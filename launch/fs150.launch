@@ -29,8 +29,8 @@
   <arg name="uxrce_dds_ns" default=""/>
   <arg name="uxrce_dds_port" default=""/>
 
-  <!-- PX4 instance 3 maps to MAV_SYS_ID=4. Keep fcu_url explicit when changing ID. -->
-  <arg name="fcu_url" default="udp://:14543@localhost:14560"/>
+  <!-- PX4 instance N maps to MAV_SYS_ID=N+1 and MAVROS UDP ports 14540+N -> 14580+N. -->
+  <arg name="fcu_url" default="$(eval 'udp://:' + str(14540 + int(arg('ID'))) + '@localhost:' + str(14580 + int(arg('ID'))))"/>
   <arg name="gcs_url" default=""/>
   <arg name="namespace" default="uav1"/>
   <arg name="respawn_gazebo" default="false"/>
