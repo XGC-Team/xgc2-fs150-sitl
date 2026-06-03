@@ -31,6 +31,8 @@
 
   <!-- PX4 instance 3 maps to MAV_SYS_ID=4. Keep fcu_url explicit when changing ID. -->
   <arg name="fcu_url" default="udp://:14543@localhost:14560"/>
+  <arg name="gcs_url" default=""/>
+  <arg name="namespace" default="uav1"/>
   <arg name="respawn_gazebo" default="false"/>
   <arg name="respawn_mavros" default="false"/>
 
@@ -62,6 +64,8 @@
     <arg name="P" value="$(arg P)"/>
     <arg name="Y" value="$(arg Y)"/>
     <arg name="fcu_url" value="$(arg fcu_url)"/>
+    <arg name="gcs_url" value="$(arg gcs_url)"/>
+    <arg name="namespace" value="$(arg namespace)"/>
     <arg name="respawn_gazebo" value="$(arg respawn_gazebo)"/>
     <arg name="respawn_mavros" value="$(arg respawn_mavros)"/>
   </include>
