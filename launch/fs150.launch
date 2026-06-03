@@ -1,0 +1,56 @@
+<launch>
+  <arg name="ID" default="3"/>
+  <arg name="vehicle" default="iris"/>
+  <arg name="px4_sim_model" default="iris"/>
+  <arg name="model_name" default="fs150_$(arg ID)"/>
+
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+  <arg name="paused" default="false"/>
+  <arg name="interactive" default="false"/>
+
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  <arg name="R" default="0"/>
+  <arg name="P" default="0"/>
+  <arg name="Y" default="0"/>
+
+  <arg name="world" default="$(find gazebo_sim_px4_1_12)/worlds/empty.world"/>
+  <arg name="sdf" default="$(find gazebo_sim_px4_1_12)/models/iris/iris.sdf"/>
+  <arg name="work_dir" default="$(env HOME)/.xgc2/px4_sitl/$(arg model_name)"/>
+  <arg name="param_file" default="$(find gazebo_sim_fs150_sitl)/config/generated/fs150-sitl.params"/>
+  <arg name="reset_params" default="true"/>
+
+  <!-- PX4 instance 3 maps to MAV_SYS_ID=4. Keep fcu_url explicit when changing ID. -->
+  <arg name="fcu_url" default="udp://:14543@localhost:14560"/>
+  <arg name="respawn_gazebo" default="false"/>
+  <arg name="respawn_mavros" default="false"/>
+
+  <include file="$(find gazebo_sim_px4_1_12)/launch/iris.launch">
+    <arg name="ID" value="$(arg ID)"/>
+    <arg name="vehicle" value="$(arg vehicle)"/>
+    <arg name="px4_sim_model" value="$(arg px4_sim_model)"/>
+    <arg name="model_name" value="$(arg model_name)"/>
+    <arg name="world" value="$(arg world)"/>
+    <arg name="sdf" value="$(arg sdf)"/>
+    <arg name="work_dir" value="$(arg work_dir)"/>
+    <arg name="param_file" value="$(arg param_file)"/>
+    <arg name="reset_params" value="$(arg reset_params)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="interactive" value="$(arg interactive)"/>
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>
+    <arg name="R" value="$(arg R)"/>
+    <arg name="P" value="$(arg P)"/>
+    <arg name="Y" value="$(arg Y)"/>
+    <arg name="fcu_url" value="$(arg fcu_url)"/>
+    <arg name="respawn_gazebo" value="$(arg respawn_gazebo)"/>
+    <arg name="respawn_mavros" value="$(arg respawn_mavros)"/>
+  </include>
+</launch>

@@ -1,0 +1,1511 @@
+name,family,fs150_value,sim_iris_value,delta_fs_minus_sim,status,sim_source,px4_group,px4_type,fs_type
+ASPD_SCALE,Other,1,1,0,same,metadata default,Airspeed Validator,Float,9
+BAT1_A_PER_V,Battery/power,17,,,missing_in_sim_metadata,,,,9
+BAT1_CAPACITY,Battery/power,-1,-1,0,same,metadata default,Battery Calibration,Float,9
+BAT1_I_CHANNEL,Battery/power,-1,,,missing_in_sim_metadata,,,,6
+BAT1_N_CELLS,Battery/power,3,0,3,different,metadata default,Battery Calibration,Int32,6
+BAT1_R_INTERNAL,Battery/power,-1,-1,0,same,metadata default,Battery Calibration,Float,9
+BAT1_SOURCE,Battery/power,0,0,0,same,metadata default,Battery Calibration,Int32,6
+BAT1_V_CHANNEL,Battery/power,-1,,,missing_in_sim_metadata,,,,6
+BAT1_V_CHARGED,Battery/power,4.3499999,4.05,0.299999905,different,metadata default,Battery Calibration,Float,9
+BAT1_V_DIV,Battery/power,19.2690182,,,missing_in_sim_metadata,,,,9
+BAT1_V_EMPTY,Battery/power,3.5999999,3.5,0.0999999046,different,metadata default,Battery Calibration,Float,9
+BAT1_V_LOAD_DROP,Battery/power,0.300000012,0.3,1.1920929e-08,same,metadata default,Battery Calibration,Float,9
+BAT_ADC_CHANNEL,Battery/power,-1,,,missing_in_sim_metadata,,,,6
+BAT_A_PER_V,Battery/power,17,-1,18,different,metadata default,Battery Calibration,Float,9
+BAT_CAPACITY,Battery/power,-1,-1,0,same,metadata default,Battery Calibration,Float,9
+BAT_CRIT_THR,Battery/power,0.0700000003,0.07,2.98023217e-10,same,metadata default,Battery Calibration,Float,9
+BAT_EMERGEN_THR,Battery/power,0.0500000007,0.05,7.45058057e-10,same,metadata default,Battery Calibration,Float,9
+BAT_LOW_THR,Battery/power,0.150000006,0.15,5.96046448e-09,same,metadata default,Battery Calibration,Float,9
+BAT_N_CELLS,Battery/power,3,4,-1,different,rcS:129 set-default,Battery Calibration,Int32,6
+BAT_R_INTERNAL,Battery/power,-1,-1,0,same,metadata default,Battery Calibration,Float,9
+BAT_SOURCE,Battery/power,0,0,0,same,metadata default,Battery Calibration,Int32,6
+BAT_V_CHARGED,Battery/power,4.3499999,4.05,0.299999905,different,metadata default,Battery Calibration,Float,9
+BAT_V_DIV,Battery/power,19.2690182,-1,20.2690182,different,metadata default,Battery Calibration,Float,9
+BAT_V_EMPTY,Battery/power,3.5999999,3.5,0.0999999046,different,metadata default,Battery Calibration,Float,9
+BAT_V_LOAD_DROP,Battery/power,0.300000012,0.3,1.1920929e-08,same,metadata default,Battery Calibration,Float,9
+BAT_V_OFFS_CURR,Battery/power,0,,,missing_in_sim_metadata,,,,9
+CAL_ACC0_ID,Sensor calibration,6946826,1310988,5635838,different,rcS simulated IMU calibration ID,Sensor Calibration,Int32,6
+CAL_ACC0_PRIO,Sensor calibration,50,-1,51,different,metadata default,Sensor Calibration,Int32,6
+CAL_ACC0_ROT,Sensor calibration,-1,-1,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_ACC0_XOFF,Sensor calibration,0.0185580309,0,0.0185580309,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC0_XSCALE,Sensor calibration,0.994249225,1,-0.00575077534,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC0_YOFF,Sensor calibration,-0.152910233,0,-0.152910233,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC0_YSCALE,Sensor calibration,0.991756856,1,-0.00824314356,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC0_ZOFF,Sensor calibration,-0.0654511452,0,-0.0654511452,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC0_ZSCALE,Sensor calibration,0.996204019,1,-0.00379598141,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC1_ID,Sensor calibration,2490378,1310996,1179382,different,rcS simulated IMU calibration ID,Sensor Calibration,Int32,6
+CAL_ACC1_PRIO,Sensor calibration,50,-1,51,different,metadata default,Sensor Calibration,Int32,6
+CAL_ACC1_ROT,Sensor calibration,-1,-1,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_ACC1_XOFF,Sensor calibration,-0.000972270966,0,-0.000972270966,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC1_XSCALE,Sensor calibration,1,1,0,same,metadata default,Sensor Calibration,Float,9
+CAL_ACC1_YOFF,Sensor calibration,0.00307750702,0,0.00307750702,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC1_YSCALE,Sensor calibration,1,1,0,same,metadata default,Sensor Calibration,Float,9
+CAL_ACC1_ZOFF,Sensor calibration,0.112415314,0,0.112415314,different,metadata default,Sensor Calibration,Float,9
+CAL_ACC1_ZSCALE,Sensor calibration,1,1,0,same,metadata default,Sensor Calibration,Float,9
+CAL_ACC2_ID,Sensor calibration,0,1311004,-1311004,different,rcS simulated IMU calibration ID,Sensor Calibration,Int32,6
+CAL_ACC3_ID,Sensor calibration,0,0,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_AIR_CMODEL,Sensor calibration,0,0,0,same,metadata default,Sensors,Int32,6
+CAL_AIR_TUBED_MM,Sensor calibration,1.5,1.5,0,same,metadata default,Sensors,Float,9
+CAL_AIR_TUBELEN,Sensor calibration,0.200000003,0.2,2.98023223e-09,same,metadata default,Sensors,Float,9
+CAL_GYRO0_ID,Sensor calibration,6684682,1310988,5373694,different,rcS simulated IMU calibration ID,Sensor Calibration,Int32,6
+CAL_GYRO0_PRIO,Sensor calibration,50,-1,51,different,metadata default,Sensor Calibration,Int32,6
+CAL_GYRO0_ROT,Sensor calibration,-1,-1,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_GYRO0_XOFF,Sensor calibration,0.0067607481,0,0.0067607481,different,metadata default,Sensor Calibration,Float,9
+CAL_GYRO0_YOFF,Sensor calibration,-0.00134988292,0,-0.00134988292,different,metadata default,Sensor Calibration,Float,9
+CAL_GYRO0_ZOFF,Sensor calibration,0.000827742217,0,0.000827742217,different,metadata default,Sensor Calibration,Float,9
+CAL_GYRO1_ID,Sensor calibration,2490378,1310996,1179382,different,rcS simulated IMU calibration ID,Sensor Calibration,Int32,6
+CAL_GYRO1_PRIO,Sensor calibration,50,-1,51,different,metadata default,Sensor Calibration,Int32,6
+CAL_GYRO1_ROT,Sensor calibration,-1,-1,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_GYRO1_XOFF,Sensor calibration,-0.00245844014,0,-0.00245844014,different,metadata default,Sensor Calibration,Float,9
+CAL_GYRO1_YOFF,Sensor calibration,-0.0154654104,0,-0.0154654104,different,metadata default,Sensor Calibration,Float,9
+CAL_GYRO1_ZOFF,Sensor calibration,0.00347761041,0,0.00347761041,different,metadata default,Sensor Calibration,Float,9
+CAL_GYRO2_ID,Sensor calibration,0,1311004,-1311004,different,rcS simulated IMU calibration ID,Sensor Calibration,Int32,6
+CAL_GYRO3_ID,Sensor calibration,0,0,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_MAG0_ID,Sensor calibration,396809,197388,199421,different,rcS simulated mag calibration ID,Sensor Calibration,Int32,6
+CAL_MAG0_PRIO,Sensor calibration,75,-1,76,different,metadata default,Sensor Calibration,Int32,6
+CAL_MAG0_ROT,Sensor calibration,4,-1,5,different,metadata default,Sensor Calibration,Int32,6
+CAL_MAG0_XCOMP,Sensor calibration,0,0,0,same,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_XODIAG,Sensor calibration,0.257161617,0,0.257161617,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_XOFF,Sensor calibration,-1.20258224,0,-1.20258224,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_XSCALE,Sensor calibration,0.622476101,1,-0.377523899,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_YCOMP,Sensor calibration,0,0,0,same,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_YODIAG,Sensor calibration,0.0718506426,0,0.0718506426,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_YOFF,Sensor calibration,1.21656382,0,1.21656382,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_YSCALE,Sensor calibration,0.434656292,1,-0.565343708,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_ZCOMP,Sensor calibration,0,0,0,same,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_ZODIAG,Sensor calibration,-0.0938132033,0,-0.0938132033,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_ZOFF,Sensor calibration,0.604580045,0,0.604580045,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG0_ZSCALE,Sensor calibration,0.514073431,1,-0.485926569,different,metadata default,Sensor Calibration,Float,9
+CAL_MAG1_ID,Sensor calibration,0,197644,-197644,different,rcS simulated mag calibration ID,Sensor Calibration,Int32,6
+CAL_MAG1_ROT,Sensor calibration,-1,-1,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_MAG2_ID,Sensor calibration,0,0,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_MAG2_ROT,Sensor calibration,-1,-1,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_MAG3_ID,Sensor calibration,0,0,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_MAG3_ROT,Sensor calibration,-1,-1,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_MAG_COMP_TYP,Sensor calibration,0,0,0,same,metadata default,Sensor Calibration,Int32,6
+CAL_MAG_ROT_AUTO,Sensor calibration,1,1,0,same,metadata default,Sensors,Int32,6
+CAL_MAG_SIDES,Sensor calibration,63,63,0,same,metadata default,Sensors,Int32,6
+CAM_CAP_FBACK,Other,0,0,0,same,metadata default,Camera Control,Int32,6
+CBRK_AIRSPD_CHK,Safety circuit breaker,0,0,0,same,rcS:131 set-default,Circuit Breaker,Int32,6
+CBRK_BUZZER,Safety circuit breaker,0,0,0,same,metadata default,Circuit Breaker,Int32,6
+CBRK_ENGINEFAIL,Safety circuit breaker,284953,284953,0,same,metadata default,Circuit Breaker,Int32,6
+CBRK_FLIGHTTERM,Safety circuit breaker,121212,121212,0,same,metadata default,Circuit Breaker,Int32,6
+CBRK_RATE_CTRL,Safety circuit breaker,0,0,0,same,metadata default,Circuit Breaker,Int32,6
+CBRK_SUPPLY_CHK,Safety circuit breaker,0,894281,-894281,different,rcS:132 set-default,Circuit Breaker,Int32,6
+CBRK_USB_CHK,Safety circuit breaker,197848,197848,0,same,metadata default,Circuit Breaker,Int32,6
+CBRK_VELPOSERR,Safety circuit breaker,0,0,0,same,metadata default,Circuit Breaker,Int32,6
+CBRK_VTOLARMING,Safety circuit breaker,0,0,0,same,metadata default,Circuit Breaker,Int32,6
+COM_ARM_AUTH_ID,Commander/failsafe,10,10,0,same,metadata default,Commander,Int32,6
+COM_ARM_AUTH_MET,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_ARM_AUTH_REQ,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_ARM_AUTH_TO,Commander/failsafe,1,1,0,same,metadata default,Commander,Float,9
+COM_ARM_CHK_ESCS,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_ARM_EKF_HGT,Commander/failsafe,1,1,0,same,metadata default,Commander,Float,9
+COM_ARM_EKF_POS,Commander/failsafe,0.5,0.5,0,same,metadata default,Commander,Float,9
+COM_ARM_EKF_VEL,Commander/failsafe,0.5,0.5,0,same,metadata default,Commander,Float,9
+COM_ARM_EKF_YAW,Commander/failsafe,0.5,0.5,0,same,metadata default,Commander,Float,9
+COM_ARM_IMU_ACC,Commander/failsafe,0.699999988,0.7,-1.19209289e-08,same,metadata default,Commander,Float,9
+COM_ARM_IMU_GYR,Commander/failsafe,0.25,0.25,0,same,metadata default,Commander,Float,9
+COM_ARM_MAG_ANG,Commander/failsafe,45,45,0,same,metadata default,Commander,Int32,6
+COM_ARM_MAG_STR,Commander/failsafe,1,1,0,same,metadata default,Commander,Int32,6
+COM_ARM_MIS_REQ,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_ARM_SDCARD,Commander/failsafe,1,1,0,same,metadata default,Commander,Int32,6
+COM_ARM_SWISBTN,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_ARM_WO_GPS,Commander/failsafe,1,1,0,same,metadata default,Commander,Int32,6
+COM_CPU_MAX,Commander/failsafe,90,-1,91,different,rcS:135 set-default,Commander,Float,9
+COM_DISARM_LAND,Commander/failsafe,1,2,-1,different,metadata default,Commander,Float,9
+COM_DISARM_PRFLT,Commander/failsafe,10,10,0,same,metadata default,Commander,Float,9
+COM_DL_LOSS_T,Commander/failsafe,5,10,-5,different,metadata default,Commander,Int32,6
+COM_EF_C2T,Commander/failsafe,5,5,0,same,metadata default,Commander,Float,9
+COM_EF_THROT,Commander/failsafe,0.5,0.5,0,same,metadata default,Commander,Float,9
+COM_EF_TIME,Commander/failsafe,10,10,0,same,metadata default,Commander,Float,9
+COM_FLIGHT_UUID,Commander/failsafe,454,0,454,different,metadata default,Commander,Int32,6
+COM_FLTMODE1,Commander/failsafe,8,-1,9,different,metadata default,Commander,Int32,6
+COM_FLTMODE2,Commander/failsafe,-1,-1,0,same,metadata default,Commander,Int32,6
+COM_FLTMODE3,Commander/failsafe,-1,-1,0,same,metadata default,Commander,Int32,6
+COM_FLTMODE4,Commander/failsafe,1,-1,2,different,metadata default,Commander,Int32,6
+COM_FLTMODE5,Commander/failsafe,-1,-1,0,same,metadata default,Commander,Int32,6
+COM_FLTMODE6,Commander/failsafe,2,-1,3,different,metadata default,Commander,Int32,6
+COM_FLT_PROFILE,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_HLDL_LOSS_T,Commander/failsafe,120,120,0,same,metadata default,Commander,Int32,6
+COM_HLDL_REG_T,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_HOME_H_T,Commander/failsafe,5,5,0,same,metadata default,Commander,Float,9
+COM_HOME_IN_AIR,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_HOME_V_T,Commander/failsafe,10,10,0,same,metadata default,Commander,Float,9
+COM_KILL_DISARM,Commander/failsafe,0,5,-5,different,metadata default,Commander,Float,9
+COM_LKDOWN_TKO,Commander/failsafe,3,3,0,same,metadata default,Commander,Float,9
+COM_LOW_BAT_ACT,Commander/failsafe,2,0,2,different,metadata default,Commander,Int32,6
+COM_MOT_TEST_EN,Commander/failsafe,1,1,0,same,metadata default,Commander,Int32,6
+COM_OBC_LOSS_T,Commander/failsafe,5,5,0,same,metadata default,Commander,Float,9
+COM_OBL_ACT,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_OBL_RC_ACT,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_OBS_AVOID,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_OF_LOSS_T,Commander/failsafe,1,1,0,same,metadata default,Commander,Float,9
+COM_POSCTL_NAVL,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_POS_FS_DELAY,Commander/failsafe,1,1,0,same,metadata default,Commander,Int32,6
+COM_POS_FS_EPH,Commander/failsafe,5,5,0,same,metadata default,Commander,Float,9
+COM_POS_FS_EPV,Commander/failsafe,10,10,0,same,metadata default,Commander,Float,9
+COM_POS_FS_GAIN,Commander/failsafe,10,10,0,same,metadata default,Commander,Int32,6
+COM_POS_FS_PROB,Commander/failsafe,30,30,0,same,metadata default,Commander,Int32,6
+COM_POWER_COUNT,Commander/failsafe,1,1,0,same,metadata default,Commander,Int32,6
+COM_PREARM_MODE,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_RCL_ACT_T,Commander/failsafe,15,15,0,same,metadata default,Commander,Float,9
+COM_RCL_EXCEPT,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_RC_ARM_HYST,Commander/failsafe,1000,1000,0,same,metadata default,Commander,Int32,6
+COM_RC_IN_MODE,Commander/failsafe,0,1,-1,different,rcS:138 set-default,Commander,Int32,6
+COM_RC_LOSS_T,Commander/failsafe,0.5,0.5,0,same,metadata default,Commander,Float,9
+COM_RC_OVERRIDE,Commander/failsafe,1,1,0,same,metadata default,Commander,Int32,6
+COM_RC_STICK_OV,Commander/failsafe,30,30,0,same,metadata default,Commander,Float,9
+COM_REARM_GRACE,Commander/failsafe,1,1,0,same,metadata default,Commander,Int32,6
+COM_TAKEOFF_ACT,Commander/failsafe,0,0,0,same,metadata default,Commander,Int32,6
+COM_VEL_FS_EVH,Commander/failsafe,1,1,0,same,metadata default,Commander,Float,9
+CP_DELAY,Other,0.400000006,0.4,5.96046446e-09,same,metadata default,Multicopter Position Control,Float,9
+CP_DIST,Other,-1,-1,0,same,metadata default,Multicopter Position Control,Float,9
+CP_GO_NO_DATA,Other,0,0,0,same,metadata default,Multicopter Position Control,Int32,6
+CP_GUIDE_ANG,Other,30,30,0,same,metadata default,Multicopter Position Control,Float,9
+EKF2_ABIAS_INIT,Estimator,0.200000003,0.2,2.98023223e-09,same,metadata default,EKF2,Float,9
+EKF2_ABL_ACCLIM,Estimator,25,25,0,same,metadata default,EKF2,Float,9
+EKF2_ABL_GYRLIM,Estimator,3,3,0,same,metadata default,EKF2,Float,9
+EKF2_ABL_LIM,Estimator,0.400000006,0.4,5.96046446e-09,same,metadata default,EKF2,Float,9
+EKF2_ABL_TAU,Estimator,0.5,0.5,0,same,metadata default,EKF2,Float,9
+EKF2_ACC_B_NOISE,Estimator,0.00300000003,0.003,2.6077032e-11,same,metadata default,EKF2,Float,9
+EKF2_ACC_NOISE,Estimator,0.349999994,0.35,-5.96046446e-09,same,metadata default,EKF2,Float,9
+EKF2_AID_MASK,Estimator,24,1,23,different,metadata default,EKF2,Int32,6
+EKF2_ANGERR_INIT,Estimator,0.100000001,0.1,1.49011611e-09,same,metadata default,EKF2,Float,9
+EKF2_ARSP_THR,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_ASPD_MAX,Estimator,20,20,0,same,metadata default,EKF2,Float,9
+EKF2_ASP_DELAY,Estimator,100,100,0,same,metadata default,EKF2,Float,9
+EKF2_AVEL_DELAY,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_BARO_DELAY,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_BARO_GATE,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_BARO_NOISE,Estimator,3.5,3.5,0,same,metadata default,EKF2,Float,9
+EKF2_BCOEF_X,Estimator,25,25,0,same,metadata default,EKF2,Float,9
+EKF2_BCOEF_Y,Estimator,25,25,0,same,metadata default,EKF2,Float,9
+EKF2_BETA_GATE,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_BETA_NOISE,Estimator,0.300000012,0.3,1.1920929e-08,same,metadata default,EKF2,Float,9
+EKF2_DECL_TYPE,Estimator,7,7,0,same,metadata default,EKF2,Int32,6
+EKF2_DRAG_NOISE,Estimator,2.5,2.5,0,same,metadata default,EKF2,Float,9
+EKF2_EAS_NOISE,Estimator,1.39999998,1.4,-2.38418578e-08,same,metadata default,EKF2,Float,9
+EKF2_EVA_NOISE,Estimator,0.0500000007,0.05,7.45058057e-10,same,metadata default,EKF2,Float,9
+EKF2_EVP_GATE,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_EVP_NOISE,Estimator,0.100000001,0.1,1.49011611e-09,same,metadata default,EKF2,Float,9
+EKF2_EVV_GATE,Estimator,3,3,0,same,metadata default,EKF2,Float,9
+EKF2_EVV_NOISE,Estimator,0.100000001,0.1,1.49011611e-09,same,metadata default,EKF2,Float,9
+EKF2_EV_DELAY,Estimator,175,175,0,same,metadata default,EKF2,Float,9
+EKF2_EV_NOISE_MD,Estimator,0,0,0,same,metadata default,EKF2,Int32,6
+EKF2_EV_POS_X,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_EV_POS_Y,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_EV_POS_Z,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_FUSE_BETA,Estimator,0,0,0,same,metadata default,EKF2,Int32,6
+EKF2_GBIAS_INIT,Estimator,0.100000001,0.1,1.49011611e-09,same,metadata default,EKF2,Float,9
+EKF2_GND_EFF_DZ,Estimator,4,4,0,same,metadata default,EKF2,Float,9
+EKF2_GND_MAX_HGT,Estimator,0.5,0.5,0,same,metadata default,EKF2,Float,9
+EKF2_GPS_CHECK,Estimator,245,245,0,same,metadata default,EKF2,Int32,6
+EKF2_GPS_DELAY,Estimator,110,110,0,same,metadata default,EKF2,Float,9
+EKF2_GPS_POS_X,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_GPS_POS_Y,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_GPS_POS_Z,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_GPS_P_GATE,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_GPS_P_NOISE,Estimator,0.5,0.5,0,same,metadata default,EKF2,Float,9
+EKF2_GPS_V_GATE,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_GPS_V_NOISE,Estimator,0.300000012,0.3,1.1920929e-08,same,metadata default,EKF2,Float,9
+EKF2_GSF_TAS,Estimator,15,15,0,same,metadata default,EKF2,Float,9
+EKF2_GYR_B_NOISE,Estimator,0.00100000005,0.001,4.74974511e-11,same,metadata default,EKF2,Float,9
+EKF2_GYR_NOISE,Estimator,0.0149999997,0.015,-3.35276126e-10,same,metadata default,EKF2,Float,9
+EKF2_HDG_GATE,Estimator,2.5999999,2.6,-9.53674317e-08,same,metadata default,EKF2,Float,9
+EKF2_HEAD_NOISE,Estimator,0.300000012,0.3,1.1920929e-08,same,metadata default,EKF2,Float,9
+EKF2_HGT_MODE,Estimator,3,0,3,different,metadata default,EKF2,Int32,6
+EKF2_IMU_POS_X,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_IMU_POS_Y,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_IMU_POS_Z,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_MAG_ACCLIM,Estimator,0.5,0.5,0,same,metadata default,EKF2,Float,9
+EKF2_MAG_B_NOISE,Estimator,9.99999975e-05,0.0001,-2.526212e-12,same,metadata default,EKF2,Float,9
+EKF2_MAG_CHECK,Estimator,0,0,0,same,metadata default,EKF2,Int32,6
+EKF2_MAG_DECL,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_MAG_DELAY,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_MAG_E_NOISE,Estimator,0.00100000005,0.001,4.74974511e-11,same,metadata default,EKF2,Float,9
+EKF2_MAG_GATE,Estimator,3,3,0,same,metadata default,EKF2,Float,9
+EKF2_MAG_NOISE,Estimator,0.0500000007,0.05,7.45058057e-10,same,metadata default,EKF2,Float,9
+EKF2_MAG_TYPE,Estimator,5,0,5,different,metadata default,EKF2,Int32,6
+EKF2_MAG_YAWLIM,Estimator,0.25,0.25,0,same,metadata default,EKF2,Float,9
+EKF2_MIN_OBS_DT,Estimator,20,20,0,same,metadata default,EKF2,Int32,6
+EKF2_MIN_RNG,Estimator,0.100000001,0.1,1.49011611e-09,same,metadata default,EKF2,Float,9
+EKF2_MOVE_TEST,Estimator,1,1,0,same,metadata default,EKF2,Float,9
+EKF2_MULTI_IMU,Estimator,3,3,0,same,rcS:144 set-default,EKF2,Int32,6
+EKF2_NOAID_NOISE,Estimator,10,10,0,same,metadata default,EKF2,Float,9
+EKF2_NOAID_TOUT,Estimator,5000000,5000000,0,same,metadata default,EKF2,Int32,6
+EKF2_OF_DELAY,Estimator,20,20,0,same,metadata default,EKF2,Float,9
+EKF2_OF_GATE,Estimator,3,3,0,same,metadata default,EKF2,Float,9
+EKF2_OF_N_MAX,Estimator,0.5,0.5,0,same,metadata default,EKF2,Float,9
+EKF2_OF_N_MIN,Estimator,0.150000006,0.15,5.96046448e-09,same,metadata default,EKF2,Float,9
+EKF2_OF_POS_X,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_OF_POS_Y,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_OF_POS_Z,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_OF_QMIN,Estimator,1,1,0,same,metadata default,EKF2,Int32,6
+EKF2_PCOEF_XN,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_PCOEF_XP,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_PCOEF_YN,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_PCOEF_YP,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_PCOEF_Z,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_REQ_EPH,Estimator,3,3,0,same,metadata default,EKF2,Float,9
+EKF2_REQ_EPV,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_REQ_GPS_H,Estimator,10,0.5,9.5,different,rcS:141 set-default,EKF2,Float,9
+EKF2_REQ_HDRIFT,Estimator,0.100000001,0.1,1.49011611e-09,same,metadata default,EKF2,Float,9
+EKF2_REQ_NSATS,Estimator,6,6,0,same,metadata default,EKF2,Int32,6
+EKF2_REQ_PDOP,Estimator,2.5,2.5,0,same,metadata default,EKF2,Float,9
+EKF2_REQ_SACC,Estimator,0.5,0.5,0,same,metadata default,EKF2,Float,9
+EKF2_REQ_VDRIFT,Estimator,0.200000003,0.2,2.98023223e-09,same,metadata default,EKF2,Float,9
+EKF2_RNG_AID,Estimator,1,1,0,same,metadata default,EKF2,Int32,6
+EKF2_RNG_A_HMAX,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_A_IGATE,Estimator,1,1,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_A_VMAX,Estimator,1,1,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_DELAY,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_GATE,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_NOISE,Estimator,0.100000001,0.1,1.49011611e-09,same,metadata default,EKF2,Float,9
+EKF2_RNG_PITCH,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_POS_X,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_POS_Y,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_POS_Z,Estimator,0,0,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_QLTY_T,Estimator,1,1,0,same,metadata default,EKF2,Float,9
+EKF2_RNG_SFE,Estimator,0.0500000007,0.05,7.45058057e-10,same,metadata default,EKF2,Float,9
+EKF2_SEL_ERR_RED,Estimator,0.200000003,0.2,2.98023223e-09,same,metadata default,EKF2,Float,9
+EKF2_SEL_IMU_ACC,Estimator,1,1,0,same,metadata default,EKF2,Float,9
+EKF2_SEL_IMU_ANG,Estimator,15,15,0,same,metadata default,EKF2,Float,9
+EKF2_SEL_IMU_RAT,Estimator,7,7,0,same,metadata default,EKF2,Float,9
+EKF2_SEL_IMU_VEL,Estimator,2,2,0,same,metadata default,EKF2,Float,9
+EKF2_SYNT_MAG_Z,Estimator,0,0,0,same,metadata default,EKF2,Int32,6
+EKF2_TAS_GATE,Estimator,3,3,0,same,metadata default,EKF2,Float,9
+EKF2_TAU_POS,Estimator,0.25,0.25,0,same,metadata default,EKF2,Float,9
+EKF2_TAU_VEL,Estimator,0.25,0.25,0,same,metadata default,EKF2,Float,9
+EKF2_TERR_GRAD,Estimator,0.5,0.5,0,same,metadata default,EKF2,Float,9
+EKF2_TERR_MASK,Estimator,3,3,0,same,metadata default,EKF2,Int32,6
+EKF2_TERR_NOISE,Estimator,5,5,0,same,metadata default,EKF2,Float,9
+EKF2_WIND_NOISE,Estimator,0.100000001,0.1,1.49011611e-09,same,metadata default,EKF2,Float,9
+EV_TSK_RC_LOSS,Other,0,0,0,same,metadata default,Events,Int32,6
+EV_TSK_STAT_DIS,Other,0,0,0,same,metadata default,Events,Int32,6
+FD_ESCS_EN,Other,1,1,0,same,metadata default,Failure Detector,Int32,6
+FD_EXT_ATS_EN,Other,0,0,0,same,metadata default,Failure Detector,Int32,6
+FD_EXT_ATS_TRIG,Other,1900,1900,0,same,metadata default,Failure Detector,Int32,6
+FD_FAIL_P,Other,60,60,0,same,metadata default,Failure Detector,Int32,6
+FD_FAIL_P_TTRI,Other,0.300000012,0.3,1.1920929e-08,same,metadata default,Failure Detector,Float,9
+FD_FAIL_R,Other,60,60,0,same,metadata default,Failure Detector,Int32,6
+FD_FAIL_R_TTRI,Other,0.300000012,0.3,1.1920929e-08,same,metadata default,Failure Detector,Float,9
+GF_ACTION,Geofence,2,2,0,same,metadata default,Geofence,Int32,6
+GF_ALTMODE,Geofence,0,0,0,same,metadata default,Geofence,Int32,6
+GF_COUNT,Geofence,-1,-1,0,same,metadata default,Geofence,Int32,6
+GF_MAX_HOR_DIST,Geofence,0,0,0,same,metadata default,Geofence,Float,9
+GF_MAX_VER_DIST,Geofence,0,0,0,same,metadata default,Geofence,Float,9
+GF_SOURCE,Geofence,0,0,0,same,metadata default,Geofence,Int32,6
+GPS_1_CONFIG,GPS,0,,,missing_in_sim_metadata,,,,6
+GPS_2_CONFIG,GPS,0,,,missing_in_sim_metadata,,,,6
+GPS_DUMP_COMM,GPS,0,0,0,same,metadata default,GPS,Int32,6
+GPS_YAW_OFFSET,GPS,0,0,0,same,metadata default,GPS,Float,9
+HTE_ACC_GATE,Other,3,3,0,same,metadata default,Hover Thrust Estimator,Float,9
+HTE_HT_ERR_INIT,Other,0.100000001,0.1,1.49011611e-09,same,metadata default,Hover Thrust Estimator,Float,9
+HTE_HT_NOISE,Other,0.00359999994,0.0036,-6.18398189e-11,same,metadata default,Hover Thrust Estimator,Float,9
+IMU_ACCEL_CUTOFF,IMU runtime,30,30,0,same,metadata default,Sensors,Float,9
+IMU_DGYRO_CUTOFF,IMU runtime,35,30,5,different,metadata default,Sensors,Float,9
+IMU_GYRO_CAL_EN,IMU runtime,1,1,0,same,metadata default,Sensors,Int32,6
+IMU_GYRO_CUTOFF,IMU runtime,35,40,-5,different,metadata default,Sensors,Float,9
+IMU_GYRO_DYN_NF,IMU runtime,0,0,0,same,metadata default,Sensors,Int32,6
+IMU_GYRO_FFT_EN,IMU runtime,1,1,0,same,rcS:149 set-default,Sensors,Int32,6
+IMU_GYRO_FFT_LEN,IMU runtime,1024,1024,0,same,metadata default,Sensors,Int32,6
+IMU_GYRO_FFT_MAX,IMU runtime,192,192,0,same,metadata default,Sensors,Float,9
+IMU_GYRO_FFT_MIN,IMU runtime,32,32,0,same,metadata default,Sensors,Float,9
+IMU_GYRO_NF_BW,IMU runtime,20,20,0,same,metadata default,Sensors,Float,9
+IMU_GYRO_NF_FREQ,IMU runtime,0,0,0,same,metadata default,Sensors,Float,9
+IMU_GYRO_RATEMAX,IMU runtime,800,800,0,same,rc.mc_defaults:10 set-default,Sensors,Int32,6
+IMU_INTEG_RATE,IMU runtime,200,250,-50,different,rcS simulator IMU integration rate,Sensors,Int32,6
+LED_RGB2_MAXBRT,Other,31,,,missing_in_sim_metadata,,,,6
+LNDMC_ALT_GND,Other,-1,-1,0,same,metadata default,Land Detector,Float,9
+LNDMC_ALT_MAX,Other,-1,-1,0,same,metadata default,Land Detector,Float,9
+LNDMC_ROT_MAX,Other,20,20,0,same,metadata default,Land Detector,Float,9
+LNDMC_TRIG_TIME,Other,1,1,0,same,metadata default,Land Detector,Float,9
+LNDMC_XY_VEL_MAX,Other,1.5,1.5,0,same,metadata default,Land Detector,Float,9
+LNDMC_Z_VEL_MAX,Other,0.5,0.5,0,same,metadata default,Land Detector,Float,9
+LND_FLIGHT_T_HI,Other,7,0,7,different,metadata default,Land Detector,Int32,6
+LND_FLIGHT_T_LO,Other,-359431728,0,-359431728,different,metadata default,Land Detector,Int32,6
+MAV_0_CONFIG,MAVLink/system identity,101,,,missing_in_sim_metadata,,,,6
+MAV_0_FORWARD,MAVLink/system identity,1,1,0,same,metadata default,MAVLink,Int32,6
+MAV_0_MODE,MAVLink/system identity,1,0,1,different,metadata default,MAVLink,Int32,6
+MAV_0_RADIO_CTL,MAVLink/system identity,1,1,0,same,metadata default,MAVLink,Int32,6
+MAV_0_RATE,MAVLink/system identity,0,1200,-1200,different,metadata default,MAVLink,Int32,6
+MAV_1_CONFIG,MAVLink/system identity,102,,,missing_in_sim_metadata,,,,6
+MAV_1_FORWARD,MAVLink/system identity,1,0,1,different,metadata default,MAVLink,Int32,6
+MAV_1_MODE,MAVLink/system identity,0,2,-2,different,metadata default,MAVLink,Int32,6
+MAV_1_RADIO_CTL,MAVLink/system identity,1,1,0,same,metadata default,MAVLink,Int32,6
+MAV_1_RATE,MAVLink/system identity,0,0,0,same,metadata default,MAVLink,Int32,6
+MAV_2_CONFIG,MAVLink/system identity,0,,,missing_in_sim_metadata,,,,6
+MAV_COMP_ID,MAVLink/system identity,1,1,0,same,metadata default,MAVLink,Int32,6
+MAV_FWDEXTSP,MAVLink/system identity,1,1,0,same,metadata default,MAVLink,Int32,6
+MAV_HASH_CHK_EN,MAVLink/system identity,1,1,0,same,metadata default,MAVLink,Int32,6
+MAV_HB_FORW_EN,MAVLink/system identity,1,1,0,same,metadata default,MAVLink,Int32,6
+MAV_ODOM_LP,MAVLink/system identity,1,0,1,different,metadata default,MAVLink,Int32,6
+MAV_PROTO_VER,MAVLink/system identity,0,0,0,same,metadata default,MAVLink,Int32,6
+MAV_RADIO_TOUT,MAVLink/system identity,5,5,0,same,metadata default,MAVLink,Int32,6
+MAV_SIK_RADIO_ID,MAVLink/system identity,0,0,0,same,metadata default,MAVLink,Int32,6
+MAV_SYS_ID,MAVLink/system identity,4,1,3,different,"rcS set MAV_SYS_ID px4_instance+1, launch ID=0",MAVLink,Int32,6
+MAV_TYPE,MAVLink/system identity,2,2,0,same,metadata default,MAVLink,Int32,6
+MAV_USEHILGPS,MAVLink/system identity,0,0,0,same,metadata default,MAVLink,Int32,6
+MC_ACRO_EXPO,Multicopter attitude/rate,0.689999998,0.69,-2.38418574e-09,same,metadata default,Multicopter Rate Control,Float,9
+MC_ACRO_EXPO_Y,Multicopter attitude/rate,0.689999998,0.69,-2.38418574e-09,same,metadata default,Multicopter Rate Control,Float,9
+MC_ACRO_P_MAX,Multicopter attitude/rate,720,720,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_ACRO_R_MAX,Multicopter attitude/rate,720,720,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_ACRO_SUPEXPO,Multicopter attitude/rate,0.699999988,0.7,-1.19209289e-08,same,metadata default,Multicopter Rate Control,Float,9
+MC_ACRO_SUPEXPOY,Multicopter attitude/rate,0.699999988,0.7,-1.19209289e-08,same,metadata default,Multicopter Rate Control,Float,9
+MC_ACRO_Y_MAX,Multicopter attitude/rate,540,540,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_AIRMODE,Multicopter attitude/rate,0,0,0,same,metadata default,Mixer Output,Int32,6
+MC_BAT_SCALE_EN,Multicopter attitude/rate,0,0,0,same,metadata default,Multicopter Rate Control,Int32,6
+MC_MAN_TILT_TAU,Multicopter attitude/rate,0,0,0,same,metadata default,Multicopter Position Control,Float,9
+MC_PITCHRATE_D,Multicopter attitude/rate,0.00100000005,0.003,-0.00199999995,different,metadata default,Multicopter Rate Control,Float,9
+MC_PITCHRATE_FF,Multicopter attitude/rate,0,0,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_PITCHRATE_I,Multicopter attitude/rate,0.0500000007,0.2,-0.149999999,different,metadata default,Multicopter Rate Control,Float,9
+MC_PITCHRATE_K,Multicopter attitude/rate,1,1,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_PITCHRATE_MAX,Multicopter attitude/rate,220,220,0,same,metadata default,Multicopter Attitude Control,Float,9
+MC_PITCHRATE_P,Multicopter attitude/rate,0.0700000003,0.15,-0.0799999997,different,metadata default,Multicopter Rate Control,Float,9
+MC_PITCH_P,Multicopter attitude/rate,6.5,6.5,0,same,metadata default,Multicopter Attitude Control,Float,9
+MC_PR_INT_LIM,Multicopter attitude/rate,0.300000012,0.3,1.1920929e-08,same,metadata default,Multicopter Rate Control,Float,9
+MC_ROLLRATE_D,Multicopter attitude/rate,0.00100000005,0.003,-0.00199999995,different,metadata default,Multicopter Rate Control,Float,9
+MC_ROLLRATE_FF,Multicopter attitude/rate,0,0,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_ROLLRATE_I,Multicopter attitude/rate,0.0700000003,0.2,-0.13,different,metadata default,Multicopter Rate Control,Float,9
+MC_ROLLRATE_K,Multicopter attitude/rate,1,1,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_ROLLRATE_MAX,Multicopter attitude/rate,220,220,0,same,metadata default,Multicopter Attitude Control,Float,9
+MC_ROLLRATE_P,Multicopter attitude/rate,0.0700000003,0.15,-0.0799999997,different,metadata default,Multicopter Rate Control,Float,9
+MC_ROLL_P,Multicopter attitude/rate,6.5,6.5,0,same,metadata default,Multicopter Attitude Control,Float,9
+MC_RR_INT_LIM,Multicopter attitude/rate,0.300000012,0.3,1.1920929e-08,same,metadata default,Multicopter Rate Control,Float,9
+MC_YAWRATE_D,Multicopter attitude/rate,0,0,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_YAWRATE_FF,Multicopter attitude/rate,0,0,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_YAWRATE_I,Multicopter attitude/rate,0.100000001,0.1,1.49011611e-09,same,metadata default,Multicopter Rate Control,Float,9
+MC_YAWRATE_K,Multicopter attitude/rate,1,1,0,same,metadata default,Multicopter Rate Control,Float,9
+MC_YAWRATE_MAX,Multicopter attitude/rate,200,200,0,same,metadata default,Multicopter Attitude Control,Float,9
+MC_YAWRATE_P,Multicopter attitude/rate,0.200000003,0.2,2.98023223e-09,same,metadata default,Multicopter Rate Control,Float,9
+MC_YAW_P,Multicopter attitude/rate,2.79999995,2.8,-4.76837156e-08,same,metadata default,Multicopter Attitude Control,Float,9
+MC_YAW_WEIGHT,Multicopter attitude/rate,0.400000006,0.4,5.96046446e-09,same,metadata default,Multicopter Attitude Control,Float,9
+MC_YR_INT_LIM,Multicopter attitude/rate,0.300000012,0.3,1.1920929e-08,same,metadata default,Multicopter Rate Control,Float,9
+MIS_DIST_1WP,Mission,900,900,0,same,metadata default,Mission,Float,9
+MIS_DIST_WPS,Mission,900,900,0,same,metadata default,Mission,Float,9
+MIS_LTRMIN_ALT,Mission,-1,-1,0,same,metadata default,Mission,Float,9
+MIS_MNT_YAW_CTL,Mission,0,0,0,same,metadata default,Mission,Int32,6
+MIS_TAKEOFF_ALT,Mission,1.5,2.5,-1,different,metadata default,Mission,Float,9
+MIS_TAKEOFF_REQ,Mission,0,0,0,same,metadata default,Mission,Int32,6
+MIS_YAW_ERR,Mission,12,12,0,same,metadata default,Mission,Float,9
+MIS_YAW_TMT,Mission,-1,-1,0,same,metadata default,Mission,Float,9
+MNT_MODE_IN,Mount/gimbal,-1,-1,0,same,metadata default,Mount,Int32,6
+MOT_ORDERING,Other,0,0,0,same,metadata default,Mixer Output,Int32,6
+MOT_SLEW_MAX,Other,0,0,0,same,metadata default,PWM Outputs,Float,9
+MPC_ACC_DOWN_MAX,Multicopter position,3,3,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_ACC_HOR,Multicopter position,3,3,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_ACC_HOR_MAX,Multicopter position,5,5,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_ACC_UP_MAX,Multicopter position,4,4,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_ALT_MODE,Multicopter position,0,0,0,same,metadata default,Multicopter Position Control,Int32,6
+MPC_HOLD_DZ,Multicopter position,0.100000001,0.1,1.49011611e-09,same,metadata default,Multicopter Position Control,Float,9
+MPC_HOLD_MAX_XY,Multicopter position,0.800000012,0.8,1.19209289e-08,same,metadata default,Multicopter Position Control,Float,9
+MPC_HOLD_MAX_Z,Multicopter position,0.600000024,0.6,2.38418579e-08,same,metadata default,Multicopter Position Control,Float,9
+MPC_JERK_AUTO,Multicopter position,4,4,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_JERK_MAX,Multicopter position,8,8,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_LAND_ALT1,Multicopter position,10,10,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_LAND_ALT2,Multicopter position,5,5,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_LAND_RC_HELP,Multicopter position,0,0,0,same,metadata default,Miscellaneous,Int32,6
+MPC_LAND_SPEED,Multicopter position,0.699999988,0.7,-1.19209289e-08,same,metadata default,Multicopter Position Control,Float,9
+MPC_MANTHR_MIN,Multicopter position,0.0399999991,0.08,-0.0400000009,different,metadata default,Multicopter Position Control,Float,9
+MPC_MAN_TILT_MAX,Multicopter position,35,35,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_MAN_Y_MAX,Multicopter position,150,150,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_MAN_Y_TAU,Multicopter position,0.0799999982,0.08,-1.78813934e-09,same,metadata default,Multicopter Position Control,Float,9
+MPC_POS_MODE,Multicopter position,4,4,0,same,metadata default,Multicopter Position Control,Int32,6
+MPC_SPOOLUP_TIME,Multicopter position,1,1,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_THR_CURVE,Multicopter position,0,0,0,same,metadata default,Multicopter Position Control,Int32,6
+MPC_THR_HOVER,Multicopter position,0.360000014,0.5,-0.139999986,different,metadata default,Multicopter Position Control,Float,9
+MPC_THR_MAX,Multicopter position,1,1,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_THR_MIN,Multicopter position,0.119999997,0.12,-2.68220901e-09,same,metadata default,Multicopter Position Control,Float,9
+MPC_TILTMAX_AIR,Multicopter position,45,45,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_TILTMAX_LND,Multicopter position,12,12,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_TKO_RAMP_T,Multicopter position,3,3,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_TKO_SPEED,Multicopter position,1.5,1.5,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_USE_HTE,Multicopter position,1,1,0,same,metadata default,Multicopter Position Control,Int32,6
+MPC_VELD_LP,Multicopter position,5,5,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_VEL_MANUAL,Multicopter position,10,10,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_CRUISE,Multicopter position,5,5,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_ERR_MAX,Multicopter position,2,2,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_MAN_EXPO,Multicopter position,0.600000024,0.6,2.38418579e-08,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_P,Multicopter position,0.949999988,0.95,-1.19209289e-08,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_TRAJ_P,Multicopter position,0.5,0.5,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_VEL_ALL,Multicopter position,-10,-10,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_VEL_D_ACC,Multicopter position,0.25,0.2,0.05,different,metadata default,Multicopter Position Control,Float,9
+MPC_XY_VEL_I_ACC,Multicopter position,0.400000006,0.4,5.96046446e-09,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_VEL_MAX,Multicopter position,12,12,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_XY_VEL_P_ACC,Multicopter position,1.79999995,1.8,-4.76837159e-08,same,metadata default,Multicopter Position Control,Float,9
+MPC_YAWRAUTO_MAX,Multicopter position,45,45,0,same,metadata default,Multicopter Attitude Control,Float,9
+MPC_YAW_EXPO,Multicopter position,0.600000024,0.6,2.38418579e-08,same,metadata default,Multicopter Position Control,Float,9
+MPC_YAW_MODE,Multicopter position,0,0,0,same,metadata default,Mission,Int32,6
+MPC_Z_MAN_EXPO,Multicopter position,0.600000024,0.6,2.38418579e-08,same,metadata default,Multicopter Position Control,Float,9
+MPC_Z_P,Multicopter position,1,1,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_Z_VEL_ALL,Multicopter position,-3,-3,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_Z_VEL_D_ACC,Multicopter position,0,0,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_Z_VEL_I_ACC,Multicopter position,2,2,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_Z_VEL_MAX_DN,Multicopter position,1,1,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_Z_VEL_MAX_UP,Multicopter position,3,3,0,same,metadata default,Multicopter Position Control,Float,9
+MPC_Z_VEL_P_ACC,Multicopter position,4,4,0,same,metadata default,Multicopter Position Control,Float,9
+NAV_ACC_RAD,Navigation,2,2,0,same,rc.mc_defaults:12 set-default,Mission,Float,9
+NAV_DLL_ACT,Navigation,2,0,2,different,metadata default,Commander,Int32,6
+NAV_FORCE_VT,Navigation,1,1,0,same,metadata default,Mission,Int32,6
+NAV_FT_DST,Navigation,8,8,0,same,metadata default,Follow target,Float,9
+NAV_FT_FS,Navigation,1,1,0,same,metadata default,Follow target,Int32,6
+NAV_FT_RS,Navigation,0.5,0.5,0,same,metadata default,Follow target,Float,9
+NAV_FW_ALTL_RAD,Navigation,5,5,0,same,metadata default,Mission,Float,9
+NAV_FW_ALT_RAD,Navigation,10,10,0,same,metadata default,Mission,Float,9
+NAV_GPSF_LT,Navigation,0,0,0,same,metadata default,GPS Failure Navigation,Float,9
+NAV_GPSF_P,Navigation,0,0,0,same,metadata default,GPS Failure Navigation,Float,9
+NAV_GPSF_R,Navigation,15,15,0,same,metadata default,GPS Failure Navigation,Float,9
+NAV_GPSF_TR,Navigation,0,0,0,same,metadata default,GPS Failure Navigation,Float,9
+NAV_LOITER_RAD,Navigation,50,50,0,same,metadata default,Mission,Float,9
+NAV_MC_ALT_RAD,Navigation,0.800000012,0.8,1.19209289e-08,same,metadata default,Mission,Float,9
+NAV_MIN_FT_HT,Navigation,8,8,0,same,metadata default,Follow target,Float,9
+NAV_RCL_ACT,Navigation,2,2,0,same,metadata default,Commander,Int32,6
+NAV_TRAFF_AVOID,Navigation,1,1,0,same,metadata default,Mission,Int32,6
+NAV_TRAFF_A_RADM,Navigation,500,500,0,same,metadata default,Mission,Float,9
+NAV_TRAFF_A_RADU,Navigation,10,10,0,same,metadata default,Mission,Float,9
+PLD_BTOUT,Other,5,5,0,same,metadata default,Precision Land,Float,9
+PLD_FAPPR_ALT,Other,0.100000001,0.1,1.49011611e-09,same,metadata default,Precision Land,Float,9
+PLD_HACC_RAD,Other,0.200000003,0.2,2.98023223e-09,same,metadata default,Precision Land,Float,9
+PLD_MAX_SRCH,Other,3,3,0,same,metadata default,Precision Land,Int32,6
+PLD_SRCH_ALT,Other,10,10,0,same,metadata default,Precision Land,Float,9
+PLD_SRCH_TOUT,Other,10,10,0,same,metadata default,Precision Land,Float,9
+PWM_AUX_DIS1,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_DIS2,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_DIS3,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_DIS4,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_DIS5,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_DIS6,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_DISARM,Actuator output,1500,1500,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_FAIL1,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_FAIL2,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_FAIL3,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_FAIL4,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_FAIL5,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_FAIL6,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MAX,Actuator output,2000,2000,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MAX1,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MAX2,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MAX3,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MAX4,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MAX5,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MAX6,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MIN,Actuator output,1000,1000,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MIN1,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MIN2,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MIN3,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MIN4,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MIN5,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_MIN6,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_OUT,Actuator output,1234,0,1234,different,metadata default,PWM Outputs,Int32,6
+PWM_AUX_RATE,Actuator output,50,50,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_REV1,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_REV2,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_REV3,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_REV4,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_REV5,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_REV6,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_AUX_TRIM1,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_AUX_TRIM2,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_AUX_TRIM3,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_AUX_TRIM4,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_AUX_TRIM5,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_AUX_TRIM6,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_MAIN_DIS1,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_DIS2,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_DIS3,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_DIS4,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_DIS5,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_DIS6,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_DIS7,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_DIS8,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_DISARM,Actuator output,900,900,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_FAIL1,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_FAIL2,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_FAIL3,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_FAIL4,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_FAIL5,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_FAIL6,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_FAIL7,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_FAIL8,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MAX,Actuator output,1950,1950,0,same,rc.mc_defaults:17 set-default,PWM Outputs,Int32,6
+PWM_MAIN_MAX1,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MAX2,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MAX3,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MAX4,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MAX5,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MAX6,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MAX7,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MAX8,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MIN,Actuator output,1100,1075,25,different,rc.mc_defaults:18 set-default,PWM Outputs,Int32,6
+PWM_MAIN_MIN1,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MIN2,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MIN3,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MIN4,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MIN5,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MIN6,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MIN7,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_MIN8,Actuator output,-1,-1,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_OUT,Actuator output,1234,0,1234,different,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_RATE,Actuator output,400,400,0,same,rc.mc_defaults:19 set-default,PWM Outputs,Int32,6
+PWM_MAIN_REV1,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_REV2,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_REV3,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_REV4,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_REV5,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_REV6,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_REV7,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_REV8,Actuator output,0,0,0,same,metadata default,PWM Outputs,Int32,6
+PWM_MAIN_TRIM1,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_MAIN_TRIM2,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_MAIN_TRIM3,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_MAIN_TRIM4,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_MAIN_TRIM5,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_MAIN_TRIM6,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_MAIN_TRIM7,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+PWM_MAIN_TRIM8,Actuator output,0,0,0,same,metadata default,PWM Outputs,Float,9
+RC10_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC10_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC10_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC10_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC10_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC11_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC11_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC11_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC11_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC11_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC12_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC12_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC12_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC12_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC12_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC13_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC13_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC13_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC13_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC13_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC14_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC14_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC14_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC14_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC14_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC15_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC15_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC15_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC15_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC15_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC16_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC16_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC16_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC16_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC16_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC17_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC17_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC17_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC17_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC17_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC18_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC18_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC18_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC18_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC18_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC1_DZ,RC/operator input,10,10,0,same,metadata default,Radio Calibration,Float,9
+RC1_MAX,RC/operator input,1953,2000,-47,different,metadata default,Radio Calibration,Float,9
+RC1_MIN,RC/operator input,1115,1000,115,different,metadata default,Radio Calibration,Float,9
+RC1_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC1_TRIM,RC/operator input,1533,1500,33,different,metadata default,Radio Calibration,Float,9
+RC2_DZ,RC/operator input,10,10,0,same,metadata default,Radio Calibration,Float,9
+RC2_MAX,RC/operator input,1933,2000,-67,different,metadata default,Radio Calibration,Float,9
+RC2_MIN,RC/operator input,1095,1000,95,different,metadata default,Radio Calibration,Float,9
+RC2_REV,RC/operator input,-1,1,-2,different,metadata default,Radio Calibration,Float,9
+RC2_TRIM,RC/operator input,1514,1500,14,different,metadata default,Radio Calibration,Float,9
+RC3_DZ,RC/operator input,10,10,0,same,metadata default,Radio Calibration,Float,9
+RC3_MAX,RC/operator input,1933,2000,-67,different,metadata default,Radio Calibration,Float,9
+RC3_MIN,RC/operator input,1095,1000,95,different,metadata default,Radio Calibration,Float,9
+RC3_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC3_TRIM,RC/operator input,1095,1500,-405,different,metadata default,Radio Calibration,Float,9
+RC4_DZ,RC/operator input,10,10,0,same,metadata default,Radio Calibration,Float,9
+RC4_MAX,RC/operator input,1933,2000,-67,different,metadata default,Radio Calibration,Float,9
+RC4_MIN,RC/operator input,1095,1000,95,different,metadata default,Radio Calibration,Float,9
+RC4_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC4_TRIM,RC/operator input,1514,1500,14,different,metadata default,Radio Calibration,Float,9
+RC5_DZ,RC/operator input,10,10,0,same,metadata default,Radio Calibration,Float,9
+RC5_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC5_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC5_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC5_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC6_DZ,RC/operator input,10,10,0,same,metadata default,Radio Calibration,Float,9
+RC6_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC6_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC6_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC6_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC7_DZ,RC/operator input,10,10,0,same,metadata default,Radio Calibration,Float,9
+RC7_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC7_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC7_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC7_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC8_DZ,RC/operator input,10,10,0,same,metadata default,Radio Calibration,Float,9
+RC8_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC8_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC8_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC8_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC9_DZ,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Float,9
+RC9_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Float,9
+RC9_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Float,9
+RC9_REV,RC/operator input,1,1,0,same,metadata default,Radio Calibration,Float,9
+RC9_TRIM,RC/operator input,1500,1500,0,same,metadata default,Radio Calibration,Float,9
+RC_ACRO_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_ARMSWITCH_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_ASSIST_TH,RC/operator input,0.25,0.25,0,same,metadata default,Radio Switches,Float,9
+RC_AUTO_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_CHAN_CNT,RC/operator input,18,0,18,different,metadata default,Radio Calibration,Int32,6
+RC_FAILS_THR,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_GEAR_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_KILLSWITCH_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_LOITER_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_MAN_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_MAP_ACRO_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_ARM_SW,RC/operator input,5,0,5,different,metadata default,Radio Switches,Int32,6
+RC_MAP_AUX1,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_AUX2,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_AUX3,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_AUX4,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_AUX5,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_AUX6,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_FAILSAFE,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_FLAPS,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_FLTMODE,RC/operator input,7,0,7,different,metadata default,Radio Switches,Int32,6
+RC_MAP_GEAR_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_KILL_SW,RC/operator input,6,0,6,different,metadata default,Radio Switches,Int32,6
+RC_MAP_LOITER_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_MAN_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_MODE_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_OFFB_SW,RC/operator input,8,0,8,different,metadata default,Radio Switches,Int32,6
+RC_MAP_PARAM1,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_PARAM2,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_PARAM3,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_MAP_PITCH,RC/operator input,2,0,2,different,metadata default,Radio Calibration,Int32,6
+RC_MAP_POSCTL_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_RATT_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_RETURN_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_ROLL,RC/operator input,1,0,1,different,metadata default,Radio Calibration,Int32,6
+RC_MAP_STAB_SW,RC/operator input,0,0,0,same,metadata default,Radio Switches,Int32,6
+RC_MAP_THROTTLE,RC/operator input,3,0,3,different,metadata default,Radio Calibration,Int32,6
+RC_MAP_TRANS_SW,RC/operator input,7,0,7,different,metadata default,Radio Switches,Int32,6
+RC_MAP_YAW,RC/operator input,4,0,4,different,metadata default,Radio Calibration,Int32,6
+RC_OFFB_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_POSCTL_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_RETURN_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RC_RSSI_PWM_CHAN,RC/operator input,0,0,0,same,metadata default,Radio Calibration,Int32,6
+RC_RSSI_PWM_MAX,RC/operator input,2000,2000,0,same,metadata default,Radio Calibration,Int32,6
+RC_RSSI_PWM_MIN,RC/operator input,1000,1000,0,same,metadata default,Radio Calibration,Int32,6
+RC_STAB_TH,RC/operator input,0.5,0.5,0,same,metadata default,Radio Switches,Float,9
+RC_TRANS_TH,RC/operator input,0.75,0.75,0,same,metadata default,Radio Switches,Float,9
+RTL_CONE_ANG,Return/landing,45,45,0,same,metadata default,Return Mode,Int32,6
+RTL_DESCEND_ALT,Return/landing,20,10,10,different,rc.mc_defaults:15 set-default,Return Mode,Float,9
+RTL_FLT_TIME,Return/landing,15,15,0,same,metadata default,Commander,Float,9
+RTL_LAND_DELAY,Return/landing,60,0,60,different,metadata default,Return Mode,Float,9
+RTL_LOITER_RAD,Return/landing,50,50,0,same,metadata default,Return Mode,Float,9
+RTL_MIN_DIST,Return/landing,10,10,0,same,metadata default,Return Mode,Float,9
+RTL_PLD_MD,Return/landing,0,0,0,same,metadata default,Return To Land,Int32,6
+RTL_RETURN_ALT,Return/landing,20,30,-10,different,rc.mc_defaults:14 set-default,Return Mode,Float,9
+RTL_TYPE,Return/landing,0,0,0,same,metadata default,Return Mode,Int32,6
+SDLOG_BOOT_BAT,Logging,0,0,0,same,metadata default,SD Logging,Int32,6
+SDLOG_DIRS_MAX,Logging,0,7,-7,different,rcS:155 set-default,SD Logging,Int32,6
+SDLOG_MISSION,Logging,0,0,0,same,metadata default,SD Logging,Int32,6
+SDLOG_MODE,Logging,0,1,-1,different,rcS:152 set-default,SD Logging,Int32,6
+SDLOG_PROFILE,Logging,1023,131,892,different,rcS:154 set-default,SD Logging,Int32,6
+SDLOG_UTC_OFFSET,Logging,0,0,0,same,metadata default,SD Logging,Int32,6
+SDLOG_UUID,Logging,1,1,0,same,metadata default,SD Logging,Int32,6
+SENS_BARO_QNH,Sensor selection/offset,1013.25,1013.25,0,same,metadata default,Sensors,Float,9
+SENS_BARO_RATE,Sensor selection/offset,20,20,0,same,metadata default,Sensors,Float,9
+SENS_BOARD_ROT,Sensor selection/offset,12,0,12,different,metadata default,Sensors,Int32,6
+SENS_BOARD_X_OFF,Sensor selection/offset,1.81090093,1e-06,1.81089993,different,rcS simulated board offset,Sensors,Float,9
+SENS_BOARD_Y_OFF,Sensor selection/offset,-0.249950871,0,-0.249950871,different,metadata default,Sensors,Float,9
+SENS_BOARD_Z_OFF,Sensor selection/offset,0,0,0,same,metadata default,Sensors,Float,9
+SENS_CM8JL65_CFG,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_DPRES_OFF,Sensor selection/offset,0,0.001,-0.001,different,rcS simulated differential pressure offset,Sensor Calibration,Float,9
+SENS_EN_LL40LS,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_MB12XX,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_MPDT,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_PAW3902,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_PGA460,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_PMW3901,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_PX4FLOW,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_SF1XX,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_THERMAL,Sensor selection/offset,-1,-1,0,same,metadata default,Sensors,Int32,6
+SENS_EN_TRANGER,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EN_VL53L1X,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_EXT_I2C_PRB,Sensor selection/offset,1,1,0,same,metadata default,Sensors,Int32,6
+SENS_FLOW_MAXHGT,Sensor selection/offset,3,3,0,same,metadata default,Sensor Calibration,Float,9
+SENS_FLOW_MAXR,Sensor selection/offset,2.5,2.5,0,same,metadata default,Sensor Calibration,Float,9
+SENS_FLOW_MINHGT,Sensor selection/offset,0.699999988,0.7,-1.19209289e-08,same,metadata default,Sensor Calibration,Float,9
+SENS_FLOW_ROT,Sensor selection/offset,0,6,-6,different,metadata default,Sensors,Int32,6
+SENS_GPS_MASK,Sensor selection/offset,0,0,0,same,metadata default,Sensors,Int32,6
+SENS_GPS_PRIME,Sensor selection/offset,0,0,0,same,metadata default,Sensors,Int32,6
+SENS_GPS_TAU,Sensor selection/offset,10,10,0,same,metadata default,Sensors,Float,9
+SENS_IMU_MODE,Sensor selection/offset,0,0,0,same,rcS:145 set-default,Sensors,Int32,6
+SENS_LEDDAR1_CFG,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_MAG_MODE,Sensor selection/offset,1,0,1,different,rcS:147 set-default,Sensors,Int32,6
+SENS_MAG_RATE,Sensor selection/offset,50,50,0,same,metadata default,Sensors,Float,9
+SENS_SF0X_CFG,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_TFLOW_CFG,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_TFMINI_CFG,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_ULAND_CFG,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SENS_UWB_CFG,Sensor selection/offset,201,,,missing_in_sim_metadata,,,,6
+SENS_ZYFLOW_CFG,Sensor selection/offset,0,,,missing_in_sim_metadata,,,,6
+SER_TEL1_BAUD,Serial port,921600,,,missing_in_sim_metadata,,,,6
+SER_TEL2_BAUD,Serial port,115200,,,missing_in_sim_metadata,,,,6
+SYS_AUTOCONFIG,System/autostart,0,0,0,same,rcS final SYS_AUTOCONFIG after first autoconfig,System,Int32,6
+SYS_AUTOSTART,System/autostart,4011,10016,-6005,different,rcS set SYS_AUTOSTART for PX4_SIM_MODEL=iris,System,Int32,6
+SYS_BL_UPDATE,System/autostart,0,0,0,same,metadata default,System,Int32,6
+SYS_CAL_ACCEL,System/autostart,0,0,0,same,metadata default,System,Int32,6
+SYS_CAL_BARO,System/autostart,0,0,0,same,metadata default,System,Int32,6
+SYS_CAL_GYRO,System/autostart,0,0,0,same,metadata default,System,Int32,6
+SYS_CAL_TDEL,System/autostart,24,24,0,same,metadata default,System,Int32,6
+SYS_CAL_TMAX,System/autostart,10,10,0,same,metadata default,System,Int32,6
+SYS_CAL_TMIN,System/autostart,5,5,0,same,metadata default,System,Int32,6
+SYS_FAC_CAL_MODE,System/autostart,0,0,0,same,metadata default,System,Int32,6
+SYS_FAILURE_EN,System/autostart,0,0,0,same,metadata default,System,Int32,6
+SYS_HAS_BARO,System/autostart,1,1,0,same,metadata default,System,Int32,6
+SYS_HAS_GPS,System/autostart,1,1,0,same,metadata default,System,Int32,6
+SYS_HAS_MAG,System/autostart,1,1,0,same,metadata default,System,Int32,6
+SYS_HITL,System/autostart,0,0,0,same,metadata default,System,Int32,6
+SYS_MC_EST_GROUP,System/autostart,2,2,0,same,metadata default,System,Int32,6
+SYS_RESTART_TYPE,System/autostart,2,2,0,same,rcS simulated restart type,System,Int32,6
+SYS_STCK_EN,System/autostart,1,1,0,same,metadata default,System,Int32,6
+SYS_VEHICLE_RESP,System/autostart,-0.400000006,-0.4,-5.96046446e-09,same,metadata default,Multicopter Position Control,Float,9
+SYS_ZY_CTRL_EN,System/autostart,1,,,missing_in_sim_metadata,,,,6
+SYS_ZY_UART_EN,System/autostart,0,,,missing_in_sim_metadata,,,,6
+TC_A_ENABLE,Other,0,0,0,same,metadata default,Thermal Compensation,Int32,6
+TC_B_ENABLE,Other,0,0,0,same,metadata default,Thermal Compensation,Int32,6
+TC_G_ENABLE,Other,0,0,0,same,metadata default,Thermal Compensation,Int32,6
+TEL_BST_EN,Telemetry,0,,,missing_in_sim_metadata,,,,6
+TEL_FRSKY_CONFIG,Telemetry,0,,,missing_in_sim_metadata,,,,6
+TEL_HOTT_CONFIG,Telemetry,0,,,missing_in_sim_metadata,,,,6
+THR_MDL_FAC,Other,0,0,0,same,metadata default,PWM Outputs,Float,9
+TRIG_MODE,Trigger/camera,0,0,0,same,metadata default,Camera trigger,Int32,6
+UAVCAN_BAT_MON,UAVCAN,0,,,missing_in_sim_metadata,,,,6
+UAVCAN_BITRATE,UAVCAN,1000000,,,missing_in_sim_metadata,,,,6
+UAVCAN_ENABLE,UAVCAN,2,,,missing_in_sim_metadata,,,,6
+UAVCAN_ESC_IDLT,UAVCAN,1,,,missing_in_sim_metadata,,,,6
+UAVCAN_LGT_ANTCL,UAVCAN,2,,,missing_in_sim_metadata,,,,6
+UAVCAN_LGT_LAND,UAVCAN,0,,,missing_in_sim_metadata,,,,6
+UAVCAN_LGT_NAV,UAVCAN,3,,,missing_in_sim_metadata,,,,6
+UAVCAN_LGT_STROB,UAVCAN,1,,,missing_in_sim_metadata,,,,6
+UAVCAN_NODE_ID,UAVCAN,1,,,missing_in_sim_metadata,,,,6
+UAVCAN_RNG_MAX,UAVCAN,200,,,missing_in_sim_metadata,,,,9
+UAVCAN_RNG_MIN,UAVCAN,0.300000012,,,missing_in_sim_metadata,,,,9
+VT_B_DEC_MSS,VTOL,2,2,0,same,metadata default,VTOL Attitude Control,Float,9
+VT_B_REV_DEL,VTOL,0,0,0,same,metadata default,VTOL Attitude Control,Float,9
+WV_EN,Other,0,0,0,same,metadata default,Multicopter Position Control,Int32,6
+ASPD_BETA_GATE,Other,,1,,not_exported_by_fs150,metadata default,Airspeed Validator,Int32,
+ASPD_BETA_NOISE,Other,,0.3,,not_exported_by_fs150,metadata default,Airspeed Validator,Float,
+ASPD_DO_CHECKS,Other,,1,,not_exported_by_fs150,metadata default,Airspeed Validator,Int32,
+ASPD_FALLBACK_GW,Other,,0,,not_exported_by_fs150,metadata default,Airspeed Validator,Int32,
+ASPD_FS_INNOV,Other,,1,,not_exported_by_fs150,metadata default,Airspeed Validator,Float,
+ASPD_FS_INTEG,Other,,5,,not_exported_by_fs150,metadata default,Airspeed Validator,Float,
+ASPD_FS_T_START,Other,,-1,,not_exported_by_fs150,metadata default,Airspeed Validator,Int32,
+ASPD_FS_T_STOP,Other,,2,,not_exported_by_fs150,metadata default,Airspeed Validator,Int32,
+ASPD_PRIMARY,Other,,1,,not_exported_by_fs150,metadata default,Airspeed Validator,Int32,
+ASPD_SCALE_EST,Other,,0,,not_exported_by_fs150,metadata default,Airspeed Validator,Int32,
+ASPD_SC_P_NOISE,Other,,0.0001,,not_exported_by_fs150,metadata default,Airspeed Validator,Float,
+ASPD_TAS_GATE,Other,,3,,not_exported_by_fs150,metadata default,Airspeed Validator,Int32,
+ASPD_TAS_NOISE,Other,,1.4,,not_exported_by_fs150,metadata default,Airspeed Validator,Float,
+ASPD_W_P_NOISE,Other,,0.1,,not_exported_by_fs150,metadata default,Airspeed Validator,Float,
+ATT_ACC_COMP,Other,,1,,not_exported_by_fs150,metadata default,Attitude Q estimator,Int32,
+ATT_BIAS_MAX,Other,,0.05,,not_exported_by_fs150,metadata default,Attitude Q estimator,Float,
+ATT_EXT_HDG_M,Other,,0,,not_exported_by_fs150,metadata default,Attitude Q estimator,Int32,
+ATT_MAG_DECL,Other,,0,,not_exported_by_fs150,metadata default,Attitude Q estimator,Float,
+ATT_MAG_DECL_A,Other,,1,,not_exported_by_fs150,metadata default,Attitude Q estimator,Int32,
+ATT_W_ACC,Other,,0.2,,not_exported_by_fs150,metadata default,Attitude Q estimator,Float,
+ATT_W_EXT_HDG,Other,,0.1,,not_exported_by_fs150,metadata default,Attitude Q estimator,Float,
+ATT_W_GYRO_BIAS,Other,,0.1,,not_exported_by_fs150,metadata default,Attitude Q estimator,Float,
+ATT_W_MAG,Other,,0.1,,not_exported_by_fs150,metadata default,Attitude Q estimator,Float,
+BAT2_CAPACITY,Battery/power,,-1,,not_exported_by_fs150,metadata default,Battery Calibration,Float,
+BAT2_N_CELLS,Battery/power,,0,,not_exported_by_fs150,metadata default,Battery Calibration,Int32,
+BAT2_R_INTERNAL,Battery/power,,-1,,not_exported_by_fs150,metadata default,Battery Calibration,Float,
+BAT2_SOURCE,Battery/power,,-1,,not_exported_by_fs150,metadata default,Battery Calibration,Int32,
+BAT2_V_CHARGED,Battery/power,,4.05,,not_exported_by_fs150,metadata default,Battery Calibration,Float,
+BAT2_V_EMPTY,Battery/power,,3.5,,not_exported_by_fs150,metadata default,Battery Calibration,Float,
+BAT2_V_LOAD_DROP,Battery/power,,0.3,,not_exported_by_fs150,metadata default,Battery Calibration,Float,
+CAL_ACC2_PRIO,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_ACC2_ROT,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_ACC2_XOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC2_XSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC2_YOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC2_YSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC2_ZOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC2_ZSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC3_PRIO,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_ACC3_ROT,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_ACC3_XOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC3_XSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC3_YOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC3_YSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC3_ZOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_ACC3_ZSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_GYRO2_PRIO,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_GYRO2_ROT,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_GYRO2_XOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_GYRO2_YOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_GYRO2_ZOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_GYRO3_PRIO,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_GYRO3_ROT,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_GYRO3_XOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_GYRO3_YOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_GYRO3_ZOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_PRIO,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_MAG1_XCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_XODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_XOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_XSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_YCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_YODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_YOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_YSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_ZCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_ZODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_ZOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG1_ZSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_PRIO,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_MAG2_XCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_XODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_XOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_XSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_YCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_YODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_YOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_YSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_ZCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_ZODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_ZOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG2_ZSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_PRIO,Sensor calibration,,-1,,not_exported_by_fs150,metadata default,Sensor Calibration,Int32,
+CAL_MAG3_XCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_XODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_XOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_XSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_YCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_YODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_YOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_YSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_ZCOMP,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_ZODIAG,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_ZOFF,Sensor calibration,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAL_MAG3_ZSCALE,Sensor calibration,,1,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+CAM_CAP_DELAY,Other,,0,,not_exported_by_fs150,metadata default,Camera Capture,Float,
+CAM_CAP_EDGE,Other,,0,,not_exported_by_fs150,metadata default,Camera Control,Int32,
+CAM_CAP_MODE,Other,,0,,not_exported_by_fs150,metadata default,Camera Control,Int32,
+CBRK_IO_SAFETY,Safety circuit breaker,,22027,,not_exported_by_fs150,metadata default,Circuit Breaker,Int32,
+COM_ARM_ARSP_EN,Commander/failsafe,,1,,not_exported_by_fs150,metadata default,Commander,Int32,
+EKF2_MULTI_MAG,Estimator,,2,,not_exported_by_fs150,rcS:146 set-default,EKF2,Int32,
+EXFW_HDNG_P,Other,,0.1,,not_exported_by_fs150,metadata default,Miscellaneous,Float,
+EXFW_PITCH_P,Other,,0.2,,not_exported_by_fs150,metadata default,Miscellaneous,Float,
+EXFW_ROLL_P,Other,,0.2,,not_exported_by_fs150,metadata default,Miscellaneous,Float,
+FW_ACRO_X_MAX,Fixed-wing,,90,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_ACRO_Y_MAX,Fixed-wing,,90,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_ACRO_Z_MAX,Fixed-wing,,45,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_AIRSPD_MAX,Fixed-wing,,20,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_AIRSPD_MIN,Fixed-wing,,10,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_AIRSPD_STALL,Fixed-wing,,7,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_AIRSPD_TRIM,Fixed-wing,,15,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_ARSP_MODE,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Int32,
+FW_ARSP_SCALE_EN,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW Attitude Control,Int32,
+FW_BAT_SCALE_EN,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Int32,
+FW_CLMBOUT_DIFF,Fixed-wing,,10,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_DTRIM_P_FLPS,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_DTRIM_P_VMAX,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_DTRIM_P_VMIN,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_DTRIM_R_FLPS,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_DTRIM_R_VMAX,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_DTRIM_R_VMIN,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_DTRIM_Y_VMAX,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_DTRIM_Y_VMIN,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_FLAPERON_SCL,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_FLAPS_LND_SCL,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_FLAPS_SCL,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_FLAPS_TO_SCL,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_GND_SPD_MIN,Fixed-wing,,5,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_L1_DAMPING,Fixed-wing,,0.75,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_L1_PERIOD,Fixed-wing,,20,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_L1_R_SLEW_MAX,Fixed-wing,,90,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_AIRSPD_SC,Fixed-wing,,1.3,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_ANG,Fixed-wing,,5,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_EARLYCFG,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW L1 Control,Int32,
+FW_LND_FLALT,Fixed-wing,,3,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_FL_PMAX,Fixed-wing,,15,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_FL_PMIN,Fixed-wing,,2.5,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_HHDIST,Fixed-wing,,15,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_HVIRT,Fixed-wing,,10,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_THRTC_SC,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_TLALT,Fixed-wing,,-1,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_LND_USETER,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW L1 Control,Int32,
+FW_MAN_P_MAX,Fixed-wing,,45,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_MAN_P_SC,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_MAN_R_MAX,Fixed-wing,,45,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_MAN_R_SC,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_MAN_Y_SC,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_POSCTL_INV_ST,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW L1 Control,Int32,
+FW_PR_FF,Fixed-wing,,0.5,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_PR_I,Fixed-wing,,0.1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_PR_IMAX,Fixed-wing,,0.4,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_PR_P,Fixed-wing,,0.08,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_PSP_OFF,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_P_LIM_MAX,Fixed-wing,,45,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_P_LIM_MIN,Fixed-wing,,-45,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_P_RMAX_NEG,Fixed-wing,,60,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_P_RMAX_POS,Fixed-wing,,60,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_P_TC,Fixed-wing,,0.4,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_RLL_TO_YAW_FF,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_RR_FF,Fixed-wing,,0.5,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_RR_I,Fixed-wing,,0.1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_RR_IMAX,Fixed-wing,,0.2,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_RR_P,Fixed-wing,,0.05,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_R_LIM,Fixed-wing,,50,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_R_RMAX,Fixed-wing,,70,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_R_TC,Fixed-wing,,0.4,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_THR_ALT_SCL,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_THR_CRUISE,Fixed-wing,,0.6,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_THR_IDLE,Fixed-wing,,0.15,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_THR_LND_MAX,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_THR_MAX,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_THR_MIN,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_THR_SLEW_MAX,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_TKO_PITCH_MIN,Fixed-wing,,10,,not_exported_by_fs150,metadata default,FW L1 Control,Float,
+FW_T_ALT_TC,Fixed-wing,,5,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_CLMB_MAX,Fixed-wing,,5,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_CLMB_R_SP,Fixed-wing,,3,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_HRATE_FF,Fixed-wing,,0.3,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_I_GAIN_PIT,Fixed-wing,,0.1,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_I_GAIN_THR,Fixed-wing,,0.3,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_PTCH_DAMP,Fixed-wing,,0.1,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_RLL2THR,Fixed-wing,,15,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_SEB_R_FF,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_SINK_MAX,Fixed-wing,,5,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_SINK_MIN,Fixed-wing,,2,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_SINK_R_SP,Fixed-wing,,2,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_SPDWEIGHT,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_SPD_OMEGA,Fixed-wing,,2,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_STE_R_TC,Fixed-wing,,0.4,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_TAS_R_TC,Fixed-wing,,0.2,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_TAS_TC,Fixed-wing,,5,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_THR_DAMP,Fixed-wing,,0.1,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_T_VERT_ACC,Fixed-wing,,7,,not_exported_by_fs150,metadata default,FW TECS,Float,
+FW_WR_FF,Fixed-wing,,0.2,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_WR_I,Fixed-wing,,0.1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_WR_IMAX,Fixed-wing,,1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_WR_P,Fixed-wing,,0.5,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_W_EN,Fixed-wing,,0,,not_exported_by_fs150,metadata default,FW Attitude Control,Int32,
+FW_W_RMAX,Fixed-wing,,30,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_YR_FF,Fixed-wing,,0.3,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_YR_I,Fixed-wing,,0.1,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_YR_IMAX,Fixed-wing,,0.2,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_YR_P,Fixed-wing,,0.05,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+FW_Y_RMAX,Fixed-wing,,50,,not_exported_by_fs150,metadata default,FW Attitude Control,Float,
+GND_L1_DAMPING,Other,,0.75,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_L1_DIST,Other,,1,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_L1_PERIOD,Other,,5,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_MAN_Y_MAX,Other,,150,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_MAX_ANG,Other,,0.7854,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_SPEED_D,Other,,0.001,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_SPEED_I,Other,,3,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_SPEED_IMAX,Other,,1,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_SPEED_MAX,Other,,10,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_SPEED_P,Other,,2,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_SPEED_THR_SC,Other,,1,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_SPEED_TRIM,Other,,3,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_SP_CTRL_MODE,Other,,1,,not_exported_by_fs150,metadata default,Rover Position Control,Int32,
+GND_THR_CRUISE,Other,,0.1,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_THR_MAX,Other,,0.3,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_THR_MIN,Other,,0,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GND_WHEEL_BASE,Other,,0.31,,not_exported_by_fs150,metadata default,Rover Position Control,Float,
+GPS_1_GNSS,GPS,,0,,not_exported_by_fs150,metadata default,GPS,Int32,
+GPS_1_PROTOCOL,GPS,,1,,not_exported_by_fs150,metadata default,GPS,Int32,
+GPS_2_GNSS,GPS,,0,,not_exported_by_fs150,metadata default,GPS,Int32,
+GPS_2_PROTOCOL,GPS,,1,,not_exported_by_fs150,metadata default,GPS,Int32,
+GPS_UBX_DYNMODEL,GPS,,6,,not_exported_by_fs150,rc.mc_defaults:21 set-default,GPS,Int32,
+GPS_UBX_MODE,GPS,,0,,not_exported_by_fs150,metadata default,GPS,Int32,
+LAUN_ALL_ON,Other,,0,,not_exported_by_fs150,metadata default,FW Launch detection,Int32,
+LAUN_CAT_A,Other,,30,,not_exported_by_fs150,metadata default,FW Launch detection,Float,
+LAUN_CAT_MDEL,Other,,0,,not_exported_by_fs150,metadata default,FW Launch detection,Float,
+LAUN_CAT_PMAX,Other,,30,,not_exported_by_fs150,metadata default,FW Launch detection,Float,
+LAUN_CAT_T,Other,,0.05,,not_exported_by_fs150,metadata default,FW Launch detection,Float,
+LNDFW_AIRSPD_MAX,Other,,6,,not_exported_by_fs150,metadata default,Land Detector,Float,
+LNDFW_VEL_XY_MAX,Other,,5,,not_exported_by_fs150,metadata default,Land Detector,Float,
+LNDFW_VEL_Z_MAX,Other,,3,,not_exported_by_fs150,metadata default,Land Detector,Float,
+LNDFW_XYACC_MAX,Other,,8,,not_exported_by_fs150,metadata default,Land Detector,Float,
+LPE_ACC_XY,Estimator,,0.012,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_ACC_Z,Estimator,,0.02,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_BAR_Z,Estimator,,3,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_EPH_MAX,Estimator,,3,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_EPV_MAX,Estimator,,5,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_FAKE_ORIGIN,Estimator,,0,,not_exported_by_fs150,metadata default,Local Position Estimator,Int32,
+LPE_FGYRO_HP,Estimator,,0.001,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_FLW_OFF_Z,Estimator,,0,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_FLW_QMIN,Estimator,,150,,not_exported_by_fs150,metadata default,Local Position Estimator,Int32,
+LPE_FLW_R,Estimator,,7,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_FLW_RR,Estimator,,7,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_FLW_SCALE,Estimator,,1.3,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_FUSION,Estimator,,145,,not_exported_by_fs150,metadata default,Local Position Estimator,Int32,
+LPE_GPS_DELAY,Estimator,,0.29,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_GPS_VXY,Estimator,,0.25,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_GPS_VZ,Estimator,,0.25,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_GPS_XY,Estimator,,1,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_GPS_Z,Estimator,,3,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_LAND_VXY,Estimator,,0.05,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_LAND_Z,Estimator,,0.03,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_LAT,Estimator,,47.397742,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_LDR_OFF_Z,Estimator,,0,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_LDR_Z,Estimator,,0.03,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_LON,Estimator,,8.545594,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_LT_COV,Estimator,,0.0001,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_PN_B,Estimator,,0.001,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_PN_P,Estimator,,0.1,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_PN_T,Estimator,,0.001,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_PN_V,Estimator,,0.1,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_SNR_OFF_Z,Estimator,,0,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_SNR_Z,Estimator,,0.05,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_T_MAX_GRADE,Estimator,,1,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_VIC_P,Estimator,,0.001,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_VIS_DELAY,Estimator,,0.1,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_VIS_XY,Estimator,,0.1,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_VIS_Z,Estimator,,0.5,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_VXY_PUB,Estimator,,0.3,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_X_LP,Estimator,,5,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LPE_Z_PUB,Estimator,,1,,not_exported_by_fs150,metadata default,Local Position Estimator,Float,
+LTEST_ACC_UNC,Other,,10,,not_exported_by_fs150,metadata default,Landing target Estimator,Float,
+LTEST_MEAS_UNC,Other,,0.005,,not_exported_by_fs150,metadata default,Landing target Estimator,Float,
+LTEST_MODE,Other,,0,,not_exported_by_fs150,metadata default,Landing target Estimator,Int32,
+LTEST_POS_UNC_IN,Other,,0.1,,not_exported_by_fs150,metadata default,Landing target Estimator,Float,
+LTEST_SCALE_X,Other,,1,,not_exported_by_fs150,metadata default,Landing target Estimator,Float,
+LTEST_SCALE_Y,Other,,1,,not_exported_by_fs150,metadata default,Landing target Estimator,Float,
+LTEST_VEL_UNC_IN,Other,,0.1,,not_exported_by_fs150,metadata default,Landing target Estimator,Float,
+MAV_0_BROADCAST,MAVLink/system identity,,1,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_0_REMOTE_PRT,MAVLink/system identity,,14550,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_0_UDP_PRT,MAVLink/system identity,,14556,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_1_BROADCAST,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_1_REMOTE_PRT,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_1_UDP_PRT,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_2_BROADCAST,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_2_FORWARD,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_2_MODE,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_2_RADIO_CTL,MAVLink/system identity,,1,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_2_RATE,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_2_REMOTE_PRT,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MAV_2_UDP_PRT,MAVLink/system identity,,0,,not_exported_by_fs150,metadata default,MAVLink,Int32,
+MNT_DO_STAB,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Int32,
+MNT_MAN_PITCH,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Int32,
+MNT_MAN_ROLL,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Int32,
+MNT_MAN_YAW,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Int32,
+MNT_MAV_COMPID,Mount/gimbal,,154,,not_exported_by_fs150,metadata default,Mount,Int32,
+MNT_MAV_SYSID,Mount/gimbal,,1,,not_exported_by_fs150,metadata default,Mount,Int32,
+MNT_MODE_OUT,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Int32,
+MNT_OB_LOCK_MODE,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_OB_NORM_MODE,Mount/gimbal,,-1,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_OFF_PITCH,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_OFF_ROLL,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_OFF_YAW,Mount/gimbal,,0,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_RANGE_PITCH,Mount/gimbal,,360,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_RANGE_ROLL,Mount/gimbal,,360,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_RANGE_YAW,Mount/gimbal,,360,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_RATE_PITCH,Mount/gimbal,,30,,not_exported_by_fs150,metadata default,Mount,Float,
+MNT_RATE_YAW,Mount/gimbal,,30,,not_exported_by_fs150,metadata default,Mount,Float,
+NAV_AH_ALT,Navigation,,600,,not_exported_by_fs150,metadata default,Data Link Loss,Float,
+NAV_AH_LAT,Navigation,,-265847810,,not_exported_by_fs150,metadata default,Data Link Loss,Int32,
+NAV_AH_LON,Navigation,,1518423250,,not_exported_by_fs150,metadata default,Data Link Loss,Int32,
+PWM_AUX_DIS7,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_DIS8,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_FAIL7,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_FAIL8,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_MAX7,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_MAX8,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_MIN7,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_MIN8,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_RATE1,Actuator output,,50,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_REV7,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_REV8,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_AUX_TRIM7,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_AUX_TRIM8,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_EXTRA_DIS1,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_DIS2,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_DIS3,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_DIS4,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_DIS5,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_DIS6,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_DIS7,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_DIS8,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_DISARM,Actuator output,,1500,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_FAIL1,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_FAIL2,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_FAIL3,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_FAIL4,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_FAIL5,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_FAIL6,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_FAIL7,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_FAIL8,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX,Actuator output,,2000,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX1,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX2,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX3,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX4,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX5,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX6,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX7,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MAX8,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN,Actuator output,,1000,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN1,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN2,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN3,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN4,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN5,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN6,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN7,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_MIN8,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_RATE,Actuator output,,50,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_RATE1,Actuator output,,50,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_REV1,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_REV2,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_REV3,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_REV4,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_REV5,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_REV6,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_REV7,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_REV8,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_EXTRA_TRIM1,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_EXTRA_TRIM2,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_EXTRA_TRIM3,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_EXTRA_TRIM4,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_EXTRA_TRIM5,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_EXTRA_TRIM6,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_EXTRA_TRIM7,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_EXTRA_TRIM8,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_MAIN_DIS10,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_DIS11,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_DIS12,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_DIS13,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_DIS14,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_DIS9,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_FAIL10,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_FAIL11,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_FAIL12,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_FAIL13,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_FAIL14,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_FAIL9,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MAX10,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MAX11,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MAX12,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MAX13,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MAX14,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MAX9,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MIN10,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MIN11,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MIN12,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MIN13,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MIN14,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_MIN9,Actuator output,,-1,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_RATE1,Actuator output,,50,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_REV10,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_REV11,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_REV12,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_REV13,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_REV14,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_REV9,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Int32,
+PWM_MAIN_TRIM10,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_MAIN_TRIM11,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_MAIN_TRIM12,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_MAIN_TRIM13,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_MAIN_TRIM14,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+PWM_MAIN_TRIM9,Actuator output,,0,,not_exported_by_fs150,metadata default,PWM Outputs,Float,
+RV_YAW_P,Other,,0.1,,not_exported_by_fs150,metadata default,Miscellaneous,Float,
+RWTO_AIRSPD_SCL,Other,,1.3,,not_exported_by_fs150,metadata default,Runway Takeoff,Float,
+RWTO_HDG,Other,,0,,not_exported_by_fs150,metadata default,Runway Takeoff,Int32,
+RWTO_MAX_PITCH,Other,,20,,not_exported_by_fs150,metadata default,Runway Takeoff,Float,
+RWTO_MAX_ROLL,Other,,25,,not_exported_by_fs150,metadata default,Runway Takeoff,Float,
+RWTO_MAX_THR,Other,,1,,not_exported_by_fs150,metadata default,Runway Takeoff,Float,
+RWTO_NAV_ALT,Other,,5,,not_exported_by_fs150,metadata default,Runway Takeoff,Float,
+RWTO_PSP,Other,,0,,not_exported_by_fs150,metadata default,Runway Takeoff,Float,
+RWTO_RAMP_TIME,Other,,2,,not_exported_by_fs150,metadata default,Runway Takeoff,Float,
+RWTO_TKOFF,Other,,0,,not_exported_by_fs150,metadata default,Runway Takeoff,Int32,
+SENS_DPRES_ANSC,Sensor selection/offset,,0,,not_exported_by_fs150,metadata default,Sensor Calibration,Float,
+SENS_INT_BARO_EN,Sensor selection/offset,,1,,not_exported_by_fs150,metadata default,Sensors,Int32,
+SIM_BAT_DRAIN,Other,,60,,not_exported_by_fs150,metadata default,SITL,Float,
+SIM_BAT_MIN_PCT,Other,,50,,not_exported_by_fs150,metadata default,SITL,Float,
+TC_A0_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_A0_TMAX,Other,,100,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_TMIN,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_TREF,Other,,25,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X0_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X0_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X0_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X1_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X1_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X1_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X2_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X2_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X2_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X3_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X3_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A0_X3_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_A1_TMAX,Other,,100,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_TMIN,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_TREF,Other,,25,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X0_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X0_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X0_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X1_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X1_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X1_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X2_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X2_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X2_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X3_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X3_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A1_X3_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_A2_TMAX,Other,,100,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_TMIN,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_TREF,Other,,25,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X0_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X0_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X0_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X1_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X1_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X1_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X2_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X2_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X2_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X3_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X3_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A2_X3_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_A3_TMAX,Other,,100,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_TMIN,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_TREF,Other,,25,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X0_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X0_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X0_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X1_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X1_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X1_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X2_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X2_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X2_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X3_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X3_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_A3_X3_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_B0_TMAX,Other,,75,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_TMIN,Other,,5,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_TREF,Other,,40,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_X0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_X1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_X2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_X3,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_X4,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B0_X5,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_B1_TMAX,Other,,75,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_TMIN,Other,,5,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_TREF,Other,,40,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_X0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_X1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_X2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_X3,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_X4,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B1_X5,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_B2_TMAX,Other,,75,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_TMIN,Other,,5,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_TREF,Other,,40,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_X0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_X1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_X2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_X3,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_X4,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B2_X5,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_B3_TMAX,Other,,75,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_TMIN,Other,,5,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_TREF,Other,,40,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_X0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_X1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_X2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_X3,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_X4,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_B3_X5,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_G0_TMAX,Other,,100,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_TMIN,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_TREF,Other,,25,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X0_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X0_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X0_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X1_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X1_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X1_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X2_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X2_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X2_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X3_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X3_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G0_X3_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_G1_TMAX,Other,,100,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_TMIN,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_TREF,Other,,25,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X0_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X0_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X0_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X1_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X1_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X1_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X2_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X2_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X2_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X3_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X3_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G1_X3_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_G2_TMAX,Other,,100,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_TMIN,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_TREF,Other,,25,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X0_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X0_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X0_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X1_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X1_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X1_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X2_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X2_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X2_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X3_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X3_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G2_X3_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_ID,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Int32,
+TC_G3_TMAX,Other,,100,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_TMIN,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_TREF,Other,,25,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X0_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X0_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X0_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X1_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X1_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X1_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X2_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X2_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X2_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X3_0,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X3_1,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TC_G3_X3_2,Other,,0,,not_exported_by_fs150,metadata default,Thermal Compensation,Float,
+TEST_1,Other,,2,,not_exported_by_fs150,metadata default,Testing,Int32,
+TEST_2,Other,,4,,not_exported_by_fs150,metadata default,Testing,Int32,
+TEST_3,Other,,5,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_D,Other,,0.01,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_DEV,Other,,2,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_D_LP,Other,,10,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_HP,Other,,10,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_I,Other,,0.1,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_I_MAX,Other,,1,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_LP,Other,,10,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_MAX,Other,,1,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_MEAN,Other,,1,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_MIN,Other,,-1,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_P,Other,,0.2,,not_exported_by_fs150,metadata default,Testing,Float,
+TEST_PARAMS,Other,,12345678,,not_exported_by_fs150,metadata default,Testing,Int32,
+TEST_RC2_X,Other,,16,,not_exported_by_fs150,metadata default,Testing,Int32,
+TEST_RC_X,Other,,8,,not_exported_by_fs150,metadata default,Testing,Int32,
+TEST_TRIM,Other,,0.5,,not_exported_by_fs150,metadata default,Testing,Float,
+TRIG_ACT_TIME,Trigger/camera,,40,,not_exported_by_fs150,metadata default,Camera trigger,Float,
+TRIG_DISTANCE,Trigger/camera,,25,,not_exported_by_fs150,metadata default,Camera trigger,Float,
+TRIG_INTERFACE,Trigger/camera,,3,,not_exported_by_fs150,rcS:157 set-default,Camera trigger,Int32,
+TRIG_INTERVAL,Trigger/camera,,40,,not_exported_by_fs150,metadata default,Camera trigger,Float,
+TRIG_MIN_INTERVA,Trigger/camera,,1,,not_exported_by_fs150,metadata default,Camera trigger,Float,
+TRIG_PINS,Trigger/camera,,56,,not_exported_by_fs150,metadata default,Camera trigger,Int32,
+TRIG_PINS_EX,Trigger/camera,,0,,not_exported_by_fs150,metadata default,Camera trigger,Int32,
+TRIG_POLARITY,Trigger/camera,,0,,not_exported_by_fs150,metadata default,Camera trigger,Int32,
+TRIG_PWM_NEUTRAL,Trigger/camera,,1500,,not_exported_by_fs150,metadata default,Camera trigger,Int32,
+TRIG_PWM_SHOOT,Trigger/camera,,1900,,not_exported_by_fs150,metadata default,Camera trigger,Int32,
+TRIM_PITCH,Other,,0,,not_exported_by_fs150,metadata default,Radio Calibration,Float,
+TRIM_ROLL,Other,,0,,not_exported_by_fs150,metadata default,Radio Calibration,Float,
+TRIM_YAW,Other,,0,,not_exported_by_fs150,metadata default,Radio Calibration,Float,
+UUV_DIRCT_PITCH,Other,,0,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_DIRCT_ROLL,Other,,0,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_DIRCT_THRUST,Other,,0,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_DIRCT_YAW,Other,,0,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_GAIN_X_D,Other,,0.2,,not_exported_by_fs150,metadata default,UUV Position Control,Float,
+UUV_GAIN_X_P,Other,,1,,not_exported_by_fs150,metadata default,UUV Position Control,Float,
+UUV_GAIN_Y_D,Other,,0.2,,not_exported_by_fs150,metadata default,UUV Position Control,Float,
+UUV_GAIN_Y_P,Other,,1,,not_exported_by_fs150,metadata default,UUV Position Control,Float,
+UUV_GAIN_Z_D,Other,,0.2,,not_exported_by_fs150,metadata default,UUV Position Control,Float,
+UUV_GAIN_Z_P,Other,,1,,not_exported_by_fs150,metadata default,UUV Position Control,Float,
+UUV_INPUT_MODE,Other,,0,,not_exported_by_fs150,metadata default,UUV Attitude Control,Int32,
+UUV_PITCH_D,Other,,2,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_PITCH_P,Other,,4,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_ROLL_D,Other,,1.5,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_ROLL_P,Other,,4,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_SKIP_CTRL,Other,,0,,not_exported_by_fs150,metadata default,Miscellaneous,Int32,
+UUV_STAB_MODE,Other,,1,,not_exported_by_fs150,metadata default,UUV Position Control,Int32,
+UUV_YAW_D,Other,,2,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+UUV_YAW_P,Other,,4,,not_exported_by_fs150,metadata default,UUV Attitude Control,Float,
+VT_ARSP_BLEND,VTOL,,8,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_ARSP_TRANS,VTOL,,10,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_B_DEC_FF,VTOL,,0.12,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_B_DEC_I,VTOL,,0.1,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_B_REV_OUT,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_B_TRANS_DUR,VTOL,,4,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_B_TRANS_RAMP,VTOL,,3,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_B_TRANS_THR,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_DWN_PITCH_MAX,VTOL,,5,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_ELEV_MC_LOCK,VTOL,,1,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_FWD_THRUST_EN,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_FWD_THRUST_SC,VTOL,,0.7,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_FW_ALT_ERR,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_FW_DIFTHR_EN,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_FW_DIFTHR_SC,VTOL,,0.1,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_FW_MIN_ALT,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_FW_MOT_OFFID,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_FW_PERM_STAB,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_FW_QC_P,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_FW_QC_R,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_F_TRANS_DUR,VTOL,,5,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_F_TRANS_THR,VTOL,,1,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_F_TR_OL_TM,VTOL,,6,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_IDLE_PWM_MC,VTOL,,900,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_MC_ON_FMU,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_MOT_ID,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+VT_PSHER_RMP_DT,VTOL,,3,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_TILT_FW,VTOL,,1,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_TILT_MC,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_TILT_SPINUP,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_TILT_TRANS,VTOL,,0.3,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_TRANS_MIN_TM,VTOL,,2,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_TRANS_P2_DUR,VTOL,,0.5,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_TRANS_TIMEOUT,VTOL,,15,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+VT_TYPE,VTOL,,0,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Int32,
+WV_GAIN,Other,,1,,not_exported_by_fs150,metadata default,VTOL Attitude Control,Float,
+WV_ROLL_MIN,Other,,1,,not_exported_by_fs150,metadata default,Multicopter Position Control,Float,
+WV_YRATE_MAX,Other,,90,,not_exported_by_fs150,metadata default,Multicopter Position Control,Float,
+ctl_bw,Other,,75,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+ctl_dir,Other,,1,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+ctl_gain,Other,,1,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Float,
+ctl_hz_idle,Other,,3.5,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Float,
+ctl_start_rate,Other,,25,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+esc_index,Other,,0,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+gnss.dyn_model,Other,,2,,not_exported_by_fs150,metadata default,UAVCAN GNSS,Int32,
+gnss.old_fix_msg,Other,,1,,not_exported_by_fs150,metadata default,UAVCAN GNSS,Int32,
+gnss.warn_dimens,Other,,0,,not_exported_by_fs150,metadata default,UAVCAN GNSS,Int32,
+gnss.warn_sats,Other,,0,,not_exported_by_fs150,metadata default,UAVCAN GNSS,Int32,
+id_ext_status,Other,,20034,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+int_ext_status,Other,,50000,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+int_status,Other,,50000,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+mot_i_max,Other,,12,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Float,
+mot_kv,Other,,2300,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+mot_ls,Other,,0,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Float,
+mot_num_poles,Other,,14,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Int32,
+mot_rs,Other,,0,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Float,
+mot_v_accel,Other,,0.5,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Float,
+mot_v_max,Other,,14.8,,not_exported_by_fs150,metadata default,UAVCAN Motor Parameters,Float,
+uavcan.pubp-pres,Other,,0,,not_exported_by_fs150,metadata default,UAVCAN GNSS,Int32,
