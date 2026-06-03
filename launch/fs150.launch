@@ -22,6 +22,12 @@
   <arg name="work_dir" default="$(env HOME)/.xgc2/px4_sitl/$(arg model_name)"/>
   <arg name="param_file" default="$(find gazebo_sim_fs150_sitl)/config/generated/fs150-sitl.params"/>
   <arg name="reset_params" default="true"/>
+  <arg name="sys_autostart" default=""/>
+  <arg name="sim_speed_factor" default=""/>
+  <arg name="home_lat" default=""/>
+  <arg name="home_lon" default=""/>
+  <arg name="uxrce_dds_ns" default=""/>
+  <arg name="uxrce_dds_port" default=""/>
 
   <!-- PX4 instance 3 maps to MAV_SYS_ID=4. Keep fcu_url explicit when changing ID. -->
   <arg name="fcu_url" default="udp://:14543@localhost:14560"/>
@@ -38,6 +44,12 @@
     <arg name="work_dir" value="$(arg work_dir)"/>
     <arg name="param_file" value="$(arg param_file)"/>
     <arg name="reset_params" value="$(arg reset_params)"/>
+    <arg name="sys_autostart" value="$(arg sys_autostart)"/>
+    <arg name="sim_speed_factor" value="$(arg sim_speed_factor)"/>
+    <arg name="home_lat" value="$(arg home_lat)"/>
+    <arg name="home_lon" value="$(arg home_lon)"/>
+    <arg name="uxrce_dds_ns" value="$(arg uxrce_dds_ns)"/>
+    <arg name="uxrce_dds_port" value="$(arg uxrce_dds_port)"/>
     <arg name="gui" value="$(arg gui)"/>
     <arg name="debug" value="$(arg debug)"/>
     <arg name="verbose" value="$(arg verbose)"/>
