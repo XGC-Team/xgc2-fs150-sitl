@@ -84,6 +84,39 @@ EXCLUDE_PATTERNS: Sequence[Tuple[str, str]] = (
 TYPE_FLOAT = 9
 TYPE_INT32 = 6
 
+SITL_OVERRIDES: Sequence[Tuple[str, str, int, str]] = (
+    (
+        "COM_RC_IN_MODE",
+        "1",
+        TYPE_INT32,
+        "PX4 SITL has no physical RC receiver; joystick/no-RC checks matches headless simulation.",
+    ),
+    (
+        "COM_RCL_EXCEPT",
+        "4",
+        TYPE_INT32,
+        "Ignore RC loss in Offboard so algorithm tests do not depend on a physical transmitter.",
+    ),
+    (
+        "SYS_HAS_GPS",
+        "0",
+        TYPE_INT32,
+        "Indoor mocap FS150 does not require GPS hardware for arming or position control.",
+    ),
+    (
+        "SYS_HAS_BARO",
+        "0",
+        TYPE_INT32,
+        "Indoor mocap FS150 does not require barometer hardware for arming.",
+    ),
+    (
+        "SYS_HAS_MAG",
+        "0",
+        TYPE_INT32,
+        "Indoor mocap FS150 does not require magnetometer hardware for arming or yaw fusion.",
+    ),
+)
+
 
 @dataclass(frozen=True)
 class Param:
@@ -203,15 +236,19 @@ def write_param_overlay(path: Path, decisions: Sequence[Decision], vehicle_id: i
         handle.write("# Vehicle-Id Component-Id Name Value Type\n")
         for decision in included:
             handle.write(f"{vehicle_id}\t{component_id}\t{decision.name}\t{decision.value}\t{decision.px4_type}\n")
+        for name, value, px4_type, _reason in SITL_OVERRIDES:
+            handle.write(f"{vehicle_id}\t{component_id}\t{name}\t{value}\t{px4_type}\n")
 
 
 def write_selection_report(path: Path, decisions: Sequence[Decision]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.writer(handle)
+        writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(["name", "value", "type", "action", "profile", "reason"])
         for decision in decisions:
             writer.writerow([decision.name, decision.value, decision.px4_type, decision.action, decision.profile, decision.reason])
+        for name, value, px4_type, reason in SITL_OVERRIDES:
+            writer.writerow([name, value, px4_type, "include", "sitl_override", reason])
 
 
 def parse_profiles(raw: str, include_mavlink_rate: bool) -> List[str]:
