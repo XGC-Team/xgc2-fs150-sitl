@@ -122,7 +122,7 @@ def _remove_plugin_tag(root, plugin_name, tag):
     return removed
 
 
-def render_indoor_sdf(base_sdf, strip_gps=True, strip_mag=True, strip_baro=True):
+def render_indoor_sdf(base_sdf, strip_gps=False, strip_mag=False, strip_baro=False):
     tree = ET.parse(base_sdf)
     root = tree.getroot()
     report = []
@@ -161,9 +161,9 @@ def main():
     parser = argparse.ArgumentParser(description="Render an indoor FS150 SDF from the installed PX4 1.12 iris SDF.")
     parser.add_argument("--base-sdf", default=None, help="Source SDF. Defaults to gazebo_sim_px4_1_12/models/iris/iris.sdf.")
     parser.add_argument("--output", default=default_output_path(), help="Output SDF path.")
-    parser.add_argument("--strip-gps", type=_bool_arg, default=True)
-    parser.add_argument("--strip-mag", type=_bool_arg, default=True)
-    parser.add_argument("--strip-baro", type=_bool_arg, default=True)
+    parser.add_argument("--strip-gps", type=_bool_arg, default=False)
+    parser.add_argument("--strip-mag", type=_bool_arg, default=False)
+    parser.add_argument("--strip-baro", type=_bool_arg, default=False)
     parser.add_argument("--print-path", action="store_true", help="Print only the output path on stdout.")
     args = parser.parse_args()
 

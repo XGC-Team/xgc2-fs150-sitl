@@ -28,11 +28,23 @@ EOF
 "/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/render_fs150_indoor_sdf.py" \
   --base-sdf /tmp/fs150-test-base.sdf \
   --output /tmp/fs150-test-indoor.sdf >/tmp/fs150-test-render.log
-grep -q 'removed 1 x gps include gps0' /tmp/fs150-test-render.log
-! grep -q 'magnetometer_plugin' /tmp/fs150-test-indoor.sdf
-! grep -q 'barometer_plugin' /tmp/fs150-test-indoor.sdf
-! grep -q 'magSubTopic' /tmp/fs150-test-indoor.sdf
-! grep -q 'baroSubTopic' /tmp/fs150-test-indoor.sdf
+! grep -q '^removed ' /tmp/fs150-test-render.log
+grep -q 'magnetometer_plugin' /tmp/fs150-test-indoor.sdf
+grep -q 'barometer_plugin' /tmp/fs150-test-indoor.sdf
+grep -q 'magSubTopic' /tmp/fs150-test-indoor.sdf
+grep -q 'baroSubTopic' /tmp/fs150-test-indoor.sdf
+
+"/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/render_fs150_indoor_sdf.py" \
+  --base-sdf /tmp/fs150-test-base.sdf \
+  --output /tmp/fs150-test-stripped.sdf \
+  --strip-gps true \
+  --strip-mag true \
+  --strip-baro true >/tmp/fs150-test-strip-render.log
+grep -q 'removed 1 x gps include gps0' /tmp/fs150-test-strip-render.log
+! grep -q 'magnetometer_plugin' /tmp/fs150-test-stripped.sdf
+! grep -q 'barometer_plugin' /tmp/fs150-test-stripped.sdf
+! grep -q 'magSubTopic' /tmp/fs150-test-stripped.sdf
+! grep -q 'baroSubTopic' /tmp/fs150-test-stripped.sdf
 
 "/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/generate_fs150_sitl_params.py" \
   --source "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/config/source/fs150-mav_sys_id4.params" \
