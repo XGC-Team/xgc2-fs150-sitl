@@ -4,6 +4,7 @@
   <arg name="vehicle" default="iris"/>
   <arg name="px4_sim_model" default="iris"/>
   <arg name="model_name" default="fs150_$(arg ID)"/>
+  <arg name="px4_launch" default="$(find gazebo_sim_px4_1_12)/launch/iris.launch"/>
 
   <arg name="gui" default="true"/>
   <arg name="debug" default="false"/>
@@ -37,7 +38,7 @@
   <arg name="respawn_gazebo" default="false"/>
   <arg name="respawn_mavros" default="false"/>
 
-  <include file="$(find gazebo_sim_px4_1_12)/launch/iris.launch">
+  <include file="$(arg px4_launch)">
     <arg name="ID" value="$(arg ID)"/>
     <arg name="vehicle" value="$(arg vehicle)"/>
     <arg name="px4_sim_model" value="$(arg px4_sim_model)"/>

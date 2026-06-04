@@ -7,6 +7,7 @@ catkin_package()
 
 catkin_install_python(PROGRAMS
   scripts/generate_fs150_sitl_params.py
+  scripts/render_fs150_indoor_sdf.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

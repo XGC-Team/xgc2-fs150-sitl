@@ -7,7 +7,32 @@ source "/opt/ros/${ROS_DISTRO}/setup.bash"
 dpkg -s ros-noetic-xgc2-gazebo-sim-fs150-sitl >/dev/null
 test "$(rospack find gazebo_sim_fs150_sitl)" = "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl"
 test -x "/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/generate_fs150_sitl_params.py"
+test -x "/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/render_fs150_indoor_sdf.py"
 test -f "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/config/generated/fs150-sitl.params"
+test -f "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/launch/fs150.launch"
+
+cat >/tmp/fs150-test-base.sdf <<'EOF'
+<sdf version="1.6">
+  <model name="iris">
+    <include><uri>model://gps</uri><name>gps0</name></include>
+    <joint name="gps0_joint" type="fixed"/>
+    <plugin name="magnetometer_plugin" filename="libgazebo_magnetometer_plugin.so"/>
+    <plugin name="barometer_plugin" filename="libgazebo_barometer_plugin.so"/>
+    <plugin name="mavlink_interface" filename="libgazebo_mavlink_interface.so">
+      <magSubTopic>/mag</magSubTopic>
+      <baroSubTopic>/baro</baroSubTopic>
+    </plugin>
+  </model>
+</sdf>
+EOF
+"/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/render_fs150_indoor_sdf.py" \
+  --base-sdf /tmp/fs150-test-base.sdf \
+  --output /tmp/fs150-test-indoor.sdf >/tmp/fs150-test-render.log
+grep -q 'removed 1 x gps include gps0' /tmp/fs150-test-render.log
+! grep -q 'magnetometer_plugin' /tmp/fs150-test-indoor.sdf
+! grep -q 'barometer_plugin' /tmp/fs150-test-indoor.sdf
+! grep -q 'magSubTopic' /tmp/fs150-test-indoor.sdf
+! grep -q 'baroSubTopic' /tmp/fs150-test-indoor.sdf
 
 "/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/generate_fs150_sitl_params.py" \
   --source "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/config/source/fs150-mav_sys_id4.params" \
