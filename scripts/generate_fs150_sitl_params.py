@@ -97,24 +97,6 @@ SITL_OVERRIDES: Sequence[Tuple[str, str, int, str]] = (
         TYPE_INT32,
         "Ignore RC loss in Offboard so algorithm tests do not depend on a physical transmitter.",
     ),
-    (
-        "SYS_HAS_GPS",
-        "0",
-        TYPE_INT32,
-        "Indoor mocap FS150 does not require GPS hardware for arming or position control.",
-    ),
-    (
-        "SYS_HAS_BARO",
-        "0",
-        TYPE_INT32,
-        "Indoor mocap FS150 does not require barometer hardware for arming.",
-    ),
-    (
-        "SYS_HAS_MAG",
-        "0",
-        TYPE_INT32,
-        "Indoor mocap FS150 does not require magnetometer hardware for arming or yaw fusion.",
-    ),
 )
 
 

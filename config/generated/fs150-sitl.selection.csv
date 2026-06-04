@@ -802,6 +802,3 @@ VT_B_REV_DEL,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 WV_EN,0,6,exclude,,not selected by FS150 SITL policy
 COM_RC_IN_MODE,1,6,include,sitl_override,PX4 SITL has no physical RC receiver; joystick/no-RC checks matches headless simulation.
 COM_RCL_EXCEPT,4,6,include,sitl_override,Ignore RC loss in Offboard so algorithm tests do not depend on a physical transmitter.
-SYS_HAS_GPS,0,6,include,sitl_override,Indoor mocap FS150 does not require GPS hardware for arming or position control.
-SYS_HAS_BARO,0,6,include,sitl_override,Indoor mocap FS150 does not require barometer hardware for arming.
-SYS_HAS_MAG,0,6,include,sitl_override,Indoor mocap FS150 does not require magnetometer hardware for arming or yaw fusion.
