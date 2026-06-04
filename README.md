@@ -66,6 +66,7 @@ The key estimator parameters are:
 | `EKF2_RNG_AID` | `0` | Prevents PX4 from temporarily switching height fusion to rangefinder at low speed and low altitude. |
 | `EKF2_TERR_MASK` | `0` | Disables rangefinder/optical-flow terrain estimation because this indoor workflow does not use HAGL aiding. |
 | `MAV_ODOM_LP` | `1` | Keeps MAVLink odometry path behavior aligned with the FS150 motion-capture workflow. |
+| `MPC_USE_HTE` | `1` | Enables PX4 hover thrust estimation instead of treating the imported `MPC_THR_HOVER` value as the only hover-thrust source. |
 
 `EKF2_RNG_AID` and `EKF2_TERR_MASK` are deliberately overridden by the FS150
 SITL overlay even though the exported real-vehicle FS150 parameter file contains
@@ -93,7 +94,7 @@ tests include:
 - `EKF2_AID_MASK`, `EKF2_HGT_MODE`, `EKF2_MAG_TYPE`
 - `EKF2_RNG_AID`, `EKF2_TERR_MASK`
 - controller parameters such as `MC_ROLLRATE_*`, `MC_PITCHRATE_*`,
-  `MPC_THR_HOVER`, and `MPC_XY_VEL_D_ACC`
+  `MPC_THR_HOVER`, `MPC_USE_HTE`, and `MPC_XY_VEL_D_ACC`
 
 Before copying anything back to a real vehicle, separate the categories:
 
@@ -111,6 +112,7 @@ rosrun mavros mavparam -n /uav1/mavros get EKF2_AID_MASK
 rosrun mavros mavparam -n /uav1/mavros get EKF2_HGT_MODE
 rosrun mavros mavparam -n /uav1/mavros get EKF2_RNG_AID
 rosrun mavros mavparam -n /uav1/mavros get EKF2_TERR_MASK
+rosrun mavros mavparam -n /uav1/mavros get MPC_USE_HTE
 ```
 
-The expected values are `24`, `3`, `0`, and `0`.
+The expected values are `24`, `3`, `0`, `0`, and `1`.

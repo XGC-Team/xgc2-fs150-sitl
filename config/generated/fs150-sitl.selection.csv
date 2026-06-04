@@ -422,7 +422,7 @@ MPC_TILTMAX_AIR,45.000000000000000000,9,exclude,,not selected by FS150 SITL poli
 MPC_TILTMAX_LND,12.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 MPC_TKO_RAMP_T,3.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 MPC_TKO_SPEED,1.500000000000000000,9,exclude,,not selected by FS150 SITL policy
-MPC_USE_HTE,1,6,exclude,,not selected by FS150 SITL policy
+MPC_USE_HTE,1,6,include,control,matched control:MPC_USE_HTE
 MPC_VELD_LP,5.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 MPC_VEL_MANUAL,10.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 MPC_XY_CRUISE,5.000000000000000000,9,exclude,,not selected by FS150 SITL policy

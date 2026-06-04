@@ -30,6 +30,7 @@ PROFILE_RULES: Dict[str, Sequence[Tuple[str, str]]] = {
     "control": (
         ("regex", r"^MC_(ROLL|PITCH)RATE_[PID]$"),
         ("exact", "MPC_THR_HOVER"),
+        ("exact", "MPC_USE_HTE"),
         ("exact", "MPC_XY_VEL_D_ACC"),
         ("exact", "MPC_MANTHR_MIN"),
         ("exact", "IMU_DGYRO_CUTOFF"),
