@@ -97,6 +97,18 @@ SITL_OVERRIDES: Sequence[Tuple[str, str, int, str]] = (
         TYPE_INT32,
         "Ignore RC loss in Offboard so algorithm tests do not depend on a physical transmitter.",
     ),
+    (
+        "EKF2_RNG_AID",
+        "0",
+        TYPE_INT32,
+        "Disable rangefinder height aiding so indoor FS150 SITL height remains external-vision only.",
+    ),
+    (
+        "EKF2_TERR_MASK",
+        "0",
+        TYPE_INT32,
+        "Disable range/optical-flow terrain fusion because the indoor FS150 workflow does not use HAGL aiding.",
+    ),
 )
 
 
