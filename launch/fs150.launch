@@ -20,7 +20,7 @@
   <arg name="Y" default="0"/>
 
   <arg name="world" default="$(find gazebo_sim_px4_1_12)/worlds/empty.world"/>
-  <arg name="sdf" default="$(find gazebo_sim_px4_1_12)/models/iris/iris.sdf"/>
+  <arg name="sdf" default="$(find gazebo_sim_fs150_sitl)/models/fs150/iris.sdf"/>
   <arg name="work_dir" default="$(env HOME)/.xgc2/px4_sitl/$(arg model_name)"/>
   <arg name="param_file" default="$(find gazebo_sim_fs150_sitl)/config/generated/fs150-sitl.params"/>
   <arg name="reset_params" default="true"/>

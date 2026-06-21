@@ -1,9 +1,9 @@
 # gazebo_sim_fs150_sitl
 
 FS150 SITL is a thin wrapper over the PX4 1.12 iris Gazebo simulation. It keeps
-the iris airframe, mixer, core multirotor dynamics and simulated IMU owned by
-the base simulator, then overlays only the real FS150 parameters that are useful
-for matching control, power policy, safety policy and mocap/vision estimator
+the iris airframe, mixer and simulated IMU owned by the base simulator, then
+overlays the real FS150 parameters plus a calibrated Gazebo motor model for
+matching control, power policy, safety policy and mocap/vision estimator
 behavior.
 
 Start the default vehicle-4 simulation:
@@ -22,10 +22,14 @@ roslaunch gazebo_sim_fs150_sitl fs150.launch \
   sdf:=$HOME/.xgc2/fs150_sitl/iris_indoor.sdf
 ```
 
-The renderer reads the installed `gazebo_sim_px4_1_12` iris SDF and falls back
-to `/opt/ros/$ROS_DISTRO/share/...` if a development source package shadows the
-installed runtime package. The FS150 package does not fork or modify the PX4
-1.12 SITL package.
+The default launch already uses `models/fs150/iris.sdf` from this package. That
+SDF keeps the iris mass and matching inertia, but injects the FS150 motor thrust
+constant calibrated from the measured SITL hover estimate and the real FS150
+hover throttle target. The renderer reads the installed `gazebo_sim_px4_1_12`
+iris SDF and applies the same dynamics injection when generating a local indoor
+variant. If `--body-mass` is overridden, the script scales `base_link` inertia by
+the same ratio so mass and inertia remain consistent. The FS150 package does not
+modify the PX4 1.12 SITL package.
 
 For multiple vehicles, change both the PX4 instance and the MAVROS URL:
 
@@ -101,7 +105,8 @@ Before copying anything back to a real vehicle, separate the categories:
 - Estimator fusion policy can transfer only if the real sensor wiring and
   motion-capture quality match the simulation assumption.
 - Controller gains can transfer only after checking actuator, mass, propeller,
-  battery, and hover-thrust differences.
+  battery, and hover-thrust differences. The packaged FS150 SDF calibrates only
+  the motor thrust constant; changing mass must be paired with inertia updates.
 - SITL-only convenience parameters such as `COM_RC_IN_MODE=1` and
   `COM_RCL_EXCEPT=4` should not be blindly copied to field aircraft.
 

@@ -6,6 +6,15 @@ import sys
 import tempfile
 import xml.etree.ElementTree as ET
 
+IRIS_MOTOR_CONSTANT = 5.84e-06
+IRIS_REFERENCE_HOVER_THRUST = 0.706963405
+FS150_TARGET_HOVER_THRUST = 0.30
+# First-pass square scaling from the iris hover estimate over-predicts thrust in
+# the full PX4/Gazebo loop. This value is calibrated from SITL HTE feedback so
+# the FS150 model hovers close to 0.30 normalized thrust.
+FS150_MOTOR_CONSTANT = 2.47417369932e-05
+FS150_MOMENT_CONSTANT = 0.06
+
 
 def _bool_arg(value):
     normalized = str(value).strip().lower()
@@ -122,10 +131,84 @@ def _remove_plugin_tag(root, plugin_name, tag):
     return removed
 
 
-def render_indoor_sdf(base_sdf, strip_gps=False, strip_mag=False, strip_baro=False):
+def _set_text(elem, text):
+    elem.text = "{:.12g}".format(float(text))
+
+
+def _patch_motor_model(root, motor_constant, moment_constant):
+    report = []
+    motor_count = 0
+    moment_count = 0
+    for plugin in root.iter("plugin"):
+        motor = plugin.find("motorConstant")
+        if motor is not None:
+            _set_text(motor, motor_constant)
+            motor_count += 1
+        moment = plugin.find("momentConstant")
+        if moment is not None:
+            _set_text(moment, moment_constant)
+            moment_count += 1
+    report.append(("motorConstant", motor_count))
+    report.append(("momentConstant", moment_count))
+    return report
+
+
+def _patch_body_mass(root, body_mass):
+    if body_mass is None:
+        return []
+
+    for link in root.iter("link"):
+        if link.attrib.get("name") != "base_link":
+            continue
+        inertial = link.find("inertial")
+        if inertial is None:
+            break
+        mass = inertial.find("mass")
+        inertia = inertial.find("inertia")
+        if mass is None or inertia is None:
+            break
+
+        old_mass = float(mass.text)
+        scale = float(body_mass) / old_mass
+        _set_text(mass, body_mass)
+        for tag in ("ixx", "iyy", "izz", "ixy", "ixz", "iyz"):
+            elem = inertia.find(tag)
+            if elem is not None:
+                _set_text(elem, float(elem.text) * scale)
+        return [("base_link mass", 1), ("base_link inertia scaled with mass", 1)]
+
+    raise RuntimeError("base_link inertial block not found in source SDF")
+
+
+def _indent(elem, level=0):
+    spaces = "\n" + level * "  "
+    child_spaces = "\n" + (level + 1) * "  "
+    children = list(elem)
+    if children:
+        if not elem.text or not elem.text.strip():
+            elem.text = child_spaces
+        for child in children:
+            _indent(child, level + 1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = spaces
+    elif level and (not elem.tail or not elem.tail.strip()):
+        elem.tail = spaces
+
+
+def render_indoor_sdf(
+    base_sdf,
+    strip_gps=False,
+    strip_mag=False,
+    strip_baro=False,
+    motor_constant=FS150_MOTOR_CONSTANT,
+    moment_constant=FS150_MOMENT_CONSTANT,
+    body_mass=None,
+):
     tree = ET.parse(base_sdf)
     root = tree.getroot()
     report = []
+    report.extend(_patch_motor_model(root, motor_constant, moment_constant))
+    report.extend(_patch_body_mass(root, body_mass))
     if strip_gps:
         report.append(("gps include gps0", len(_remove_include_by_name(root, "gps0"))))
         report.append(("gps joint gps0_joint", len(_remove_joint_by_name(root, "gps0_joint"))))
@@ -135,6 +218,7 @@ def render_indoor_sdf(base_sdf, strip_gps=False, strip_mag=False, strip_baro=Fal
     if strip_baro:
         report.append(("plugin barometer_plugin", len(_remove_named_plugin(root, "barometer_plugin"))))
         report.append(("mavlink_interface baroSubTopic", len(_remove_plugin_tag(root, "mavlink_interface", "baroSubTopic"))))
+    _indent(root)
     return ET.tostring(root, encoding="unicode"), report
 
 
@@ -164,11 +248,24 @@ def main():
     parser.add_argument("--strip-gps", type=_bool_arg, default=False)
     parser.add_argument("--strip-mag", type=_bool_arg, default=False)
     parser.add_argument("--strip-baro", type=_bool_arg, default=False)
+    parser.add_argument("--motor-constant", type=float, default=FS150_MOTOR_CONSTANT,
+                        help="Gazebo motor thrust coefficient. Default is calibrated from measured FS150 hover throttle.")
+    parser.add_argument("--moment-constant", type=float, default=FS150_MOMENT_CONSTANT)
+    parser.add_argument("--body-mass", type=float, default=None,
+                        help="Optional base_link mass override. If set, base_link inertia is scaled by the same mass ratio.")
     parser.add_argument("--print-path", action="store_true", help="Print only the output path on stdout.")
     args = parser.parse_args()
 
     base_sdf = resolve_base_sdf(args.base_sdf)
-    sdf, report = render_indoor_sdf(base_sdf, args.strip_gps, args.strip_mag, args.strip_baro)
+    sdf, report = render_indoor_sdf(
+        base_sdf,
+        args.strip_gps,
+        args.strip_mag,
+        args.strip_baro,
+        args.motor_constant,
+        args.moment_constant,
+        args.body_mass,
+    )
     write_atomic(args.output, sdf)
 
     if args.print_path:
@@ -177,7 +274,7 @@ def main():
         print("rendered: %s" % args.output)
         print("base_sdf: %s" % base_sdf)
         for label, count in report:
-            print("removed %d x %s" % (count, label))
+            print("updated %d x %s" % (count, label))
 
 
 if __name__ == "__main__":
