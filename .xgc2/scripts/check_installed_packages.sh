@@ -10,6 +10,7 @@ test -x "/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/generate_fs150_sitl_pa
 test -x "/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/render_fs150_indoor_sdf.py"
 test -f "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/config/generated/fs150-sitl.params"
 test -f "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/launch/fs150.launch"
+test -s "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/models/fs150/iris.sdf"
 
 cat >/tmp/fs150-test-base.sdf <<'EOF'
 <sdf version="1.6">
@@ -40,7 +41,7 @@ grep -q 'baroSubTopic' /tmp/fs150-test-indoor.sdf
   --strip-gps true \
   --strip-mag true \
   --strip-baro true >/tmp/fs150-test-strip-render.log
-grep -q 'removed 1 x gps include gps0' /tmp/fs150-test-strip-render.log
+grep -q 'updated 1 x gps include gps0' /tmp/fs150-test-strip-render.log
 ! grep -q 'magnetometer_plugin' /tmp/fs150-test-stripped.sdf
 ! grep -q 'barometer_plugin' /tmp/fs150-test-stripped.sdf
 ! grep -q 'magSubTopic' /tmp/fs150-test-stripped.sdf
