@@ -34,7 +34,7 @@
   <!-- PX4 instance N maps to MAV_SYS_ID=N+1 and MAVROS UDP ports 14540+N -> 14580+N. -->
   <arg name="fcu_url" default="$(eval 'udp://:' + str(14540 + int(arg('ID'))) + '@localhost:' + str(14580 + int(arg('ID'))))"/>
   <arg name="gcs_url" default=""/>
-  <arg name="namespace" default="uav1"/>
+  <arg name="ns" default="uav1"/>
   <arg name="respawn_gazebo" default="false"/>
   <arg name="respawn_mavros" default="false"/>
 
@@ -67,7 +67,7 @@
     <arg name="Y" value="$(arg Y)"/>
     <arg name="fcu_url" value="$(arg fcu_url)"/>
     <arg name="gcs_url" value="$(arg gcs_url)"/>
-    <arg name="namespace" value="$(arg namespace)"/>
+    <arg name="ns" value="$(arg ns)"/>
     <arg name="respawn_gazebo" value="$(arg respawn_gazebo)"/>
     <arg name="respawn_mavros" value="$(arg respawn_mavros)"/>
   </include>
