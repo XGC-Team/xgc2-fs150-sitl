@@ -38,6 +38,8 @@
   <arg name="respawn_gazebo" default="false"/>
   <arg name="respawn_mavros" default="false"/>
 
+  <env name="GAZEBO_MODEL_PATH" value="$(find gazebo_sim_fs150_sitl)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+
   <include file="$(arg px4_launch)">
     <arg name="ID" value="$(arg ID)"/>
     <arg name="vehicle" value="$(arg vehicle)"/>

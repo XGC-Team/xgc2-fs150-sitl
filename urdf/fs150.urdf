@@ -1,0 +1,99 @@
+<robot name="fs150">
+  <link name="base_link">
+    <visual name="base_link_inertia_visual">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gazebo_sim_fs150_sitl/models/fs150/meshes/iris.stl" scale="1 1 1" />
+      </geometry>
+      <material name="base_link_mat">
+        <color rgba="0.84 0.71 0.10 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="imu_link" />
+  <link name="rotor_0">
+    <visual name="rotor_0_visual">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gazebo_sim_fs150_sitl/models/fs150/meshes/iris_prop_ccw.dae" scale="1 1 1" />
+      </geometry>
+      <material name="rotor_0_mat">
+        <color rgba="0.1 0.2 0.9 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="rotor_1">
+    <visual name="rotor_1_visual">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gazebo_sim_fs150_sitl/models/fs150/meshes/iris_prop_ccw.dae" scale="1 1 1" />
+      </geometry>
+      <material name="rotor_1_mat">
+        <color rgba="0.12 0.12 0.12 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="rotor_2">
+    <visual name="rotor_2_visual">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gazebo_sim_fs150_sitl/models/fs150/meshes/iris_prop_cw.dae" scale="1 1 1" />
+      </geometry>
+      <material name="rotor_2_mat">
+        <color rgba="0.1 0.2 0.9 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="rotor_3">
+    <visual name="rotor_3_visual">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://gazebo_sim_fs150_sitl/models/fs150/meshes/iris_prop_cw.dae" scale="1 1 1" />
+      </geometry>
+      <material name="rotor_3_mat">
+        <color rgba="0.12 0.12 0.12 1" />
+      </material>
+    </visual>
+  </link>
+  <link name="gps0_link">
+    <visual name="visual">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.002" />
+      </geometry>
+      <material name="gps0_link_mat">
+        <color rgba="0.02 0.02 0.02 1" />
+      </material>
+    </visual>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="rotor_0_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="rotor_0" />
+    <origin xyz="0.13 -0.22 0.023" rpy="0 0 0" />
+  </joint>
+  <joint name="rotor_1_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="rotor_1" />
+    <origin xyz="-0.13 0.2 0.023" rpy="0 0 0" />
+  </joint>
+  <joint name="rotor_2_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="rotor_2" />
+    <origin xyz="0.13 0.22 0.023" rpy="0 0 0" />
+  </joint>
+  <joint name="rotor_3_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="rotor_3" />
+    <origin xyz="-0.13 -0.2 0.023" rpy="0 0 0" />
+  </joint>
+  <joint name="gps0_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="gps0_link" />
+    <origin xyz="0.1 0 0" rpy="0 0 0" />
+  </joint>
+</robot>

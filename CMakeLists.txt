@@ -7,12 +7,21 @@ catkin_package()
 
 catkin_install_python(PROGRAMS
   scripts/generate_fs150_sitl_params.py
+  scripts/generate_fs150_urdf.py
   scripts/render_fs150_indoor_sdf.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(DIRECTORY config launch models reports
+install(DIRECTORY config launch models reports urdf
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  USE_SOURCE_PERMISSIONS
+)
+
+install(DIRECTORY scripts
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  USE_SOURCE_PERMISSIONS
+  PATTERN "__pycache__" EXCLUDE
+  PATTERN "*.pyc" EXCLUDE
 )
 
 if(CATKIN_ENABLE_TESTING)

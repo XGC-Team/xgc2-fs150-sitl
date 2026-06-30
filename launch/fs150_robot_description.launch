@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="sdf" default="$(find gazebo_sim_fs150_sitl)/models/fs150/iris.sdf"/>
+  <arg name="prefix" default=""/>
+
+  <param name="robot_description"
+         command="$(find gazebo_sim_fs150_sitl)/scripts/generate_fs150_urdf.py --sdf $(arg sdf) --prefix $(arg prefix) --print"/>
+</launch>
