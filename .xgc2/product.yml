@@ -1,36 +1,37 @@
 schema: xgc2.product.v1
 id: xgc2-gazebo-sim-fs150-sitl
 name: XGC2 FS150 SITL
-version: 1.1.0-1
+version: 1.1.0-2
 kind: ros1-apt
-summary: FS150 PX4 1.12 iris SITL wrapper with package-owned Gazebo meshes and RViz URDF.
-
+summary: FS150 PX4 1.12 iris SITL wrapper with package-owned Gazebo meshes and RViz
+  URDF.
 ros:
   distro: noetic
   packages:
-    - gazebo_sim_fs150_sitl
-
+  - gazebo_sim_fs150_sitl
 apt:
   distribution: focal
   install:
-    - ros-noetic-xgc2-gazebo-sim-fs150-sitl
+  - ros-noetic-xgc2-gazebo-sim-fs150-sitl
   packages:
-    - ros-noetic-xgc2-gazebo-sim-fs150-sitl
+  - ros-noetic-xgc2-gazebo-sim-fs150-sitl
   depends:
-    - python3
-    - ros-noetic-roslaunch
-    - ros-noetic-mavros
-    - ros-noetic-xgc2-gazebo-sim-px4-1-12
-
+  - python3
+  - ros-noetic-roslaunch
+  - ros-noetic-mavros
+  - ros-noetic-xgc2-gazebo-sim-px4-1-12
 usage:
-  install: |
-    sudo apt update
+  install: 'sudo apt update
+
     sudo apt install ros-noetic-xgc2-gazebo-sim-fs150-sitl
-  smoke_test: |
-    roslaunch --files gazebo_sim_fs150_sitl fs150.launch gui:=false
+
+    '
+  smoke_test: 'roslaunch --files gazebo_sim_fs150_sitl fs150.launch gui:=false
+
     roslaunch --files gazebo_sim_fs150_sitl fs150_robot_description.launch
 
+    '
 ownership:
   paths:
-    - /opt/ros/noetic/share/gazebo_sim_fs150_sitl
-    - /opt/ros/noetic/lib/gazebo_sim_fs150_sitl
+  - /opt/ros/noetic/share/gazebo_sim_fs150_sitl
+  - /opt/ros/noetic/lib/gazebo_sim_fs150_sitl
