@@ -45,6 +45,7 @@
     <arg name="vehicle" value="$(arg vehicle)"/>
     <arg name="px4_sim_model" value="$(arg px4_sim_model)"/>
     <arg name="model_name" value="$(arg model_name)"/>
+    <arg name="gazebo_model_path_extra" value="$(find gazebo_sim_fs150_sitl)/models"/>
     <arg name="world" value="$(arg world)"/>
     <arg name="sdf" value="$(arg sdf)"/>
     <arg name="work_dir" value="$(arg work_dir)"/>
