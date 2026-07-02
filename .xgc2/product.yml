@@ -1,7 +1,7 @@
 schema: xgc2.product.v1
 id: xgc2-gazebo-sim-fs150-sitl
 name: XGC2 FS150 SITL
-version: 1.1.0-3
+version: 1.1.0-4
 kind: ros1-apt
 summary: FS150 PX4 1.12 iris SITL wrapper with package-owned Gazebo meshes and RViz
   URDF.
