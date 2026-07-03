@@ -10,7 +10,7 @@ IRIS_MOTOR_CONSTANT = 5.84e-06
 IRIS_REFERENCE_HOVER_THRUST = 0.706963405
 FS150_TARGET_HOVER_THRUST = 0.30
 FS150_TOTAL_MASS = 0.310
-FS150_BASE_MASS = 0.260
+FS150_BASE_MASS = 0.275
 IRIS_BASE_MASS = 1.5
 IRIS_BASE_INERTIA = (0.029125, 0.029125, 0.055225)
 FS150_EQUIVALENT_INERTIA_SCALE = 0.35
@@ -34,7 +34,6 @@ FS150_PROP_COLLISION_RADIUS = FS150_PROP_RADIUS
 FS150_PROP_LENGTH = 0.005
 FS150_PROP_VISUAL_SCALE = (1.0, 1.0, 1.0)
 FS150_PROP_VISUAL_POSE = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-FS150_GPS_POSE = (0.1, 0.0, 0.0, 0.0, 0.0, 0.0)
 # Hover-test correction from the total-mass scaled FS150 model. Further
 # correction should use
 # motorConstant_next = motorConstant_current * (hover_thrust / 0.30)^2.
@@ -382,18 +381,11 @@ def _patch_rotor_model(root):
     ]
 
 
-def _patch_gps_pose(root):
-    pose_count = 0
-    for include in root.iter("include"):
-        name = include.find("name")
-        if name is None or (name.text or "").strip() != "gps0":
-            continue
-        pose = include.find("pose")
-        if pose is None:
-            pose = ET.SubElement(include, "pose")
-        _set_vector(pose, FS150_GPS_POSE)
-        pose_count += 1
-    return [("gps0 pose", pose_count)]
+def _remove_gps_model(root):
+    return [
+        ("gps include gps0", len(_remove_include_by_name(root, "gps0"))),
+        ("gps joint gps0_joint", len(_remove_joint_by_name(root, "gps0_joint"))),
+    ]
 
 
 def _indent(elem, level=0):
@@ -413,7 +405,6 @@ def _indent(elem, level=0):
 
 def render_indoor_sdf(
     base_sdf,
-    strip_gps=False,
     strip_mag=False,
     strip_baro=False,
     motor_constant=FS150_MOTOR_CONSTANT,
@@ -425,12 +416,9 @@ def render_indoor_sdf(
     report = []
     report.extend(_patch_body_geometry(root))
     report.extend(_patch_rotor_model(root))
-    report.extend(_patch_gps_pose(root))
+    report.extend(_remove_gps_model(root))
     report.extend(_patch_motor_model(root, motor_constant, moment_constant))
     report.extend(_patch_body_mass(root, body_mass))
-    if strip_gps:
-        report.append(("gps include gps0", len(_remove_include_by_name(root, "gps0"))))
-        report.append(("gps joint gps0_joint", len(_remove_joint_by_name(root, "gps0_joint"))))
     if strip_mag:
         report.append(("plugin magnetometer_plugin", len(_remove_named_plugin(root, "magnetometer_plugin"))))
         report.append(("mavlink_interface magSubTopic", len(_remove_plugin_tag(root, "mavlink_interface", "magSubTopic"))))
@@ -465,21 +453,19 @@ def main():
     parser.add_argument("--base-sdf", default=None,
                         help="Source SDF. Defaults to gazebo_sim_fs150_sitl/models/fs150/iris.sdf when available.")
     parser.add_argument("--output", default=default_output_path(), help="Output SDF path.")
-    parser.add_argument("--strip-gps", type=_bool_arg, default=False)
     parser.add_argument("--strip-mag", type=_bool_arg, default=False)
     parser.add_argument("--strip-baro", type=_bool_arg, default=False)
     parser.add_argument("--motor-constant", type=float, default=FS150_MOTOR_CONSTANT,
                         help="Gazebo motor thrust coefficient. Default is calibrated from measured FS150 hover throttle.")
     parser.add_argument("--moment-constant", type=float, default=FS150_MOMENT_CONSTANT)
     parser.add_argument("--body-mass", type=float, default=None,
-                        help="Optional base_link mass override. Defaults to FS150_BASE_MASS with cuboid inertia.")
+                        help="Optional base_link mass override. Defaults to no-GPS FS150_BASE_MASS with equivalent inertia.")
     parser.add_argument("--print-path", action="store_true", help="Print only the output path on stdout.")
     args = parser.parse_args()
 
     base_sdf = resolve_base_sdf(args.base_sdf)
     sdf, report = render_indoor_sdf(
         base_sdf,
-        args.strip_gps,
         args.strip_mag,
         args.strip_baro,
         args.motor_constant,

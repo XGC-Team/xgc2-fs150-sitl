@@ -55,17 +55,6 @@
       </material>
     </visual>
   </link>
-  <link name="gps0_link">
-    <visual name="visual">
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <cylinder radius="0.01" length="0.002" />
-      </geometry>
-      <material name="gps0_link_mat">
-        <color rgba="0.02 0.02 0.02 1" />
-      </material>
-    </visual>
-  </link>
   <joint name="imu_joint" type="fixed">
     <parent link="base_link" />
     <child link="imu_link" />
@@ -90,10 +79,5 @@
     <parent link="base_link" />
     <child link="rotor_3" />
     <origin xyz="-0.13 -0.2 0.023" rpy="0 0 0" />
-  </joint>
-  <joint name="gps0_joint" type="fixed">
-    <parent link="base_link" />
-    <child link="gps0_link" />
-    <origin xyz="0.1 0 0" rpy="0 0 0" />
   </joint>
 </robot>

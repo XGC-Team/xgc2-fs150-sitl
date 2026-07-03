@@ -4,14 +4,14 @@
       <pose>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
-        <mass>0.26</mass>
+        <mass>0.275</mass>
         <inertia>
-          <ixx>0.00176691667</ixx>
+          <ixx>0.00186885417</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.00176691667</iyy>
+          <iyy>0.00186885417</iyy>
           <iyz>0</iyz>
-          <izz>0.00335031667</izz>
+          <izz>0.00354360417</izz>
           </inertia>
         </inertial>
       <collision name="base_link_inertia_collision">
@@ -417,15 +417,6 @@
       <motorSpeedPubTopic>/motor_speed/3</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       </plugin>
-    <include>
-      <uri>model://gps</uri>
-      <pose>0.1 0 0 0 0 0</pose>
-      <name>gps0</name>
-      </include>
-    <joint name="gps0_joint" type="fixed">
-      <child>gps0::link</child>
-      <parent>base_link</parent>
-      </joint>
     <plugin name="groundtruth_plugin" filename="libgazebo_groundtruth_plugin.so">
       <robotNamespace />
       </plugin>

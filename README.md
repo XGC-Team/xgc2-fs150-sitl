@@ -13,9 +13,10 @@ Start the default vehicle-4 simulation:
 roslaunch gazebo_sim_fs150_sitl fs150.launch
 ```
 
-For indoor mocap simulation, render a local SDF with the same FS150 dynamics,
-optionally stripping the unused Gazebo GPS, magnetometer and barometer
-simulation:
+For indoor mocap simulation, render a local SDF with the same FS150 dynamics.
+The default rendered model removes the `gps0` include/joint entirely and keeps
+the removed GPS mass inside `base_link`, so there is no Gazebo GPS sensor,
+plugin, link, or black GPS marker:
 
 ```bash
 rosrun gazebo_sim_fs150_sitl render_fs150_indoor_sdf.py
@@ -25,15 +26,17 @@ roslaunch gazebo_sim_fs150_sitl fs150.launch \
 
 The default launch already uses `models/fs150/iris.sdf` from this package. That
 SDF keeps the iris PX4 airframe, mixer assumptions, rotor geometry, collision
-geometry, visible geometry, and GPS pose unchanged. It changes only the FS150
-equivalent dynamics terms:
+geometry, and visible geometry unchanged. The default model has no `gps0`
+include/joint, so Gazebo does not publish GPS and no GPS visual marker is
+shown. The removed GPS mass is folded into `base_link`. The SDF changes only
+the FS150 equivalent dynamics terms:
 
 | Quantity | FS150 SITL value |
 | --- | ---: |
-| Total Gazebo mass, including `gps0` | `0.310 kg` |
-| `base_link` mass | `0.260 kg` |
-| Base inertia | Iris base inertia scaled by `0.260 / 1.5 * 0.35` |
-| Base inertia values | `ixx=iyy=0.00176691667`, `izz=0.00335031667` |
+| Total Gazebo mass | `0.310 kg` |
+| `base_link` mass | `0.275 kg` |
+| Base inertia | Iris base inertia scaled by `0.275 / 1.5 * 0.35` |
+| Base inertia values | `ixx=iyy=0.00186885417`, `izz=0.00354360417` |
 | Body collision size | Iris default `0.47 x 0.47 x 0.11 m` |
 | Body visual mesh | Iris default `iris.stl` |
 | Body visual pose | `0 0 0 0 0 0` |
@@ -43,7 +46,7 @@ equivalent dynamics terms:
 | Propeller radius | Iris default `0.128 m` |
 | Rotor collision cylinder | Iris default `radius 0.128 m`, `length 0.005 m` |
 | Propeller visual scale | Iris default `1 1 1` |
-| `gps0` pose | Iris default `0.1 0 0 0 0 0` |
+| `gps0` model | Removed |
 | `motorConstant` hover-corrected value | `5.33969944334e-06` |
 | `momentConstant` | `0.06` |
 | `timeConstantUp/Down` | `0.006 / 0.012 s` |
@@ -52,9 +55,12 @@ equivalent dynamics terms:
 
 The renderer applies the same FS150 mass, equivalent inertia, Iris geometry,
 motor constants, motor response and rotor drag when generating a local indoor
-variant. If `--body-mass` is overridden, the script keeps the same 0.35 compact
-frame inertia factor while scaling by the requested mass. The FS150 package does
-not modify the PX4 1.12 SITL package.
+variant. GPS is not configurable in this renderer: FS150 is treated as a
+no-GPS vehicle, so any `gps0` include/joint in the source SDF is always removed
+and the `0.015 kg` GPS mass is carried by `base_link`. If `--body-mass` is
+overridden, the script keeps the same 0.35 compact frame inertia factor while
+scaling by the requested mass. The FS150 package does not modify the PX4 1.12
+SITL package.
 
 The `motorConstant` started from total-mass scaling of the previous
 hover-calibrated heavy model and was then corrected by FS150 hover testing.
@@ -108,6 +114,18 @@ The key estimator parameters are:
 | `MAV_ODOM_LP` | `1` | Keeps MAVLink odometry path behavior aligned with the FS150 motion-capture workflow. |
 | `MPC_USE_HTE` | `1` | Enables PX4 hover thrust estimation instead of treating the imported `MPC_THR_HOVER` value as the only hover-thrust source. |
 
+The indoor no-GPS and failsafe parameters are:
+
+| Parameter | Value | Meaning in FS150 SITL |
+| --- | ---: | --- |
+| `COM_ARM_WO_GPS` | `1` | Allows arming when no GPS is present. |
+| `EKF2_GPS_CHECK` | `0` | Disables GPS quality checks for the no-GPS indoor model. |
+| `COM_POSCTL_NAVL` | `0` | On position-control navigation loss, fall back to Altitude if height is available, otherwise Manual. |
+| `COM_TAKEOFF_ACT` | `0` | Matches the real FS150 export: on takeoff failure, choose Hold instead of trying to resume Mission. |
+| `NAV_DLL_ACT` | `2` | Matches the real FS150 export: if the GCS/data link is lost, choose Return. |
+| `NAV_RCL_ACT` | `2` | Matches the real FS150 export: if RC/manual control is lost, choose Return. |
+| `COM_OBL_ACT` | `0` | Matches the real FS150 export: if Offboard setpoints stop, choose Land mode. |
+
 `EKF2_RNG_AID` and `EKF2_TERR_MASK` are deliberately overridden by the FS150
 SITL overlay even though the exported real-vehicle FS150 parameter file contains
 `EKF2_RNG_AID=1` and `EKF2_TERR_MASK=3`.  In PX4 1.12, range aid can make the
@@ -115,15 +133,22 @@ main height fusion use rangefinder when the vehicle is low and slow.  That is
 useful for some vehicles, but it is misleading for this indoor FS150 simulation
 because altitude behavior should come from motion capture only.
 
-The package does not remove GPS, magnetometer, or barometer plugins from the SDF
-by default.  Sensor presence and EKF fusion are separate:
+The package removes the Gazebo GPS model entirely: no `gps0` include, no
+`gps0` joint, no GPS link, and no GPS plugin. Magnetometer and barometer
+plugins are still present by default, while EKF fusion is selected explicitly by
+parameters. Sensor presence and EKF fusion are separate:
 
 ```text
 Sensor exists in SITL  !=  EKF fuses that sensor
 ```
 
-This keeps PX4/Gazebo health behavior stable while making the fusion policy
-explicit in the startup parameter overlay.
+This makes the sensor model closer to the real FS150 behavior: no GPS aiding is
+available in Gazebo.  Failsafe parameters that already exist in the real FS150
+export, including `NAV_DLL_ACT` and `NAV_RCL_ACT`, are mirrored instead of
+being changed silently. PX4 1.12 parameters alone cannot guarantee that every
+AUTO submode is rejected; if `AUTO.LAND` is still accepted, that is a known
+limitation of the pure parameter approach. A hard ban would need a MAVROS-side
+mode guard or a PX4 commander/navigator patch.
 
 ## Simulation-to-Real Parameter Feedback
 
@@ -156,6 +181,10 @@ rosrun mavros mavparam -n /uav1/mavros get EKF2_HGT_MODE
 rosrun mavros mavparam -n /uav1/mavros get EKF2_RNG_AID
 rosrun mavros mavparam -n /uav1/mavros get EKF2_TERR_MASK
 rosrun mavros mavparam -n /uav1/mavros get MPC_USE_HTE
+rosrun mavros mavparam -n /uav1/mavros get COM_ARM_WO_GPS
+rosrun mavros mavparam -n /uav1/mavros get EKF2_GPS_CHECK
+rosrun mavros mavparam -n /uav1/mavros get NAV_DLL_ACT
+rosrun mavros mavparam -n /uav1/mavros get NAV_RCL_ACT
 ```
 
-The expected values are `24`, `3`, `0`, `0`, and `1`.
+The expected values are `24`, `3`, `0`, `0`, `1`, `1`, `0`, `2`, and `2`.

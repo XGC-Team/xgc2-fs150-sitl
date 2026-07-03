@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 
-DEFAULT_RUNTIME_ROOT = "/opt/ros/noetic/share/px4_sitl_runtime_1_12/runtime"
+DEFAULT_RUNTIME_ROOT = "/opt/ros/noetic/share/px4_sitl_1_12/runtime"
 
 
 PROFILE_ORDER = ("control", "power", "safety", "estimator_mocap")
@@ -87,6 +87,48 @@ TYPE_INT32 = 6
 
 SITL_OVERRIDES: Sequence[Tuple[str, str, int, str]] = (
     (
+        "COM_ARM_WO_GPS",
+        "1",
+        TYPE_INT32,
+        "Allow arming without a GPS because FS150 indoor SITL is external-vision aided.",
+    ),
+    (
+        "EKF2_GPS_CHECK",
+        "0",
+        TYPE_INT32,
+        "Disable GPS quality checks because the default FS150 indoor model has no GPS sensor.",
+    ),
+    (
+        "COM_POSCTL_NAVL",
+        "0",
+        TYPE_INT32,
+        "Use Altitude/Manual fallback on position-control navigation loss in the indoor vision workflow.",
+    ),
+    (
+        "COM_TAKEOFF_ACT",
+        "0",
+        TYPE_INT32,
+        "Mirror the real FS150 export: hold on takeoff failure instead of trying to resume Mission.",
+    ),
+    (
+        "NAV_DLL_ACT",
+        "2",
+        TYPE_INT32,
+        "Mirror the real FS150 export: Return on data-link loss.",
+    ),
+    (
+        "NAV_RCL_ACT",
+        "2",
+        TYPE_INT32,
+        "Mirror the real FS150 export: Return on RC loss.",
+    ),
+    (
+        "COM_OBL_ACT",
+        "0",
+        TYPE_INT32,
+        "Mirror the real FS150 export: land on offboard loss.",
+    ),
+    (
         "COM_RC_IN_MODE",
         "1",
         TYPE_INT32,
@@ -111,6 +153,7 @@ SITL_OVERRIDES: Sequence[Tuple[str, str, int, str]] = (
         "Disable range/optical-flow terrain fusion because the indoor FS150 workflow does not use HAGL aiding.",
     ),
 )
+SITL_OVERRIDE_NAMES = {name for name, _value, _px4_type, _reason in SITL_OVERRIDES}
 
 
 @dataclass(frozen=True)
@@ -204,6 +247,10 @@ def classify(
     decisions: List[Decision] = []
     for name in sorted(params):
         param = params[name]
+        if name in SITL_OVERRIDE_NAMES:
+            decisions.append(Decision(name, param.value, param.px4_type, "exclude", "", "overridden by FS150 SITL policy"))
+            continue
+
         reason = excluded_reason(name)
         if reason is not None:
             decisions.append(Decision(name, param.value, param.px4_type, "exclude", "", reason))
@@ -295,6 +342,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     known_runtime_params = load_known_runtime_params(runtime_root)
     if known_runtime_params is None and not args.no_runtime_baseline:
         print(f"warning: PX4 runtime metadata not found under {runtime_root}; continuing without metadata validation", file=sys.stderr)
+    if known_runtime_params is not None and not args.allow_missing:
+        missing_overrides = [name for name in SITL_OVERRIDE_NAMES if name not in known_runtime_params]
+        if missing_overrides:
+            print(
+                "SITL override parameter(s) missing from PX4 runtime metadata: "
+                + ", ".join(sorted(missing_overrides)),
+                file=sys.stderr,
+            )
+            return 2
 
     params = parse_qgc_params(source)
     decisions = classify(params, profiles, known_runtime_params, args.allow_missing)
@@ -304,7 +360,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     included = sum(1 for decision in decisions if decision.action == "include")
     excluded = len(decisions) - included
-    print(f"generated {output}: {included} included, {excluded} excluded")
+    overrides = len(SITL_OVERRIDES)
+    print(f"generated {output}: {included} selected + {overrides} overrides, {excluded} excluded")
     print(f"selection report: {selection_report}")
     return 0
 

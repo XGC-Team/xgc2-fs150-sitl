@@ -11,7 +11,7 @@ BAT1_V_CHARGED,4.349999904632568359,9,exclude,,hardware-specific secondary batte
 BAT1_V_DIV,19.269018173217773438,9,exclude,,hardware-specific secondary battery settings are not valid for Gazebo
 BAT1_V_EMPTY,3.599999904632568359,9,exclude,,hardware-specific secondary battery settings are not valid for Gazebo
 BAT1_V_LOAD_DROP,0.300000011920928955,9,exclude,,hardware-specific secondary battery settings are not valid for Gazebo
-BAT_ADC_CHANNEL,-1,6,exclude,,not selected by FS150 SITL policy
+BAT_ADC_CHANNEL,-1,6,exclude,,not present in PX4 1.12 runtime metadata
 BAT_A_PER_V,17.000000000000000000,9,exclude,,hardware battery ADC scaling is not valid for Gazebo
 BAT_CAPACITY,-1.000000000000000000,9,exclude,,hardware battery ADC scaling is not valid for Gazebo
 BAT_CRIT_THR,0.070000000298023224,9,include,power,matched power:BAT_CRIT_THR
@@ -24,7 +24,7 @@ BAT_V_CHARGED,4.349999904632568359,9,include,power,matched power:BAT_V_CHARGED
 BAT_V_DIV,19.269018173217773438,9,exclude,,hardware battery ADC scaling is not valid for Gazebo
 BAT_V_EMPTY,3.599999904632568359,9,include,power,matched power:BAT_V_EMPTY
 BAT_V_LOAD_DROP,0.300000011920928955,9,exclude,,not selected by FS150 SITL policy
-BAT_V_OFFS_CURR,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
+BAT_V_OFFS_CURR,0.000000000000000000,9,exclude,,not present in PX4 1.12 runtime metadata
 CAL_ACC0_ID,6946826,6,exclude,,hardware calibration belongs to the Gazebo/SITL sensor model
 CAL_ACC0_PRIO,50,6,exclude,,hardware calibration belongs to the Gazebo/SITL sensor model
 CAL_ACC0_ROT,-1,6,exclude,,hardware calibration belongs to the Gazebo/SITL sensor model
@@ -112,7 +112,7 @@ COM_ARM_MAG_STR,1,6,exclude,,not selected by FS150 SITL policy
 COM_ARM_MIS_REQ,0,6,exclude,,not selected by FS150 SITL policy
 COM_ARM_SDCARD,1,6,exclude,,not selected by FS150 SITL policy
 COM_ARM_SWISBTN,0,6,exclude,,not selected by FS150 SITL policy
-COM_ARM_WO_GPS,1,6,exclude,,not selected by FS150 SITL policy
+COM_ARM_WO_GPS,1,6,exclude,,overridden by FS150 SITL policy
 COM_CPU_MAX,90.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 COM_DISARM_LAND,1.000000000000000000,9,include,safety,matched safety:COM_DISARM_LAND
 COM_DISARM_PRFLT,10.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -138,11 +138,11 @@ COM_LKDOWN_TKO,3.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 COM_LOW_BAT_ACT,2,6,include,power,matched power:COM_LOW_BAT_ACT
 COM_MOT_TEST_EN,1,6,exclude,,not selected by FS150 SITL policy
 COM_OBC_LOSS_T,5.000000000000000000,9,exclude,,not selected by FS150 SITL policy
-COM_OBL_ACT,0,6,exclude,,not selected by FS150 SITL policy
+COM_OBL_ACT,0,6,exclude,,overridden by FS150 SITL policy
 COM_OBL_RC_ACT,0,6,exclude,,not selected by FS150 SITL policy
 COM_OBS_AVOID,0,6,exclude,,not selected by FS150 SITL policy
 COM_OF_LOSS_T,1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
-COM_POSCTL_NAVL,0,6,exclude,,not selected by FS150 SITL policy
+COM_POSCTL_NAVL,0,6,exclude,,overridden by FS150 SITL policy
 COM_POS_FS_DELAY,1,6,exclude,,not selected by FS150 SITL policy
 COM_POS_FS_EPH,5.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 COM_POS_FS_EPV,10.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -151,14 +151,14 @@ COM_POS_FS_PROB,30,6,exclude,,not selected by FS150 SITL policy
 COM_POWER_COUNT,1,6,exclude,,not selected by FS150 SITL policy
 COM_PREARM_MODE,0,6,exclude,,not selected by FS150 SITL policy
 COM_RCL_ACT_T,15.000000000000000000,9,exclude,,not selected by FS150 SITL policy
-COM_RCL_EXCEPT,0,6,exclude,,not selected by FS150 SITL policy
+COM_RCL_EXCEPT,0,6,exclude,,overridden by FS150 SITL policy
 COM_RC_ARM_HYST,1000,6,exclude,,RC simulation is not part of this wrapper
-COM_RC_IN_MODE,0,6,exclude,,RC simulation is not part of this wrapper
+COM_RC_IN_MODE,0,6,exclude,,overridden by FS150 SITL policy
 COM_RC_LOSS_T,0.500000000000000000,9,exclude,,RC simulation is not part of this wrapper
 COM_RC_OVERRIDE,1,6,exclude,,RC simulation is not part of this wrapper
 COM_RC_STICK_OV,30.000000000000000000,9,exclude,,RC simulation is not part of this wrapper
 COM_REARM_GRACE,1,6,exclude,,not selected by FS150 SITL policy
-COM_TAKEOFF_ACT,0,6,exclude,,not selected by FS150 SITL policy
+COM_TAKEOFF_ACT,0,6,exclude,,overridden by FS150 SITL policy
 COM_VEL_FS_EVH,1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 CP_DELAY,0.400000005960464478,9,exclude,,not selected by FS150 SITL policy
 CP_DIST,-1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -201,7 +201,7 @@ EKF2_FUSE_BETA,0,6,exclude,,not selected by FS150 SITL policy
 EKF2_GBIAS_INIT,0.100000001490116119,9,exclude,,not selected by FS150 SITL policy
 EKF2_GND_EFF_DZ,4.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_GND_MAX_HGT,0.500000000000000000,9,exclude,,not selected by FS150 SITL policy
-EKF2_GPS_CHECK,245,6,exclude,,not selected by FS150 SITL policy
+EKF2_GPS_CHECK,245,6,exclude,,overridden by FS150 SITL policy
 EKF2_GPS_DELAY,110.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_GPS_POS_X,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_GPS_POS_Y,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -256,7 +256,7 @@ EKF2_REQ_NSATS,6,6,exclude,,not selected by FS150 SITL policy
 EKF2_REQ_PDOP,2.500000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_REQ_SACC,0.500000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_REQ_VDRIFT,0.200000002980232239,9,exclude,,not selected by FS150 SITL policy
-EKF2_RNG_AID,1,6,exclude,,not selected by FS150 SITL policy
+EKF2_RNG_AID,1,6,exclude,,overridden by FS150 SITL policy
 EKF2_RNG_A_HMAX,5.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_RNG_A_IGATE,1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_RNG_A_VMAX,1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -279,7 +279,7 @@ EKF2_TAS_GATE,3.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_TAU_POS,0.250000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_TAU_VEL,0.250000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_TERR_GRAD,0.500000000000000000,9,exclude,,not selected by FS150 SITL policy
-EKF2_TERR_MASK,3,6,exclude,,not selected by FS150 SITL policy
+EKF2_TERR_MASK,3,6,exclude,,overridden by FS150 SITL policy
 EKF2_TERR_NOISE,5.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_WIND_NOISE,0.100000001490116119,9,exclude,,not selected by FS150 SITL policy
 EV_TSK_RC_LOSS,0,6,exclude,,not selected by FS150 SITL policy
@@ -317,7 +317,7 @@ IMU_GYRO_NF_BW,20.000000000000000000,9,exclude,,not selected by FS150 SITL polic
 IMU_GYRO_NF_FREQ,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 IMU_GYRO_RATEMAX,800,6,exclude,,not selected by FS150 SITL policy
 IMU_INTEG_RATE,200,6,include,control,matched control:IMU_INTEG_RATE
-LED_RGB2_MAXBRT,31,6,exclude,,not selected by FS150 SITL policy
+LED_RGB2_MAXBRT,31,6,exclude,,not present in PX4 1.12 runtime metadata
 LNDMC_ALT_GND,-1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 LNDMC_ALT_MAX,-1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 LNDMC_ROT_MAX,20.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -447,7 +447,7 @@ MPC_Z_VEL_MAX_DN,1.000000000000000000,9,exclude,,not selected by FS150 SITL poli
 MPC_Z_VEL_MAX_UP,3.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 MPC_Z_VEL_P_ACC,4.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 NAV_ACC_RAD,2.000000000000000000,9,exclude,,not selected by FS150 SITL policy
-NAV_DLL_ACT,2,6,include,safety,matched safety:NAV_DLL_ACT
+NAV_DLL_ACT,2,6,exclude,,overridden by FS150 SITL policy
 NAV_FORCE_VT,1,6,exclude,,not selected by FS150 SITL policy
 NAV_FT_DST,8.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 NAV_FT_FS,1,6,exclude,,not selected by FS150 SITL policy
@@ -461,7 +461,7 @@ NAV_GPSF_TR,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 NAV_LOITER_RAD,50.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 NAV_MC_ALT_RAD,0.800000011920928955,9,exclude,,not selected by FS150 SITL policy
 NAV_MIN_FT_HT,8.000000000000000000,9,exclude,,not selected by FS150 SITL policy
-NAV_RCL_ACT,2,6,exclude,,return-home mission details are intentionally left to the scenario wrapper
+NAV_RCL_ACT,2,6,exclude,,overridden by FS150 SITL policy
 NAV_TRAFF_AVOID,1,6,exclude,,not selected by FS150 SITL policy
 NAV_TRAFF_A_RADM,500.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 NAV_TRAFF_A_RADU,10.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -776,14 +776,14 @@ SYS_MC_EST_GROUP,2,6,exclude,,not selected by FS150 SITL policy
 SYS_RESTART_TYPE,2,6,exclude,,not selected by FS150 SITL policy
 SYS_STCK_EN,1,6,exclude,,not selected by FS150 SITL policy
 SYS_VEHICLE_RESP,-0.400000005960464478,9,exclude,,not selected by FS150 SITL policy
-SYS_ZY_CTRL_EN,1,6,exclude,,not selected by FS150 SITL policy
-SYS_ZY_UART_EN,0,6,exclude,,not selected by FS150 SITL policy
+SYS_ZY_CTRL_EN,1,6,exclude,,not present in PX4 1.12 runtime metadata
+SYS_ZY_UART_EN,0,6,exclude,,not present in PX4 1.12 runtime metadata
 TC_A_ENABLE,0,6,exclude,,not selected by FS150 SITL policy
 TC_B_ENABLE,0,6,exclude,,not selected by FS150 SITL policy
 TC_G_ENABLE,0,6,exclude,,not selected by FS150 SITL policy
-TEL_BST_EN,0,6,exclude,,not selected by FS150 SITL policy
-TEL_FRSKY_CONFIG,0,6,exclude,,not selected by FS150 SITL policy
-TEL_HOTT_CONFIG,0,6,exclude,,not selected by FS150 SITL policy
+TEL_BST_EN,0,6,exclude,,not present in PX4 1.12 runtime metadata
+TEL_FRSKY_CONFIG,0,6,exclude,,not present in PX4 1.12 runtime metadata
+TEL_HOTT_CONFIG,0,6,exclude,,not present in PX4 1.12 runtime metadata
 THR_MDL_FAC,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 TRIG_MODE,0,6,exclude,,not selected by FS150 SITL policy
 UAVCAN_BAT_MON,0,6,exclude,,serial/GPS/UAVCAN device ownership is not portable in SITL
@@ -800,6 +800,13 @@ UAVCAN_RNG_MIN,0.300000011920928955,9,exclude,,serial/GPS/UAVCAN device ownershi
 VT_B_DEC_MSS,2.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 VT_B_REV_DEL,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 WV_EN,0,6,exclude,,not selected by FS150 SITL policy
+COM_ARM_WO_GPS,1,6,include,sitl_override,Allow arming without a GPS because FS150 indoor SITL is external-vision aided.
+EKF2_GPS_CHECK,0,6,include,sitl_override,Disable GPS quality checks because the default FS150 indoor model has no GPS sensor.
+COM_POSCTL_NAVL,0,6,include,sitl_override,Use Altitude/Manual fallback on position-control navigation loss in the indoor vision workflow.
+COM_TAKEOFF_ACT,0,6,include,sitl_override,Mirror the real FS150 export: hold on takeoff failure instead of trying to resume Mission.
+NAV_DLL_ACT,2,6,include,sitl_override,Mirror the real FS150 export: Return on data-link loss.
+NAV_RCL_ACT,2,6,include,sitl_override,Mirror the real FS150 export: Return on RC loss.
+COM_OBL_ACT,0,6,include,sitl_override,Mirror the real FS150 export: land on offboard loss.
 COM_RC_IN_MODE,1,6,include,sitl_override,PX4 SITL has no physical RC receiver; joystick/no-RC checks matches headless simulation.
 COM_RCL_EXCEPT,4,6,include,sitl_override,Ignore RC loss in Offboard so algorithm tests do not depend on a physical transmitter.
 EKF2_RNG_AID,0,6,include,sitl_override,Disable rangefinder height aiding so indoor FS150 SITL height remains external-vision only.
