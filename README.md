@@ -188,3 +188,11 @@ rosrun mavros mavparam -n /uav1/mavros get NAV_RCL_ACT
 ```
 
 The expected values are `24`, `3`, `0`, `0`, `1`, `1`, `0`, `2`, and `2`.
+
+## Real FS150 IMU Telemetry Rate Notes
+
+The real FS150 raw-IMU telemetry path and the tested MAVROS rate limits are
+documented in [docs/fs150_imu_mavros_rate_debug.md](docs/fs150_imu_mavros_rate_debug.md).
+The current practical setting for high-rate raw IMU over MAVROS is
+`IMU_GYRO_RATEMAX=800`, `IMU_INTEG_RATE=800`, and `HIGHRES_IMU(105)` requested
+at `250 Hz`.
