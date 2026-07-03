@@ -261,7 +261,7 @@ def parse_profiles(raw: str, include_mavlink_rate: bool) -> List[str]:
 
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Generate FS150 PX4 SITL parameter overlay.")
-    parser.add_argument("--source", default="config/source/fs150-mav_sys_id4.params", help="QGroundControl parameter export from the real FS150.")
+    parser.add_argument("--source", default="firmware/fs150-mav_sys_id4.params", help="QGroundControl parameter export from the real FS150.")
     parser.add_argument("--output", default="config/generated/fs150-sitl.params", help="Generated SITL overlay parameter file.")
     parser.add_argument("--selection-report", default="config/generated/fs150-sitl.selection.csv", help="CSV report explaining include/exclude decisions.")
     parser.add_argument("--runtime-root", default=DEFAULT_RUNTIME_ROOT, help="PX4 1.12 runtime root used to reject unknown parameters.")

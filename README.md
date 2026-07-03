@@ -80,7 +80,7 @@ Regenerate the SITL overlay after updating the real FS150 export:
 
 ```bash
 rosrun gazebo_sim_fs150_sitl generate_fs150_sitl_params.py \
-  --source "$(rospack find gazebo_sim_fs150_sitl)/config/source/fs150-mav_sys_id4.params" \
+  --source "$(rospack find gazebo_sim_fs150_sitl)/firmware/fs150-mav_sys_id4.params" \
   --output "$(rospack find gazebo_sim_fs150_sitl)/config/generated/fs150-sitl.params" \
   --selection-report "$(rospack find gazebo_sim_fs150_sitl)/config/generated/fs150-sitl.selection.csv"
 ```
