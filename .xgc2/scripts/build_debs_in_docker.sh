@@ -69,7 +69,7 @@ docker run --rm \
     cd /workspace/work/src/gazebo_sim_fs150_sitl
     python3 -m py_compile scripts/generate_fs150_sitl_params.py
     scripts/generate_fs150_sitl_params.py \
-      --source config/source/fs150-mav_sys_id4.params \
+      --source firmware/fs150-mav_sys_id4.params \
       --output config/generated/fs150-sitl.params \
       --selection-report config/generated/fs150-sitl.selection.csv \
       --no-runtime-baseline
