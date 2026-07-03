@@ -1,9 +1,10 @@
 # gazebo_sim_fs150_sitl
 
 FS150 SITL is a thin wrapper over the PX4 1.12 iris Gazebo simulation. It keeps
-the iris airframe, mixer and simulated IMU owned by the base simulator, then
-overlays the real FS150 parameters plus a calibrated Gazebo motor model for
-matching control, power policy, safety policy and mocap/vision estimator
+the iris airframe, mixer, and simulated IMU startup path owned by the base
+simulator, then overlays the real FS150 parameters plus FS150 total mass,
+equivalent compact-frame inertia, and hover-calibrated Gazebo motor constants
+for matching control, power policy, safety policy and mocap/vision estimator
 behavior.
 
 Start the default vehicle-4 simulation:
@@ -12,8 +13,8 @@ Start the default vehicle-4 simulation:
 roslaunch gazebo_sim_fs150_sitl fs150.launch
 ```
 
-For indoor mocap simulation, render a local SDF from the currently installed PX4
-1.12 iris model, stripping the unused Gazebo GPS, magnetometer and barometer
+For indoor mocap simulation, render a local SDF with the same FS150 dynamics,
+optionally stripping the unused Gazebo GPS, magnetometer and barometer
 simulation:
 
 ```bash
@@ -23,13 +24,48 @@ roslaunch gazebo_sim_fs150_sitl fs150.launch \
 ```
 
 The default launch already uses `models/fs150/iris.sdf` from this package. That
-SDF keeps the iris mass and matching inertia, but injects the FS150 motor thrust
-constant calibrated from the measured SITL hover estimate and the real FS150
-hover throttle target. The renderer reads the installed `gazebo_sim_px4_1_12`
-iris SDF and applies the same dynamics injection when generating a local indoor
-variant. If `--body-mass` is overridden, the script scales `base_link` inertia by
-the same ratio so mass and inertia remain consistent. The FS150 package does not
-modify the PX4 1.12 SITL package.
+SDF keeps the iris PX4 airframe, mixer assumptions, rotor geometry, collision
+geometry, visible geometry, and GPS pose unchanged. It changes only the FS150
+equivalent dynamics terms:
+
+| Quantity | FS150 SITL value |
+| --- | ---: |
+| Total Gazebo mass, including `gps0` | `0.310 kg` |
+| `base_link` mass | `0.260 kg` |
+| Base inertia | Iris base inertia scaled by `0.260 / 1.5 * 0.35` |
+| Base inertia values | `ixx=iyy=0.00176691667`, `izz=0.00335031667` |
+| Body collision size | Iris default `0.47 x 0.47 x 0.11 m` |
+| Body visual mesh | Iris default `iris.stl` |
+| Body visual pose | `0 0 0 0 0 0` |
+| Body visual scale | Iris default `1 1 1` |
+| Rotor centers | Iris default rotor poses |
+| Rotor z offset | Iris default `0.023 m` |
+| Propeller radius | Iris default `0.128 m` |
+| Rotor collision cylinder | Iris default `radius 0.128 m`, `length 0.005 m` |
+| Propeller visual scale | Iris default `1 1 1` |
+| `gps0` pose | Iris default `0.1 0 0 0 0 0` |
+| `motorConstant` hover-corrected value | `5.33969944334e-06` |
+| `momentConstant` | `0.06` |
+| `timeConstantUp/Down` | `0.006 / 0.012 s` |
+| `rotorDragCoefficient` | `2e-05` |
+| `rollingMomentCoefficient` | `1e-07` |
+
+The renderer applies the same FS150 mass, equivalent inertia, Iris geometry,
+motor constants, motor response and rotor drag when generating a local indoor
+variant. If `--body-mass` is overridden, the script keeps the same 0.35 compact
+frame inertia factor while scaling by the requested mass. The FS150 package does
+not modify the PX4 1.12 SITL package.
+
+The `motorConstant` started from total-mass scaling of the previous
+hover-calibrated heavy model and was then corrected by FS150 hover testing.
+For future hover tests, correct it with:
+
+```text
+motorConstant_next = motorConstant_current * (observed_hover_thrust / 0.30)^2
+```
+
+where `observed_hover_thrust` is the stable PX4 HTE or ROS hover-thrust
+estimate. The target is `0.30 +/- 0.03`.
 
 For multiple vehicles, change both the PX4 instance and the MAVROS URL:
 
@@ -105,8 +141,10 @@ Before copying anything back to a real vehicle, separate the categories:
 - Estimator fusion policy can transfer only if the real sensor wiring and
   motion-capture quality match the simulation assumption.
 - Controller gains can transfer only after checking actuator, mass, propeller,
-  battery, and hover-thrust differences. The packaged FS150 SDF calibrates only
-  the motor thrust constant; changing mass must be paired with inertia updates.
+  battery, and hover-thrust differences. The packaged FS150 SDF currently
+  aligns total mass, first-pass inertia, Gazebo rotor geometry, propeller
+  radius and motor thrust constant while keeping PX4 mixer and airframe
+  identity iris-owned.
 - SITL-only convenience parameters such as `COM_RC_IN_MODE=1` and
   `COM_RCL_EXCEPT=4` should not be blindly copied to field aircraft.
 
