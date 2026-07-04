@@ -195,7 +195,7 @@ The real FS150 raw-IMU telemetry path and the tested MAVROS rate limits are
 documented in [docs/fs150_imu_mavros_rate_debug.md](docs/fs150_imu_mavros_rate_debug.md).
 The current practical setting for high-rate raw IMU over MAVROS is
 `IMU_GYRO_RATEMAX=800`, `IMU_INTEG_RATE=800`, and `HIGHRES_IMU(105)` requested
-at `250 Hz`.
+at `250 Hz` by the state-estimation launch that consumes `/mavros/imu/data_raw`.
 
 The RK356x/RK3566 onboard-computer CPU governor modes, performance-mode
 commands, restore commands, and temperature monitoring commands are documented

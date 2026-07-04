@@ -11,7 +11,7 @@ BAT1_V_CHARGED,4.349999904632568359,9,exclude,,hardware-specific secondary batte
 BAT1_V_DIV,19.269018173217773438,9,exclude,,hardware-specific secondary battery settings are not valid for Gazebo
 BAT1_V_EMPTY,3.599999904632568359,9,exclude,,hardware-specific secondary battery settings are not valid for Gazebo
 BAT1_V_LOAD_DROP,0.300000011920928955,9,exclude,,hardware-specific secondary battery settings are not valid for Gazebo
-BAT_ADC_CHANNEL,-1,6,exclude,,not present in PX4 1.12 runtime metadata
+BAT_ADC_CHANNEL,-1,6,exclude,,not selected by FS150 SITL policy
 BAT_A_PER_V,17.000000000000000000,9,exclude,,hardware battery ADC scaling is not valid for Gazebo
 BAT_CAPACITY,-1.000000000000000000,9,exclude,,hardware battery ADC scaling is not valid for Gazebo
 BAT_CRIT_THR,0.070000000298023224,9,include,power,matched power:BAT_CRIT_THR
@@ -24,7 +24,7 @@ BAT_V_CHARGED,4.349999904632568359,9,include,power,matched power:BAT_V_CHARGED
 BAT_V_DIV,19.269018173217773438,9,exclude,,hardware battery ADC scaling is not valid for Gazebo
 BAT_V_EMPTY,3.599999904632568359,9,include,power,matched power:BAT_V_EMPTY
 BAT_V_LOAD_DROP,0.300000011920928955,9,exclude,,not selected by FS150 SITL policy
-BAT_V_OFFS_CURR,0.000000000000000000,9,exclude,,not present in PX4 1.12 runtime metadata
+BAT_V_OFFS_CURR,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 CAL_ACC0_ID,6946826,6,exclude,,hardware calibration belongs to the Gazebo/SITL sensor model
 CAL_ACC0_PRIO,50,6,exclude,,hardware calibration belongs to the Gazebo/SITL sensor model
 CAL_ACC0_ROT,-1,6,exclude,,hardware calibration belongs to the Gazebo/SITL sensor model
@@ -315,9 +315,9 @@ IMU_GYRO_FFT_MAX,192.000000000000000000,9,exclude,,not selected by FS150 SITL po
 IMU_GYRO_FFT_MIN,32.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 IMU_GYRO_NF_BW,20.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 IMU_GYRO_NF_FREQ,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
-IMU_GYRO_RATEMAX,800,6,exclude,,not selected by FS150 SITL policy
-IMU_INTEG_RATE,200,6,include,control,matched control:IMU_INTEG_RATE
-LED_RGB2_MAXBRT,31,6,exclude,,not present in PX4 1.12 runtime metadata
+IMU_GYRO_RATEMAX,800,6,exclude,,overridden by FS150 SITL policy
+IMU_INTEG_RATE,200,6,exclude,,overridden by FS150 SITL policy
+LED_RGB2_MAXBRT,31,6,exclude,,not selected by FS150 SITL policy
 LNDMC_ALT_GND,-1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 LNDMC_ALT_MAX,-1.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 LNDMC_ROT_MAX,20.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -776,14 +776,14 @@ SYS_MC_EST_GROUP,2,6,exclude,,not selected by FS150 SITL policy
 SYS_RESTART_TYPE,2,6,exclude,,not selected by FS150 SITL policy
 SYS_STCK_EN,1,6,exclude,,not selected by FS150 SITL policy
 SYS_VEHICLE_RESP,-0.400000005960464478,9,exclude,,not selected by FS150 SITL policy
-SYS_ZY_CTRL_EN,1,6,exclude,,not present in PX4 1.12 runtime metadata
-SYS_ZY_UART_EN,0,6,exclude,,not present in PX4 1.12 runtime metadata
+SYS_ZY_CTRL_EN,1,6,exclude,,not selected by FS150 SITL policy
+SYS_ZY_UART_EN,0,6,exclude,,not selected by FS150 SITL policy
 TC_A_ENABLE,0,6,exclude,,not selected by FS150 SITL policy
 TC_B_ENABLE,0,6,exclude,,not selected by FS150 SITL policy
 TC_G_ENABLE,0,6,exclude,,not selected by FS150 SITL policy
-TEL_BST_EN,0,6,exclude,,not present in PX4 1.12 runtime metadata
-TEL_FRSKY_CONFIG,0,6,exclude,,not present in PX4 1.12 runtime metadata
-TEL_HOTT_CONFIG,0,6,exclude,,not present in PX4 1.12 runtime metadata
+TEL_BST_EN,0,6,exclude,,not selected by FS150 SITL policy
+TEL_FRSKY_CONFIG,0,6,exclude,,not selected by FS150 SITL policy
+TEL_HOTT_CONFIG,0,6,exclude,,not selected by FS150 SITL policy
 THR_MDL_FAC,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 TRIG_MODE,0,6,exclude,,not selected by FS150 SITL policy
 UAVCAN_BAT_MON,0,6,exclude,,serial/GPS/UAVCAN device ownership is not portable in SITL
@@ -800,6 +800,8 @@ UAVCAN_RNG_MIN,0.300000011920928955,9,exclude,,serial/GPS/UAVCAN device ownershi
 VT_B_DEC_MSS,2.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 VT_B_REV_DEL,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 WV_EN,0,6,exclude,,not selected by FS150 SITL policy
+IMU_GYRO_RATEMAX,800,6,include,sitl_override,Match the FS150 high-rate raw-IMU test setup; Gazebo still provides HIL_SENSOR at the simulator rate.
+IMU_INTEG_RATE,800,6,include,sitl_override,Match the FS150 high-rate raw-IMU test setup and avoid the real export's lower 200 Hz integration rate.
 COM_ARM_WO_GPS,1,6,include,sitl_override,Allow arming without a GPS because FS150 indoor SITL is external-vision aided.
 EKF2_GPS_CHECK,0,6,include,sitl_override,Disable GPS quality checks because the default FS150 indoor model has no GPS sensor.
 COM_POSCTL_NAVL,0,6,include,sitl_override,Use Altitude/Manual fallback on position-control navigation loss in the indoor vision workflow.

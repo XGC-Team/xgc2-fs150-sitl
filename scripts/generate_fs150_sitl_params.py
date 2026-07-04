@@ -87,6 +87,18 @@ TYPE_INT32 = 6
 
 SITL_OVERRIDES: Sequence[Tuple[str, str, int, str]] = (
     (
+        "IMU_GYRO_RATEMAX",
+        "800",
+        TYPE_INT32,
+        "Match the FS150 high-rate raw-IMU test setup; Gazebo still provides HIL_SENSOR at the simulator rate.",
+    ),
+    (
+        "IMU_INTEG_RATE",
+        "800",
+        TYPE_INT32,
+        "Match the FS150 high-rate raw-IMU test setup and avoid the real export's lower 200 Hz integration rate.",
+    ),
+    (
         "COM_ARM_WO_GPS",
         "1",
         TYPE_INT32,
