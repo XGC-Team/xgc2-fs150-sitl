@@ -38,6 +38,7 @@ mkdir -p "${WORK_DIR}" "${OUTPUT_DIR}"
 
 docker pull "${DOCKER_IMAGE}"
 docker run --rm \
+  -e XGC2_APT_OVERLAY_URL="${XGC2_APT_OVERLAY_URL:-}" \
   -e DEBIAN_FRONTEND=noninteractive \
   -e INSTALL_CHECK="${INSTALL_CHECK}" \
   -v "${REPO_ROOT}:/workspace/fs150-sitl:ro" \
@@ -53,10 +54,12 @@ docker run --rm \
       build-essential \
       ca-certificates \
       cmake \
+      curl \
       dpkg-dev \
       fakeroot \
       file \
       git \
+      gnupg \
       rsync \
       ros-noetic-mavros \
       ros-noetic-roslaunch \
@@ -85,7 +88,17 @@ docker run --rm \
       --output-dir /workspace/out
 
     if [[ "${INSTALL_CHECK}" == "true" ]]; then
-      dpkg -i --ignore-depends=ros-noetic-xgc2-gazebo-sim-px4-1-12 /workspace/out/*.deb
+      install -d -m 0755 /etc/apt/keyrings
+      curl -fsSL https://xgc2.apt.xiaokang.ink/xgc2-archive-keyring.gpg \
+        -o /etc/apt/keyrings/xgc2-archive-keyring.gpg
+      echo "deb [signed-by=/etc/apt/keyrings/xgc2-archive-keyring.gpg] https://xgc2.apt.xiaokang.ink focal main" \
+        > /etc/apt/sources.list.d/xgc2.list
+      if [[ -n "${XGC2_APT_OVERLAY_URL:-}" ]]; then
+        echo "deb [signed-by=/etc/apt/keyrings/xgc2-archive-keyring.gpg] ${XGC2_APT_OVERLAY_URL%/} focal main" \
+          > /etc/apt/sources.list.d/00-xgc2-release-train.list
+      fi
+      apt-get update
+      apt-get install -y --no-install-recommends /workspace/out/*.deb
       /workspace/fs150-sitl/.xgc2/scripts/check_installed_packages.sh
     fi
   '
