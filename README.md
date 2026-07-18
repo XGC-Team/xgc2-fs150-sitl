@@ -82,6 +82,12 @@ roslaunch gazebo_sim_fs150_sitl fs150.launch \
   fcu_url:=udp://:14544@localhost:14561
 ```
 
+The wrapper also exposes `mav_system_id`, all four Gazebo/PX4 MAVLink ports,
+the MAVROS local/remote UDP ports, `work_dir`, and `sitl_node_name`. To attach
+to a shared Gazebo Classic server without starting another `gzserver` or
+`gzclient`, pass `start_gazebo:=false`; the existing ROS/Gazebo master URIs
+must be present in the `roslaunch` process environment.
+
 Regenerate the SITL overlay after updating the real FS150 export:
 
 ```bash
