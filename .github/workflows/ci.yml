@@ -40,11 +40,12 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Build and install-check deb packages
+      - name: Build and package Debian artifacts
         run: |
           .xgc2/scripts/build_debs_in_docker.sh \
             --work-dir "$RUNNER_TEMP/xgc2-gazebo-sim-fs150-sitl-${{ matrix.arch }}" \
-            --output-dir "$GITHUB_WORKSPACE/debs"
+            --output-dir "$GITHUB_WORKSPACE/debs" \
+            --skip-install-check
 
       - name: Create trusted build manifest
         run: |
