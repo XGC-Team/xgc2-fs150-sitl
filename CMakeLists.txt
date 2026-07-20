@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(gazebo_sim_fs150_sitl)
 
-find_package(catkin REQUIRED COMPONENTS roslaunch)
+find_package(catkin REQUIRED)
 
 catkin_package()
 
@@ -25,5 +25,6 @@ install(DIRECTORY scripts
 )
 
 if(CATKIN_ENABLE_TESTING)
+  find_package(roslaunch REQUIRED)
   roslaunch_add_file_check(launch/fs150.launch)
 endif()

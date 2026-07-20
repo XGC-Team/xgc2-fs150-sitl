@@ -9,12 +9,12 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <build_depend>roslaunch</build_depend>
-
   <exec_depend>gazebo_sim_px4_1_12</exec_depend>
   <exec_depend>mavros</exec_depend>
   <exec_depend>python3</exec_depend>
   <exec_depend>roslaunch</exec_depend>
+
+  <test_depend>roslaunch</test_depend>
 
   <export>
     <build_type>catkin</build_type>
