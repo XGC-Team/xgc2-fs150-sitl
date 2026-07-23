@@ -24,6 +24,10 @@ install(DIRECTORY scripts
   PATTERN "*.pyc" EXCLUDE
 )
 
+install(FILES process-definitions/xgc2-gazebo-sim-fs150-sitl.json
+  DESTINATION /usr/share/xgc2/process-definitions
+)
+
 if(CATKIN_ENABLE_TESTING)
   find_package(roslaunch REQUIRED)
   roslaunch_add_file_check(launch/fs150.launch)

@@ -35,6 +35,7 @@ ownership:
   paths:
   - /opt/ros/noetic/share/gazebo_sim_fs150_sitl
   - /opt/ros/noetic/lib/gazebo_sim_fs150_sitl
+  - /usr/share/xgc2/process-definitions/xgc2-gazebo-sim-fs150-sitl.json
 release:
   dependency_policy:
     xgc2-px4-sitl-112: verify
