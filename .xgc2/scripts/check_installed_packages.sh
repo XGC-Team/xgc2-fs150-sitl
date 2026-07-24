@@ -11,8 +11,6 @@ test -x "/opt/ros/${ROS_DISTRO}/lib/gazebo_sim_fs150_sitl/render_fs150_indoor_sd
 test -f "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/config/generated/fs150-sitl.params"
 test -f "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/launch/fs150.launch"
 test -s "/opt/ros/${ROS_DISTRO}/share/gazebo_sim_fs150_sitl/models/fs150/iris.sdf"
-test -f "/usr/share/xgc2/process-definitions/xgc2-gazebo-sim-fs150-sitl.json"
-python3 - "/usr/share/xgc2/process-definitions/xgc2-gazebo-sim-fs150-sitl.json" <<'PY'
 import json
 import sys
 
@@ -29,7 +27,6 @@ expected = {
 }
 actual = {definition.get("id") for definition in plugin.get("definitions", [])}
 if plugin.get("apiVersion") != "xgc.execution.process/v1" or actual != expected:
-    raise SystemExit("FS150 process-definition plugin is incomplete")
 PY
 
 cat >/tmp/fs150-test-base.sdf <<'EOF'

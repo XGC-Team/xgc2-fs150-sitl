@@ -69,7 +69,6 @@ mkdir -p "${pkg_root}"
 
 copy_path "${PREFIX_ROOT}/share/${ROS_PACKAGE}" "${pkg_root}"
 copy_path "${PREFIX_ROOT}/lib/${ROS_PACKAGE}" "${pkg_root}"
-copy_path "${INSTALL_ROOT}/usr/share/xgc2/process-definitions/xgc2-gazebo-sim-fs150-sitl.json" "${pkg_root}"
 
 mkdir -p "${pkg_root}/DEBIAN" "${pkg_root}/usr/share/doc/${PACKAGE}"
 cat > "${pkg_root}/DEBIAN/control" <<EOF
