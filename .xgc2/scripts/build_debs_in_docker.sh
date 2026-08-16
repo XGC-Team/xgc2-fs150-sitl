@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-DOCKER_IMAGE="${DOCKER_IMAGE:-ros:noetic-ros-base-focal}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-ghcr.io/xgc-team/xgc2-images/xgc2-build-focal-full-noetic:1.0.0}"
 WORK_DIR="${WORK_DIR:-${REPO_ROOT}/.work/docker}"
 OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/debs}"
 INSTALL_CHECK="${INSTALL_CHECK:-true}"
@@ -49,22 +49,6 @@ docker run --rm \
     set -euo pipefail
 
     export DEBIAN_FRONTEND=noninteractive
-    apt-get update
-    apt-get install -y --no-install-recommends \
-      build-essential \
-      ca-certificates \
-      cmake \
-      curl \
-      dpkg-dev \
-      fakeroot \
-      file \
-      git \
-      gnupg \
-      rsync \
-      ros-noetic-mavros \
-      ros-noetic-roslaunch \
-      ros-noetic-rospack
-
     rm -rf /workspace/work/src /workspace/work/build /workspace/work/devel /workspace/work/install-root
     mkdir -p /workspace/work/src/gazebo_sim_fs150_sitl
     rsync -a --delete /workspace/fs150-sitl/ /workspace/work/src/gazebo_sim_fs150_sitl/
