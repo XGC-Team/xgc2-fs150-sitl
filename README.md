@@ -195,14 +195,8 @@ rosrun mavros mavparam -n /uav1/mavros get NAV_RCL_ACT
 
 The expected values are `24`, `3`, `0`, `0`, `1`, `1`, `0`, `2`, and `2`.
 
-## Real FS150 IMU Telemetry Rate Notes
+## FS150 IMU over MAVROS
 
-The real FS150 raw-IMU telemetry path and the tested MAVROS rate limits are
-documented in [docs/fs150_imu_mavros_rate_debug.md](docs/fs150_imu_mavros_rate_debug.md).
-The current practical setting for high-rate raw IMU over MAVROS is
-`IMU_GYRO_RATEMAX=800`, `IMU_INTEG_RATE=800`, and `HIGHRES_IMU(105)` requested
-at `250 Hz` by the state-estimation launch that consumes `/mavros/imu/data_raw`.
-
-The RK356x/RK3566 onboard-computer CPU governor modes, performance-mode
-commands, restore commands, and temperature monitoring commands are documented
-in [docs/rk356x_performance_mode.md](docs/rk356x_performance_mode.md).
+`IMU_GYRO_RATEMAX=800`, `IMU_INTEG_RATE=800`, `HIGHRES_IMU(105)` at 250 Hz into
+`/mavros/imu/data_raw`. Details: [docs/fs150_imu_mavros_rate_debug.md](docs/fs150_imu_mavros_rate_debug.md).
+Onboard CPU governor is the real-vehicle package, not this SITL tree.
