@@ -73,14 +73,26 @@ motorConstant_next = motorConstant_current * (observed_hover_thrust / 0.30)^2
 where `observed_hover_thrust` is the stable PX4 HTE or ROS hover-thrust
 estimate. The target is `0.30 +/- 0.03`.
 
-For multiple vehicles, change both the PX4 instance and the MAVROS URL:
+For another vehicle in an already-running Gazebo world, use a unique PX4
+instance, ROS namespace, model name, and SITL node name. The work directory
+and MAVROS ports follow the model name and instance automatically:
 
 ```bash
 roslaunch gazebo_sim_fs150_sitl fs150.launch \
   ID:=4 \
   model_name:=fs150_4 \
-  fcu_url:=udp://:14544@localhost:14561
+  ns:=uav2 \
+  sitl_node_name:=sitl_fs150_4 \
+  start_gazebo:=false
 ```
+
+The packaged PX4 runtime uses the dedicated Offboard segment: MAVROS binds
+`15000 + ID` and sends to the PX4 port `15300 + ID`. For example, `ID:=3`
+uses `udp://:15003@localhost:15303`, and `ID:=4` uses
+`udp://:15004@localhost:15304`. The Gazebo SDK destination defaults to the
+same MAVROS local port. Changing only `mavros_local_port`,
+`mavros_remote_port`, or `fcu_url` does not reconfigure the PX4 runtime's
+`px4-rc.mavlink`; custom ports require a matching runtime configuration.
 
 The wrapper also exposes `mav_system_id`, all four Gazebo/PX4 MAVLink ports,
 the MAVROS local/remote UDP ports, `work_dir`, and `sitl_node_name`. To attach
