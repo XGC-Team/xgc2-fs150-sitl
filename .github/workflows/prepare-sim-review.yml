@@ -1,0 +1,46 @@
+name: Prepare isolated simulation fix
+on:
+  push:
+    branches: [work/simulation-review-20260905]
+    paths: [.ci/prepare_sim_review.py, .github/workflows/prepare-sim-review.yml]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    if: github.repository == 'XGC-Team/xgc2-fs150-sitl' && github.ref == 'refs/heads/work/simulation-review-20260905'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Apply guarded source edits and run regression
+        run: |
+          python3 .ci/prepare_sim_review.py
+          git diff --check
+          git diff --stat
+      - name: Publish tested Git object only, without moving any branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, urllib.request
+          from pathlib import Path
+          base = 'f726298efa6fd46f7533a405c31e7d598070aaac'
+          paths = ['launch/fs150.launch', 'README.md', 'test/test_launch_ports.py', '.github/workflows/ci.yml']
+          api = 'https://api.github.com/repos/' + os.environ['GITHUB_REPOSITORY'] + '/git/'
+          def post(endpoint, data):
+              req = urllib.request.Request(api + endpoint, data=json.dumps(data).encode(), headers={
+                  'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                  'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json'})
+              with urllib.request.urlopen(req, timeout=60) as response:
+                  return json.load(response)
+          tree = post('trees', {'base_tree': subprocess.check_output(['git', 'rev-parse', base + '^{tree}'], text=True).strip(),
+              'tree': [{'path': path, 'mode': '100644', 'type': 'blob', 'content': Path(path).read_text()} for path in paths]})
+          commit = post('commits', {'message': 'fix(fs150): align MAVROS with dedicated PX4 offboard ports',
+                                   'tree': tree['sha'], 'parents': [base]})
+          print('PREPARED_COMMIT=' + commit['sha'])
+          print('PREPARED_TREE=' + tree['sha'])
+          print('No branch was updated and no PR was merged.')
+          PY
