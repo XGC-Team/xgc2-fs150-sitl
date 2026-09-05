@@ -35,11 +35,11 @@
   <arg name="mavlink_tcp_port" default="$(eval 4560 + int(arg('ID')))"/>
   <arg name="mavlink_udp_port" default="$(eval 14560 + int(arg('ID')))"/>
   <arg name="qgc_udp_port" default="14550"/>
-  <arg name="sdk_udp_port" default="$(eval 14540 + int(arg('ID')))"/>
-  <arg name="mavros_local_port" default="$(eval 14540 + int(arg('ID')))"/>
-  <arg name="mavros_remote_port" default="$(eval 14580 + int(arg('ID')))"/>
+  <arg name="mavros_local_port" default="$(eval 15000 + int(arg('ID')))"/>
+  <arg name="mavros_remote_port" default="$(eval 15300 + int(arg('ID')))"/>
+  <arg name="sdk_udp_port" default="$(arg mavros_local_port)"/>
 
-  <!-- PX4 instance N maps to MAV_SYS_ID=N+1 and MAVROS UDP ports 14540+N -> 14580+N. -->
+  <!-- PX4 instance N maps to MAV_SYS_ID=N+1 and MAVROS UDP ports 15000+N -> 15300+N (the PX4 runtime offboard segment). -->
   <arg name="fcu_url" default="$(eval 'udp://:' + str(arg('mavros_local_port')) + '@localhost:' + str(arg('mavros_remote_port')))"/>
   <arg name="gcs_url" default=""/>
   <arg name="ns" default="uav1"/>

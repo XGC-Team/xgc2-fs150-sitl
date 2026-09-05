@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
+      - name: Check launch port contract
+        run: python3 -m unittest discover -s test -p test_launch_ports.py -v
   build-debs:
     strategy:
       fail-fast: false
