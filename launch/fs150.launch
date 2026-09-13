@@ -6,6 +6,9 @@
   <arg name="model_name" default="fs150_$(arg ID)"/>
   <arg name="px4_launch" default="$(find gazebo_sim_px4_1_12)/launch/iris.launch"/>
 
+  <arg name="enable_camera" default="false"/>
+  <arg name="camera_fps" default="15"/>
+  <arg name="camera_hfov" default="1.5707963267948966"/>
   <arg name="gui" default="true"/>
   <arg name="debug" default="false"/>
   <arg name="verbose" default="false"/>
@@ -51,6 +54,9 @@
 
   <env name="GAZEBO_MODEL_PATH" value="$(find gazebo_sim_fs150_sitl)/models:$(optenv GAZEBO_MODEL_PATH)"/>
 
+  <arg name="prepared_sdf" default="$(arg work_dir)/fs150.sdf"/>
+  <param name="$(arg ns)/fs150_sdf_path"
+         command="$(find gazebo_sim_fs150_sitl)/scripts/render_fs150_indoor_sdf.py --base-sdf $(arg sdf) --output $(arg prepared_sdf) --enable-camera $(arg enable_camera) --robot-namespace $(arg ns) --model-name $(arg model_name) --camera-fps $(arg camera_fps) --camera-hfov $(arg camera_hfov) --print-path"/>
   <include file="$(arg px4_launch)">
     <arg name="ID" value="$(arg ID)"/>
     <arg name="vehicle" value="$(arg vehicle)"/>
@@ -58,7 +64,7 @@
     <arg name="model_name" value="$(arg model_name)"/>
     <arg name="gazebo_model_path_extra" value="$(find gazebo_sim_fs150_sitl)/models"/>
     <arg name="world" value="$(arg world)"/>
-    <arg name="sdf" value="$(arg sdf)"/>
+    <arg name="sdf" value="$(arg prepared_sdf)"/>
     <arg name="work_dir" value="$(arg work_dir)"/>
     <arg name="param_file" value="$(arg param_file)"/>
     <arg name="reset_params" value="$(arg reset_params)"/>

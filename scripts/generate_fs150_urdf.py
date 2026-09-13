@@ -110,6 +110,8 @@ def add_geometry(parent, sdf_geometry):
 
 
 def resolve_mesh_uri(uri):
+    if uri.startswith(("model://fs150_photo/", "model://fs150_lod10k/")):
+        return "package://fs150_description/models/"+uri[len("model://"): ]
     if uri.startswith("model://fs150/"):
         rel = uri[len("model://fs150/") :]
         return f"package://{PKG_NAME}/models/fs150/{rel}"
@@ -171,7 +173,7 @@ def add_link(robot, sdf_link, prefix):
     has_visual = False
     for sdf_visual in sdf_link.findall("visual"):
         has_visual = add_visual(urdf_link, sdf_visual, prefix, link_name) or has_visual
-    if not has_visual:
+    if not has_visual and not raw_name.startswith("rotor_"):
         for sdf_collision in sdf_link.findall("collision"):
             if add_collision_as_visual(urdf_link, sdf_collision, prefix, link_name):
                 break

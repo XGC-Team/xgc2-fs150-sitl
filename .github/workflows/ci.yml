@@ -47,8 +47,7 @@ jobs:
         run: |
           .xgc2/scripts/build_debs_in_docker.sh \
             --work-dir "$RUNNER_TEMP/xgc2-gazebo-sim-fs150-sitl-${{ matrix.arch }}" \
-            --output-dir "$GITHUB_WORKSPACE/debs" \
-            --skip-install-check
+            --output-dir "$GITHUB_WORKSPACE/debs"
 
       - name: Create trusted build manifest
         run: |

@@ -26,5 +26,10 @@ install(DIRECTORY scripts
 
 if(CATKIN_ENABLE_TESTING)
   find_package(roslaunch REQUIRED)
+  find_package(PythonInterp REQUIRED)
+  add_test(NAME fs150_shared_visual_assets
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_visual_assets.py)
+  add_test(NAME fs150_camera_assets
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_camera_assets.py)
   roslaunch_add_file_check(launch/fs150.launch)
 endif()

@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 import argparse
+import json
+import math
+import re
 import os
 import subprocess
 import sys
 import tempfile
 import xml.etree.ElementTree as ET
+
+from pathlib import Path
 
 IRIS_MOTOR_CONSTANT = 5.84e-06
 IRIS_REFERENCE_HOVER_THRUST = 0.706963405
@@ -43,6 +48,109 @@ FS150_MOTOR_TIME_CONSTANT_UP = 0.006
 FS150_MOTOR_TIME_CONSTANT_DOWN = 0.012
 FS150_ROTOR_DRAG_COEFFICIENT = 2e-05
 FS150_ROLLING_MOMENT_COEFFICIENT = 1e-07
+
+
+def description_package():
+    try:
+        return Path(subprocess.check_output(['rospack', 'find', 'fs150_description'], text=True).strip())
+    except (FileNotFoundError, subprocess.CalledProcessError) as exc:
+        raise RuntimeError('fs150_description is required for the FS150 visual model') from exc
+
+
+def apply_visual_assets(root, description_root=None, resolve_resources=True):
+    package = Path(description_root) if description_root else description_package()
+    source = ET.parse(package/'urdf/fs150_visual.urdf').getroot()
+    model = root.find('model')
+    body = model.find("link[@name='base_link']")
+    origins = {'base_link': '0 0 0 0 0 0'}
+    visual_links={link.get('name') for link in source.findall('link') if link.find('visual') is not None}
+    for joint in source.findall('joint'):
+        if joint.find('child').get('link') not in visual_links:
+            continue
+        if joint.find('parent').get('link') != 'base_link':
+            raise ValueError('FS150 visual joints must be relative to base_link')
+        origin = joint.find('origin')
+        origins[joint.find('child').get('link')] = origin.get('xyz')+' '+origin.get('rpy','0 0 0')
+    for link in model.findall('link'):
+        if link.get('name') == 'base_link' or link.get('name', '').startswith('rotor_'):
+            for visual in list(link.findall('visual')):
+                link.remove(visual)
+    count = 0
+    for link in source.findall('link'):
+        for visual in link.findall('visual'):
+            target = ET.SubElement(body, 'visual', name='fs150_photo_'+link.get('name'))
+            ET.SubElement(target, 'pose').text = origins[link.get('name')]
+            mesh = visual.find('geometry/mesh')
+            geometry = ET.SubElement(target, 'geometry')
+            output_mesh = ET.SubElement(geometry, 'mesh')
+            uri = mesh.get('filename')
+            prefix = 'package://fs150_description/models/'
+            if not uri.startswith(prefix):
+                raise ValueError('FS150 visual mesh must belong to fs150_description/models')
+            relative = uri[len('package://fs150_description/'):]
+            asset = package/relative
+            if not asset.is_file():
+                raise FileNotFoundError(str(asset))
+            ET.SubElement(output_mesh, 'uri').text = asset.as_uri() if resolve_resources else 'model://'+relative[len('models/'):]
+            ET.SubElement(output_mesh, 'scale').text = mesh.get('scale','1 1 1')
+            count += 1
+    if count != 5:
+        raise ValueError('FS150 appearance must contain a body and four rotors')
+    return [('shared FS150 visual meshes (static rotor appearance)',count)]
+
+
+def apply_camera(root, enabled=False, robot_namespace='uav1', model_name='uav1',
+                 fps=None, horizontal_fov=None, description_root=None):
+    """Optional ideal ROS colour camera; disabled output has no camera sensor/plugin."""
+    body=root.find("model/link[@name='base_link']")
+    for sensor in list(body.findall("sensor[@name='fs150_front_camera']")):
+        body.remove(sensor)
+    if not enabled:
+        return [('front camera disabled (sensor omitted)',0)]
+    namespace=robot_namespace.strip('/')
+    if not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]*(/[A-Za-z][A-Za-z0-9_]*)*',namespace):
+        raise ValueError('Camera namespace must identify one robot')
+    if not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]*',model_name):
+        raise ValueError('Invalid camera model name')
+    package=Path(description_root) if description_root else description_package()
+    urdf=ET.parse(package/'urdf/fs150_visual.urdf').getroot()
+    origin=urdf.find("joint[@name='camera_link_joint']/origin")
+    if origin is None:
+        raise ValueError('fs150_description camera_link_joint is required')
+    profile_path=Path(__file__).resolve().parents[1]/'config/camera.json'
+    if not profile_path.is_file():
+        profile_path=Path(_rospack_find('gazebo_sim_fs150_sitl'))/'config/camera.json'
+    profile=json.loads(profile_path.read_text())
+    rate=profile['fps'] if fps is None else float(fps)
+    fov=profile['horizontal_fov_rad'] if horizontal_fov is None else float(horizontal_fov)
+    if not math.isfinite(rate) or not 0<rate<=30:
+        raise ValueError('FS150 camera rate must be in (0,30] Hz')
+    if not math.isfinite(fov) or not 0<fov<math.pi:
+        raise ValueError('Camera HFOV must be between zero and pi radians')
+    width,height=profile['width'],profile['height']
+    focal=width/(2*math.tan(fov/2))
+    sensor=ET.SubElement(body,'sensor',name='fs150_front_camera',type='camera')
+    ET.SubElement(sensor,'pose').text=origin.get('xyz')+' '+origin.get('rpy','0 0 0')
+    ET.SubElement(sensor,'always_on').text='false'
+    ET.SubElement(sensor,'visualize').text='false'
+    ET.SubElement(sensor,'update_rate').text=str(rate)
+    camera=ET.SubElement(sensor,'camera',name='fs150_front')
+    ET.SubElement(camera,'horizontal_fov').text=str(fov)
+    image=ET.SubElement(camera,'image')
+    for key,value in [('width',width),('height',height),('format','R8G8B8')]:
+        ET.SubElement(image,key).text=str(value)
+    clip=ET.SubElement(camera,'clip')
+    ET.SubElement(clip,'near').text=str(profile['near_m'])
+    ET.SubElement(clip,'far').text=str(profile['far_m'])
+    plugin=ET.SubElement(sensor,'plugin',name='fs150_front_camera_ros',filename='libgazebo_ros_camera.so')
+    values={'robotNamespace':'/'+namespace,'cameraName':'camera2',
+            'imageTopicName':'image','cameraInfoTopicName':'camera_info',
+            'frameName':'xgc/robots/'+model_name+'/camera_optical_frame',
+            'updateRate':0,'Cx':width/2,'Cy':height/2,'CxPrime':width/2,'focalLength':focal,
+            'distortionK1':0,'distortionK2':0,'distortionK3':0,'distortionT1':0,'distortionT2':0,
+            'hackBaseline':0}
+    for key,value in values.items():ET.SubElement(plugin,key).text=str(value)
+    return [('front camera enabled (ideal pinhole, ROS camera2/image)',1)]
 
 
 def _bool_arg(value):
@@ -410,6 +518,11 @@ def render_indoor_sdf(
     motor_constant=FS150_MOTOR_CONSTANT,
     moment_constant=FS150_MOMENT_CONSTANT,
     body_mass=None,
+    enable_camera=False,
+    robot_namespace="uav1",
+    model_name="uav1",
+    camera_fps=None,
+    camera_hfov=None,
 ):
     tree = ET.parse(base_sdf)
     root = tree.getroot()
@@ -425,6 +538,8 @@ def render_indoor_sdf(
     if strip_baro:
         report.append(("plugin barometer_plugin", len(_remove_named_plugin(root, "barometer_plugin"))))
         report.append(("mavlink_interface baroSubTopic", len(_remove_plugin_tag(root, "mavlink_interface", "baroSubTopic"))))
+    report.extend(apply_visual_assets(root))
+    report.extend(apply_camera(root,enable_camera,robot_namespace,model_name,camera_fps,camera_hfov))
     _indent(root)
     return ET.tostring(root, encoding="unicode"), report
 
@@ -461,6 +576,11 @@ def main():
     parser.add_argument("--body-mass", type=float, default=None,
                         help="Optional base_link mass override. Defaults to no-GPS FS150_BASE_MASS with equivalent inertia.")
     parser.add_argument("--print-path", action="store_true", help="Print only the output path on stdout.")
+    parser.add_argument('--enable-camera',type=_bool_arg,default=False)
+    parser.add_argument('--robot-namespace',default='uav1')
+    parser.add_argument('--model-name',default='uav1')
+    parser.add_argument('--camera-fps',type=float,default=None)
+    parser.add_argument('--camera-hfov',type=float,default=None,help='Ideal horizontal field of view, radians')
     args = parser.parse_args()
 
     base_sdf = resolve_base_sdf(args.base_sdf)
@@ -471,6 +591,7 @@ def main():
         args.motor_constant,
         args.moment_constant,
         args.body_mass,
+        args.enable_camera,args.robot_namespace,args.model_name,args.camera_fps,args.camera_hfov,
     )
     write_atomic(args.output, sdf)
 

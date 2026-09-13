@@ -84,6 +84,7 @@ docker run --rm \
       apt-get update
       apt-get install -y --no-install-recommends /workspace/out/*.deb
       /workspace/fs150-sitl/.xgc2/scripts/check_installed_packages.sh
+      python3 -m unittest discover -s /workspace/fs150-sitl/test -p "test_*assets.py" -v
     fi
   '
 

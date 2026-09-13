@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <sdf version="1.6">
   <model name="iris">
     <link name="base_link">
@@ -33,23 +34,53 @@
             </friction>
           </surface>
         </collision>
-      <visual name="base_link_inertia_visual">
+      <gravity>1</gravity>
+      <velocity_decay />
+      <visual name="fs150_photo_base_link">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
+            <uri>model://fs150_lod10k/meshes/base_link.dae</uri>
             <scale>1 1 1</scale>
-            <uri>model://fs150/meshes/iris.stl</uri>
             </mesh>
           </geometry>
-        <material>
-          <ambient>0.42 0.35 0.05 1</ambient>
-          <diffuse>0.84 0.71 0.10 1</diffuse>
-          <specular>0.05 0.04 0.02 1</specular>
-          <emissive>0 0 0 1</emissive>
-          </material>
         </visual>
-      <gravity>1</gravity>
-      <velocity_decay />
+      <visual name="fs150_photo_rotor_0">
+        <pose>0.045 -0.0536190265 0.023 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://fs150_lod10k/meshes/rotor_0.dae</uri>
+            <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+      <visual name="fs150_photo_rotor_1">
+        <pose>-0.045 0.0536190265 0.023 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://fs150_lod10k/meshes/rotor_1.dae</uri>
+            <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+      <visual name="fs150_photo_rotor_2">
+        <pose>0.045 0.0536190265 0.023 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://fs150_lod10k/meshes/rotor_2.dae</uri>
+            <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+      <visual name="fs150_photo_rotor_3">
+        <pose>-0.045 -0.0536190265 0.023 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://fs150_lod10k/meshes/rotor_3.dae</uri>
+            <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
       </link>
     <link name="/imu_link">
       <pose>0 0 0 0 0 0</pose>
@@ -115,21 +146,6 @@
             </friction>
           </surface>
         </collision>
-      <visual name="rotor_0_visual">
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <uri>model://fs150/meshes/iris_prop_ccw.dae</uri>
-            </mesh>
-          </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Blue</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-            </script>
-          </material>
-        </visual>
       <gravity>1</gravity>
       <velocity_decay />
       </link>
@@ -180,21 +196,6 @@
             </friction>
           </surface>
         </collision>
-      <visual name="rotor_1_visual">
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <uri>model://fs150/meshes/iris_prop_ccw.dae</uri>
-            </mesh>
-          </geometry>
-        <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-            </script>
-          </material>
-        </visual>
       <gravity>1</gravity>
       <velocity_decay />
       </link>
@@ -245,21 +246,6 @@
             </friction>
           </surface>
         </collision>
-      <visual name="rotor_2_visual">
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <uri>model://fs150/meshes/iris_prop_cw.dae</uri>
-            </mesh>
-          </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Blue</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-            </script>
-          </material>
-        </visual>
       <gravity>1</gravity>
       <velocity_decay />
       </link>
@@ -310,21 +296,6 @@
             </friction>
           </surface>
         </collision>
-      <visual name="rotor_3_visual">
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <uri>model://fs150/meshes/iris_prop_cw.dae</uri>
-            </mesh>
-          </geometry>
-        <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-            </script>
-          </material>
-        </visual>
       <gravity>1</gravity>
       <velocity_decay />
       </link>

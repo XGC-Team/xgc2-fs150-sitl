@@ -1,0 +1,16 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 15,
+  "horizontal_fov_rad": 1.5707963267948966,
+  "near_m": 0.02,
+  "far_m": 100.0,
+  "projection": "ideal_pinhole",
+  "distortion": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}
