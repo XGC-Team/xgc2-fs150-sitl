@@ -192,7 +192,7 @@ EKF2_EVP_GATE,5.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_EVP_NOISE,0.100000001490116119,9,exclude,,not selected by FS150 SITL policy
 EKF2_EVV_GATE,3.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_EVV_NOISE,0.100000001490116119,9,exclude,,not selected by FS150 SITL policy
-EKF2_EV_DELAY,175.000000000000000000,9,exclude,,not selected by FS150 SITL policy
+EKF2_EV_DELAY,175.000000000000000000,9,exclude,,overridden by FS150 SITL policy
 EKF2_EV_NOISE_MD,0,6,exclude,,not selected by FS150 SITL policy
 EKF2_EV_POS_X,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
 EKF2_EV_POS_Y,0.000000000000000000,9,exclude,,not selected by FS150 SITL policy
@@ -813,3 +813,4 @@ COM_RC_IN_MODE,1,6,include,sitl_override,PX4 SITL has no physical RC receiver; j
 COM_RCL_EXCEPT,4,6,include,sitl_override,Ignore RC loss in Offboard so algorithm tests do not depend on a physical transmitter.
 EKF2_RNG_AID,0,6,include,sitl_override,Disable rangefinder height aiding so indoor FS150 SITL height remains external-vision only.
 EKF2_TERR_MASK,0,6,include,sitl_override,Disable range/optical-flow terrain fusion because the indoor FS150 workflow does not use HAGL aiding.
+EKF2_EV_DELAY,10,9,include,sitl_override,Vision observation delay 10 ms relative to IMU for FS150 SITL. The vehicle check table remains 60 ms.

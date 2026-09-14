@@ -164,6 +164,12 @@ SITL_OVERRIDES: Sequence[Tuple[str, str, int, str]] = (
         TYPE_INT32,
         "Disable range/optical-flow terrain fusion because the indoor FS150 workflow does not use HAGL aiding.",
     ),
+    (
+        "EKF2_EV_DELAY",
+        "10",
+        TYPE_FLOAT,
+        "Vision observation delay 10 ms relative to IMU for FS150 SITL. The vehicle check table remains 60 ms.",
+    ),
 )
 SITL_OVERRIDE_NAMES = {name for name, _value, _px4_type, _reason in SITL_OVERRIDES}
 

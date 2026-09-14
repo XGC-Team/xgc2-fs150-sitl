@@ -133,6 +133,7 @@ The key estimator parameters are:
 | Parameter | Value | Meaning in FS150 SITL |
 | --- | ---: | --- |
 | `EKF2_AID_MASK` | `24` | Enables external vision position and external vision yaw.  This is the main motion-capture aiding selection. |
+| `EKF2_EV_DELAY` | `10` | Vision observation delay relative to IMU, in milliseconds. The vehicle check table remains 60 ms. |
 | `EKF2_HGT_MODE` | `3` | Selects external vision as the primary height source. |
 | `EKF2_MAG_TYPE` | `5` | Disables magnetometer fusion.  Yaw should come from motion capture. |
 | `EKF2_RNG_AID` | `0` | Prevents PX4 from temporarily switching height fusion to rangefinder at low speed and low altitude. |

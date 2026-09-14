@@ -81,8 +81,10 @@ grep -q $'NAV_RCL_ACT\t2\t6' /tmp/fs150-sitl.params
 grep -q $'COM_OBL_ACT\t0\t6' /tmp/fs150-sitl.params
 grep -q $'COM_RC_IN_MODE\t1\t6' /tmp/fs150-sitl.params
 grep -q $'COM_RCL_EXCEPT\t4\t6' /tmp/fs150-sitl.params
+grep -q $'EKF2_EV_DELAY\t10\t9' /tmp/fs150-sitl.params
 grep -q 'COM_RC_IN_MODE,1,6,include,sitl_override' /tmp/fs150-sitl.selection.csv
 grep -q 'COM_RCL_EXCEPT,4,6,include,sitl_override' /tmp/fs150-sitl.selection.csv
+grep -q 'EKF2_EV_DELAY,10,9,include,sitl_override' /tmp/fs150-sitl.selection.csv
 ! grep -q $'SYS_HAS_GPS\t0\t6' /tmp/fs150-sitl.params
 ! grep -q $'SYS_HAS_BARO\t0\t6' /tmp/fs150-sitl.params
 ! grep -q $'SYS_HAS_MAG\t0\t6' /tmp/fs150-sitl.params
