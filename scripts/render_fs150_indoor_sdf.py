@@ -19,7 +19,12 @@ FS150_BASE_MASS = 0.275
 IRIS_BASE_MASS = 1.5
 IRIS_BASE_INERTIA = (0.029125, 0.029125, 0.055225)
 FS150_EQUIVALENT_INERTIA_SCALE = 0.35
-FS150_BODY_COLLISION_SIZE = (0.47, 0.47, 0.11)
+# The shared FS150 landing pads end at z=-0.033 m in base_link. The old
+# 0.11 m Iris box supported the model 22 mm above those pads. Match its
+# vertical support extent without moving the visual, body/IMU frame or COM.
+# XY and rotor collision geometry remain the existing coarse Iris envelope;
+# this contact-height correction is not a full FS150 airframe calibration.
+FS150_BODY_COLLISION_SIZE = (0.47, 0.47, 0.066)
 FS150_BODY_VISUAL_POSE = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 FS150_BODY_VISUAL_SCALE = (1.0, 1.0, 1.0)
 FS150_ROTOR_POSES = {
