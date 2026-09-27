@@ -24,5 +24,7 @@
   <test_depend>rospy</test_depend>
   <test_depend>mavros_msgs</test_depend>
   <test_depend>gazebo_msgs</test_depend>
+  <exec_depend>xacro</exec_depend>
+  <test_depend>xgc2_simple_lidar</test_depend>
   <exec_depend>gazebo_plugins</exec_depend>
 </package>

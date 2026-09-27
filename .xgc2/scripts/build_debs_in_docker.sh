@@ -82,7 +82,9 @@ docker run --rm \
           > /etc/apt/sources.list.d/00-xgc2-release-train.list
       fi
       apt-get update
-      apt-get install -y --no-install-recommends /workspace/out/*.deb
+      apt-get install -y --no-install-recommends \
+        ros-noetic-xgc2-simple-lidar \
+        /workspace/out/*.deb
       /workspace/fs150-sitl/.xgc2/scripts/check_installed_packages.sh
       python3 -m unittest discover -s /workspace/fs150-sitl/test -p "test_*assets.py" -v
     fi

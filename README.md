@@ -24,6 +24,17 @@ roslaunch gazebo_sim_fs150_sitl fs150.launch \
   sdf:=$HOME/.xgc2/fs150_sitl/iris_indoor.sdf
 ```
 
+### Optional simple lidar (simulation only)
+
+`fs150.launch` can append the shared ideal lidar to `base_link` with
+`enable_simple_lidar:=true`. Its mount pose defaults to
+`0 0 0.12 0 0 0` and can be overridden with `simple_lidar_pose`. When enabled,
+the renderer resolves `xgc2_simple_lidar` and renders its public SDF xacro;
+the sensor publishes world-frame XYZ points at
+`/<ns>/simple_lidar/points` using a 10 Hz, 360 by 16 scan with a 20 m maximum
+range. The option is off by default. This is an ideal Gazebo component and does
+not claim that a physical FS150 is equipped with a lidar.
+
 The default launch already uses `models/fs150/iris.sdf` from this package. That
 SDF retains the Iris PX4 airframe, mixer assumptions and equivalent rotor
 geometry. Its visible meshes come from the shared `fs150_description` package.

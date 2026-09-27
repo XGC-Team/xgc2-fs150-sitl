@@ -158,6 +158,40 @@ def apply_camera(root, enabled=False, robot_namespace='uav1', model_name='uav1',
     return [('front camera enabled (ideal pinhole, ROS camera2/image)',1)]
 
 
+def apply_simple_lidar(root, enabled=False, robot_namespace='uav1',
+                       pose='0 0 0.12 0 0 0'):
+    """Optionally append the shared ideal world-XYZ lidar sensor to base_link."""
+    model=root.find('model')
+    body=None if model is None else model.find("link[@name='base_link']")
+    if body is None:
+        raise ValueError('FS150 base_link is required for the simple lidar')
+    for sensor in list(body.findall("sensor[@name='simple_lidar']")):
+        body.remove(sensor)
+    if not enabled:
+        return [('simple lidar disabled (sensor omitted)',0)]
+
+    package=Path(_rospack_find('xgc2_simple_lidar'))
+    template=package/'models/sensor.sdf.xacro'
+    namespace=robot_namespace.strip('/')
+    namespace='/'+namespace if namespace else '/'
+    rendered=subprocess.check_output([
+        'xacro',str(template),
+        'namespace:='+namespace,
+        'pose:='+pose,
+        'rate:=10',
+        'max_range:=20',
+        'samples:=360',
+        'layers:=16',
+        'vertical_fov:=1.0',
+    ],text=True)
+    sensor_root=ET.fromstring(rendered)
+    sensors=sensor_root.findall("sensor[@name='simple_lidar']")
+    if len(sensors)!=1:
+        raise RuntimeError('xgc2_simple_lidar xacro must render exactly one simple_lidar sensor')
+    body.append(sensors[0])
+    return [('simple lidar enabled (ideal world XYZ points)',1)]
+
+
 def _bool_arg(value):
     normalized = str(value).strip().lower()
     if normalized in ("1", "true", "yes", "on"):
@@ -528,6 +562,8 @@ def render_indoor_sdf(
     model_name="uav1",
     camera_fps=None,
     camera_hfov=None,
+    enable_simple_lidar=False,
+    simple_lidar_pose='0 0 0.12 0 0 0',
 ):
     tree = ET.parse(base_sdf)
     root = tree.getroot()
@@ -545,6 +581,7 @@ def render_indoor_sdf(
         report.append(("mavlink_interface baroSubTopic", len(_remove_plugin_tag(root, "mavlink_interface", "baroSubTopic"))))
     report.extend(apply_visual_assets(root))
     report.extend(apply_camera(root,enable_camera,robot_namespace,model_name,camera_fps,camera_hfov))
+    report.extend(apply_simple_lidar(root,enable_simple_lidar,robot_namespace,simple_lidar_pose))
     _indent(root)
     return ET.tostring(root, encoding="unicode"), report
 
@@ -586,6 +623,8 @@ def main():
     parser.add_argument('--model-name',default='uav1')
     parser.add_argument('--camera-fps',type=float,default=None)
     parser.add_argument('--camera-hfov',type=float,default=None,help='Ideal horizontal field of view, radians')
+    parser.add_argument('--enable-simple-lidar',type=_bool_arg,default=False)
+    parser.add_argument('--simple-lidar-pose',default='0 0 0.12 0 0 0')
     args = parser.parse_args()
 
     base_sdf = resolve_base_sdf(args.base_sdf)
@@ -597,6 +636,7 @@ def main():
         args.moment_constant,
         args.body_mass,
         args.enable_camera,args.robot_namespace,args.model_name,args.camera_fps,args.camera_hfov,
+        args.enable_simple_lidar,args.simple_lidar_pose,
     )
     write_atomic(args.output, sdf)
 

@@ -59,6 +59,14 @@ class LaunchPortsTest(unittest.TestCase):
         names = [arg.attrib["name"] for arg in self.launch.findall("arg")]
         self.assertLess(names.index("mavros_local_port"), names.index("sdk_udp_port"))
 
+    def test_simple_lidar_is_opt_in_and_its_pose_reaches_the_renderer(self):
+        self.assertEqual(self.defaults["enable_simple_lidar"], "false")
+        self.assertEqual(self.defaults["simple_lidar_pose"], "0 0 0.12 0 0 0")
+        render_param = self.launch.find("param[@name='$(arg ns)/fs150_sdf_path']")
+        command = render_param.attrib["command"]
+        self.assertIn("--enable-simple-lidar $(arg enable_simple_lidar)", command)
+        self.assertIn('--simple-lidar-pose "$(arg simple_lidar_pose)"', command)
+
     def test_wrapper_forwards_resolved_contract_to_base(self):
         include = self.launch.find("include")
         forwarded = {arg.attrib["name"]: arg.attrib["value"] for arg in include.findall("arg")}
