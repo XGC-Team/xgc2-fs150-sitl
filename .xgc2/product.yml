@@ -39,7 +39,10 @@ ownership:
   - /opt/ros/noetic/share/gazebo_sim_fs150_sitl
   - /opt/ros/noetic/lib/gazebo_sim_fs150_sitl
 release:
+  requires:
+  - xgc2-gazebo-sim-scenes
   dependency_policy:
+    xgc2-gazebo-sim-scenes: verify
     xgc2-px4-sitl-112: verify
     xgc2-fs150-description: verify
   apt_versions:
