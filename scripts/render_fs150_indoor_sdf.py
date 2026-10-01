@@ -4,9 +4,11 @@ import json
 import math
 import re
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import xml.etree.ElementTree as ET
 
 from pathlib import Path
@@ -158,6 +160,197 @@ def apply_camera(root, enabled=False, robot_namespace='uav1', model_name='uav1',
     return [('front camera enabled (ideal pinhole, ROS camera2/image)',1)]
 
 
+# Rendering the shared lidar takes one xacro process per robot, and xacro spends
+# about 0.3 s of it importing roslaunch to resolve $(arg ...). A fleet renders
+# the same scan for every robot, only the namespace differs, so the xacro output
+# is kept per scan in the user's cache directory with a placeholder where the
+# namespace goes. XGC2_FS150_RENDER_CACHE_DIR names another directory; empty, it
+# turns the cache off.
+RENDER_CACHE_ENV = 'XGC2_FS150_RENDER_CACHE_DIR'
+RENDER_CACHE_FORMAT = '1'
+RENDER_CACHE_PLACEHOLDER = '/xgc2_render_cache_namespace'
+RENDER_CACHE_LOCK_SECONDS = 10.0
+_NOFOLLOW = getattr(os, 'O_NOFOLLOW', 0)
+
+
+def render_cache_directory():
+    """The directory for rendered xacro, or None when the cache is off or has no home."""
+    configured = os.environ.get(RENDER_CACHE_ENV)
+    if configured is not None:
+        return configured if os.path.isabs(configured) else None
+    base = os.environ.get('XDG_CACHE_HOME')
+    if not base or not os.path.isabs(base):
+        home = os.path.expanduser('~')
+        if not os.path.isabs(home):
+            return None
+        base = os.path.join(home, '.cache')
+    return os.path.join(base, 'xgc2', 'fs150-sitl', 'simple-lidar')
+
+
+class SimpleLidarRenderCache:
+    """Rendered ``sensor.sdf.xacro`` for one scan, with the namespace left out.
+
+    The key is a digest of everything the output depends on but the namespace:
+    the xacro sources, the xacro executable and the other arguments. An entry is
+    stored only after rendering with the placeholder, with the namespace put
+    back, reproduces the document xacro rendered for the real namespace, so a
+    template that uses the namespace in any other way is never cached; the
+    scan is then marked unsupported and rendered directly. Only plain namespaces
+    (``/uav1``, ``/fleet/uav1``) are substituted, and templates that read
+    anything but ``$(arg ...)`` are never cached. Every failure to read or write
+    the cache falls back to rendering with xacro.
+    """
+
+    def __init__(self, directory, key):
+        self.directory = directory
+        self.entry = os.path.join(directory, key + '.xml')
+        self.unsupported = os.path.join(directory, key + '.unsupported')
+
+    @classmethod
+    def for_scan(cls, template, namespace, scan):
+        """The cache for this scan, or None when this render must not use one."""
+        directory = render_cache_directory()
+        if (directory is None or not re.fullmatch(r'(/[A-Za-z0-9_]+)+', namespace)
+                or RENDER_CACHE_PLACEHOLDER in namespace):
+            return None
+        executable = shutil.which('xacro')
+        if executable is None:
+            return None
+        template = Path(template)
+        try:
+            sources = sorted({template, *template.parent.rglob('*.xacro')})
+            texts = [source.read_bytes() for source in sources]
+            status = os.stat(executable)
+        except OSError:
+            return None
+        if any(re.search(rb'\$\((?!arg\s)|load_yaml', text) for text in texts):
+            return None
+        import hashlib  # about 3 ms of OpenSSL: only a render that uses the cache needs it
+        digest = hashlib.sha256()
+        for part in (RENDER_CACHE_FORMAT, executable, str(status.st_size), str(status.st_mtime_ns), *scan):
+            digest.update(os.fsencode(part) + b'\0')
+        for source, text in zip(sources, texts):
+            digest.update(source.relative_to(template.parent).as_posix().encode() + b'\0' + text + b'\0')
+        return cls(directory, digest.hexdigest()[:32])
+
+    def load(self, namespace):
+        """The cached document for this namespace, or None."""
+        try:
+            with open(self.entry, 'rb') as handle:
+                text = handle.read().decode('utf-8')
+            document = ET.fromstring(text.replace(RENDER_CACHE_PLACEHOLDER, namespace))
+        except (OSError, UnicodeDecodeError, ET.ParseError):
+            return None
+        return document if len(document.findall("sensor[@name='simple_lidar']")) == 1 else None
+
+    def render(self, namespace, xacro):
+        """The parsed xacro output for `namespace`; ``xacro(namespace)`` renders it without the cache."""
+        document = self.load(namespace)
+        if document is not None:
+            return document
+        if os.path.exists(self.unsupported):
+            return ET.fromstring(xacro(namespace))
+        try:
+            os.makedirs(self.directory, mode=0o700, exist_ok=True)
+        except OSError:
+            return ET.fromstring(xacro(namespace))
+        lock = self._lock_fills()
+        try:
+            document = self.load(namespace)
+            return document if document is not None else self._fill(namespace, xacro)
+        finally:
+            if lock is not None:
+                os.close(lock)
+
+    def _lock_fills(self):
+        """Take the directory's fill lock, so a fleet rendering at once renders each scan once.
+
+        Returns the descriptor that holds the lock, or None when there is none to hold: an
+        unlockable directory, or a holder that kept it past the timeout (a stuck xacro).
+        """
+        try:
+            import fcntl
+            descriptor = os.open(os.path.join(self.directory, '.fill.lock'), os.O_CREAT | os.O_RDWR | _NOFOLLOW, 0o600)
+        except (ImportError, OSError):
+            return None
+        deadline = time.monotonic() + RENDER_CACHE_LOCK_SECONDS
+        while True:
+            try:
+                fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                return descriptor
+            except BlockingIOError:
+                if time.monotonic() >= deadline:
+                    break
+                time.sleep(0.02)
+            except OSError:
+                break
+        os.close(descriptor)
+        return None
+
+    def _fill(self, namespace, xacro):
+        try:
+            descriptor, temporary = tempfile.mkstemp(prefix='.tmp-', suffix='.xml', dir=self.directory)
+        except OSError:
+            return ET.fromstring(xacro(namespace))
+        try:
+            # The check render runs beside the real one, so a cold cache costs
+            # the first robot no more time than before, only a second process.
+            import threading
+            checked = []
+
+            def render_with_placeholder():
+                try:
+                    checked.append(xacro(RENDER_CACHE_PLACEHOLDER))
+                except Exception:  # whatever it is, the scan is then not cached
+                    checked.append(None)
+
+            checker = threading.Thread(target=render_with_placeholder)
+            try:
+                checker.start()
+            except RuntimeError:  # no thread to be had: check after the real render
+                checker = None
+            try:
+                document = ET.fromstring(xacro(namespace))
+            finally:
+                if checker is not None:
+                    checker.join()
+            if checker is None:
+                render_with_placeholder()
+            generic = checked[0]
+            supported = False
+            if generic is not None:
+                try:
+                    reproduced = ET.fromstring(generic.replace(RENDER_CACHE_PLACEHOLDER, namespace))
+                    supported = (ET.tostring(reproduced) == ET.tostring(document)
+                                 and len(reproduced.findall("sensor[@name='simple_lidar']")) == 1)
+                except ET.ParseError:
+                    pass
+            try:
+                if supported:
+                    with os.fdopen(descriptor, 'wb') as handle:
+                        descriptor = None
+                        handle.write(generic.encode('utf-8'))
+                    os.replace(temporary, self.entry)
+                    temporary = None
+                else:
+                    os.close(os.open(self.unsupported, os.O_CREAT | os.O_WRONLY | _NOFOLLOW, 0o600))
+            except (OSError, ValueError):
+                pass  # the render is right; only the next robot pays for it
+            return document
+        finally:
+            if descriptor is not None:
+                os.close(descriptor)
+            if temporary is not None:
+                try:
+                    os.unlink(temporary)
+                except OSError:
+                    pass
+
+
+def _render_simple_lidar_xacro(template, namespace, scan):
+    return subprocess.check_output(['xacro', str(template), 'namespace:=' + namespace] + scan, text=True)
+
+
 def apply_simple_lidar(root, enabled=False, robot_namespace='uav1',
                        pose='0 0 0.12 0 0 0', acceleration='gpu', rate_hz=10,
                        range_meters=20, hfov_deg=360, vfov_deg=180/math.pi,
@@ -183,9 +376,7 @@ def apply_simple_lidar(root, enabled=False, robot_namespace='uav1',
     template=package/'models/sensor.sdf.xacro'
     namespace=robot_namespace.strip('/')
     namespace='/'+namespace if namespace else '/'
-    rendered=subprocess.check_output([
-        'xacro',str(template),
-        'namespace:='+namespace,
+    scan=[
         'pose:='+pose,
         'acceleration:='+acceleration,
         'rate:='+str(rate_hz),
@@ -194,8 +385,11 @@ def apply_simple_lidar(root, enabled=False, robot_namespace='uav1',
         'layers:='+str(vres),
         'horizontal_fov:='+str(math.radians(hfov_deg)),
         'vertical_fov:='+str(math.radians(vfov_deg)),
-    ],text=True)
-    sensor_root=ET.fromstring(rendered)
+    ]
+    def render(namespace):
+        return _render_simple_lidar_xacro(template,namespace,scan)
+    cache=SimpleLidarRenderCache.for_scan(template,namespace,scan)
+    sensor_root=ET.fromstring(render(namespace)) if cache is None else cache.render(namespace,render)
     sensors=sensor_root.findall("sensor[@name='simple_lidar']")
     if len(sensors)!=1:
         raise RuntimeError('xgc2_simple_lidar xacro must render exactly one simple_lidar sensor')

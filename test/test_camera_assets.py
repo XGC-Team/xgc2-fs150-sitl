@@ -4,6 +4,7 @@ import math
 import os
 import subprocess
 import sys
+import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -27,6 +28,13 @@ class CameraAssetsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.description=Path(subprocess.check_output(['rospack','find','fs150_description'],text=True).strip())
+    def setUp(self):
+        # Rendered lidar xacro is cached per user; keep these renders out of it.
+        cache=tempfile.TemporaryDirectory()
+        self.addCleanup(cache.cleanup)
+        patcher=patch.dict(os.environ,{'XGC2_FS150_RENDER_CACHE_DIR':cache.name})
+        patcher.start()
+        self.addCleanup(patcher.stop)
     def root(self):return ET.parse(PKG/'models/fs150/iris.sdf').getroot()
     def test_disabled_camera_has_no_sensor_or_plugin_and_does_not_change_plant(self):
         root=self.root();before=ET.tostring(root)
