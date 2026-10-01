@@ -1,7 +1,7 @@
 schema: xgc2.product.v1
 id: xgc2-gazebo-sim-fs150-sitl
 name: XGC2 FS150 SITL
-version: 1.1.0-24
+version: 1.1.0-25
 kind: ros1-apt
 summary: FS150 PX4 1.12 iris SITL wrapper with package-owned Gazebo meshes and RViz
   URDF.
@@ -16,6 +16,7 @@ apt:
   packages:
   - ros-noetic-xgc2-gazebo-sim-fs150-sitl
   depends:
+  - ros-noetic-xgc2-simple-lidar (>= 1.4.0-2)
   - python3
   - ros-noetic-gazebo-plugins
   - ros-noetic-xgc2-fs150-description (>= 0.1.0-11)
@@ -46,4 +47,4 @@ release:
     xgc2-px4-sitl-112: verify
     xgc2-fs150-description: verify
   apt_versions:
-    focal: 1.1.0-24
+    focal: 1.1.0-25
