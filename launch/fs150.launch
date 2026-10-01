@@ -11,6 +11,13 @@
   <arg name="camera_hfov" default="1.5707963267948966"/>
   <arg name="enable_simple_lidar" default="false"/>
   <arg name="simple_lidar_pose" default="0 0 0.12 0 0 0"/>
+  <arg name="simple_lidar_acceleration" default="gpu"/>
+  <arg name="simple_lidar_rate_hz" default="10"/>
+  <arg name="simple_lidar_range_meters" default="20"/>
+  <arg name="simple_lidar_hfov_deg" default="360"/>
+  <arg name="simple_lidar_vfov_deg" default="57.29577951308232"/>
+  <arg name="simple_lidar_hres" default="360"/>
+  <arg name="simple_lidar_vres" default="16"/>
   <arg name="gui" default="true"/>
   <arg name="debug" default="false"/>
   <arg name="verbose" default="false"/>
@@ -58,7 +65,7 @@
 
   <arg name="prepared_sdf" default="$(arg work_dir)/fs150.sdf"/>
   <param name="$(arg ns)/fs150_sdf_path"
-         command="$(find gazebo_sim_fs150_sitl)/scripts/render_fs150_indoor_sdf.py --base-sdf $(arg sdf) --output $(arg prepared_sdf) --enable-camera $(arg enable_camera) --robot-namespace $(arg ns) --model-name $(arg model_name) --camera-fps $(arg camera_fps) --camera-hfov $(arg camera_hfov) --enable-simple-lidar $(arg enable_simple_lidar) --simple-lidar-pose &quot;$(arg simple_lidar_pose)&quot; --print-path"/>
+         command="$(find gazebo_sim_fs150_sitl)/scripts/render_fs150_indoor_sdf.py --base-sdf $(arg sdf) --output $(arg prepared_sdf) --enable-camera $(arg enable_camera) --robot-namespace $(arg ns) --model-name $(arg model_name) --camera-fps $(arg camera_fps) --camera-hfov $(arg camera_hfov) --enable-simple-lidar $(arg enable_simple_lidar) --simple-lidar-pose &quot;$(arg simple_lidar_pose)&quot; --simple-lidar-acceleration $(arg simple_lidar_acceleration) --simple-lidar-rate-hz $(arg simple_lidar_rate_hz) --simple-lidar-range-meters $(arg simple_lidar_range_meters) --simple-lidar-hfov-deg $(arg simple_lidar_hfov_deg) --simple-lidar-vfov-deg $(arg simple_lidar_vfov_deg) --simple-lidar-hres $(arg simple_lidar_hres) --simple-lidar-vres $(arg simple_lidar_vres) --print-path"/>
   <include file="$(arg px4_launch)">
     <arg name="ID" value="$(arg ID)"/>
     <arg name="vehicle" value="$(arg vehicle)"/>

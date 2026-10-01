@@ -63,6 +63,25 @@ class CameraAssetsTest(unittest.TestCase):
         for kwargs in ({'fps':0},{'fps':31},{'horizontal_fov':math.pi},{'horizontal_fov':float('nan')},{'robot_namespace':'../bad'}):
             with self.assertRaises(ValueError):apply_camera(self.root(),True,description_root=self.description,**kwargs)
 
+    def test_cpu_native_scan_receives_authored_parameters_and_preserves_camera(self):
+        base=str(PKG/'models/fs150/iris.sdf')
+        with patch('render_fs150_indoor_sdf.description_package',return_value=self.description):
+            xml,_=render_indoor_sdf(base,enable_camera=True,enable_simple_lidar=True,robot_namespace='/uav3',
+                simple_lidar_acceleration='cpu',simple_lidar_rate_hz=12,simple_lidar_range_meters=8,
+                simple_lidar_hfov_deg=120,simple_lidar_vfov_deg=40,simple_lidar_hres=90,simple_lidar_vres=8)
+        root=ET.fromstring(xml)
+        sensor=root.find("model/link[@name='base_link']/sensor[@name='simple_lidar']")
+        self.assertEqual(sensor.get('type'),'ray')
+        self.assertEqual(sensor.find('plugin').get('filename'),'libxgc2_simple_lidar_cpu.so')
+        self.assertEqual(sensor.findtext('plugin/robotNamespace'),'/uav3')
+        self.assertEqual(float(sensor.findtext('update_rate')),12)
+        self.assertEqual(float(sensor.findtext('ray/range/max')),8)
+        for direction,count,degrees in [('horizontal',90,120),('vertical',8,40)]:
+            scan=sensor.find('ray/scan/'+direction)
+            self.assertEqual(int(scan.findtext('samples')),count)
+            self.assertAlmostEqual(float(scan.findtext('max_angle'))-float(scan.findtext('min_angle')),math.radians(degrees))
+        self.assertIsNotNone(root.find("model/link/sensor[@name='fs150_front_camera']"))
+
     def test_simple_lidar_is_optional_and_renders_the_shared_xacro_per_robot(self):
         base=str(PKG/'models/fs150/iris.sdf')
         pose='0 0 0.12 0 0 0'

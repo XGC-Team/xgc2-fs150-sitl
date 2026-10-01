@@ -51,7 +51,7 @@ docker run --rm \
     export DEBIAN_FRONTEND=noninteractive
     rm -rf /workspace/work/src /workspace/work/build /workspace/work/devel /workspace/work/install-root
     mkdir -p /workspace/work/src/gazebo_sim_fs150_sitl
-    rsync -a --delete /workspace/fs150-sitl/ /workspace/work/src/gazebo_sim_fs150_sitl/
+    rsync -a --delete --exclude=.git --exclude=.work --exclude=.ci --exclude=debs /workspace/fs150-sitl/ /workspace/work/src/gazebo_sim_fs150_sitl/
 
     cd /workspace/work/src/gazebo_sim_fs150_sitl
     python3 -m py_compile scripts/generate_fs150_sitl_params.py
