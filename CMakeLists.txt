@@ -31,5 +31,7 @@ if(CATKIN_ENABLE_TESTING)
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_visual_assets.py)
   add_test(NAME fs150_camera_assets
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_camera_assets.py)
+  add_test(NAME fs150_model_plugins
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_model_plugins.py)
   roslaunch_add_file_check(launch/fs150.launch)
 endif()

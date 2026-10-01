@@ -539,6 +539,27 @@ def _patch_rotor_model(root):
     ]
 
 
+# PX4 SITL's multirotor base plugin (named "rosbag" in the iris model) builds
+# a motor-speed message on every world update and never publishes it: the
+# advertise and publish calls are commented out upstream (PX4 v1.12.3 sitl_gazebo
+# 822050a, still so on PX4-SITL_gazebo-classic main). Nothing reads it, so the
+# rendered model omits it whichever base SDF it starts from.
+MULTIROTOR_BASE_PLUGIN = "libgazebo_multirotor_base_plugin.so"
+
+
+def _remove_multirotor_base_plugin(root):
+    removed = []
+    for parent in root.iter():
+        removed.extend(
+            _remove_children(
+                parent,
+                lambda child: child.tag == "plugin"
+                and child.attrib.get("filename") == MULTIROTOR_BASE_PLUGIN,
+            )
+        )
+    return [("plugin " + MULTIROTOR_BASE_PLUGIN + " (unpublished per-update message)", len(removed))]
+
+
 def _remove_gps_model(root):
     return [
         ("gps include gps0", len(_remove_include_by_name(root, "gps0"))),
@@ -589,6 +610,7 @@ def render_indoor_sdf(
     report.extend(_patch_body_geometry(root))
     report.extend(_patch_rotor_model(root))
     report.extend(_remove_gps_model(root))
+    report.extend(_remove_multirotor_base_plugin(root))
     report.extend(_patch_motor_model(root, motor_constant, moment_constant))
     report.extend(_patch_body_mass(root, body_mass))
     if strip_mag:

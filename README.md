@@ -174,7 +174,9 @@ because altitude behavior should come from motion capture only.
 The package removes the Gazebo GPS model entirely: no `gps0` include, no
 `gps0` joint, no GPS link, and no GPS plugin. Magnetometer and barometer
 plugins are still present by default, while EKF fusion is selected explicitly by
-parameters. Sensor presence and EKF fusion are separate:
+parameters. The model and every rendered SDF also omit PX4's
+`libgazebo_multirotor_base_plugin.so` (named `rosbag` in the iris model): it
+built a motor-speed message on every world update and never published it. Sensor presence and EKF fusion are separate:
 
 ```text
 Sensor exists in SITL  !=  EKF fuses that sensor
