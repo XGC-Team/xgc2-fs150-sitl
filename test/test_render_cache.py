@@ -30,7 +30,101 @@ SDF = PKG / 'models/fs150/iris.sdf'
 ENV = renderer.RENDER_CACHE_ENV
 PLACEHOLDER = renderer.RENDER_CACHE_PLACEHOLDER
 
-TEMPLATE = '<sdf xmlns:xacro="x"><xacro:arg name="namespace" default="/robot"/>%s</sdf>\n'
+TEMPLATE = '<sdf xmlns:xacro="http://www.ros.org/wiki/xacro"><xacro:arg name="namespace" default="/robot"/>%s</sdf>\n'
+
+
+@unittest.skipUnless(shutil.which('xacro'), 'needs the real xacro Python package')
+class RealXacroDependencyTest(unittest.TestCase):
+    """Update installed bytes while the entry point and top-level template stay fixed."""
+
+    def setUp(self):
+        self.scratch = Path(tempfile.mkdtemp(prefix='render-cache-dependencies-'))
+        self.addCleanup(shutil.rmtree, self.scratch, True)
+        import xacro
+        self.module = self.scratch / 'python/xacro'
+        shutil.copytree(Path(xacro.__file__).parent, self.module,
+                        ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+        self.executable = self.scratch / 'bin/xacro'
+        self.executable.parent.mkdir()
+        shutil.copy2(shutil.which('xacro'), self.executable)
+        self.models = self.scratch / 'share/lidar/models'
+        self.models.mkdir(parents=True)
+        self.external = self.scratch / 'share/common/rate.xml'
+        self.external.parent.mkdir()
+        self.write_rate('10')
+        self.template = self.models / 'sensor.sdf.xacro'
+        self.template.write_text('''<sdf xmlns:xacro="http://www.ros.org/wiki/xacro">
+          <xacro:arg name="namespace" default="/robot"/>
+          <xacro:include filename="../../common/rate.xml"/>
+          <sensor name="simple_lidar"><update_rate>${scan_rate}</update_rate>
+            <plugin><robotNamespace>$(arg namespace)</robotNamespace></plugin>
+          </sensor></sdf>''')
+        patcher = patch.dict(os.environ, {
+            ENV: str(self.scratch / 'cache'),
+            'PATH': str(self.executable.parent) + os.pathsep + os.environ['PATH'],
+            'PYTHONPATH': str(self.module.parent) + os.pathsep + os.environ.get('PYTHONPATH', ''),
+            'PYTHONDONTWRITEBYTECODE': '1',
+        })
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def write_rate(self, rate):
+        self.external.write_text('<sdf xmlns:xacro="http://www.ros.org/wiki/xacro">'
+                                 '<xacro:property name="scan_rate" value="%s"/></sdf>' % rate)
+
+    def render(self, namespace='/uav1', cache=True):
+        def direct(name):
+            return renderer._render_simple_lidar_xacro(self.template, name, [])
+        entry = renderer.SimpleLidarRenderCache.for_scan(self.template, namespace, []) if cache else None
+        return entry.render(namespace, direct) if entry else ET.fromstring(direct(namespace))
+
+    def assert_rate(self, rate):
+        document = self.render('/uav2')
+        self.assertEqual(document.findtext('sensor/update_rate'), rate)
+        self.assertEqual(ET.tostring(document), ET.tostring(self.render('/uav2', cache=False)))
+        self.assertTrue(list((self.scratch / 'cache').glob('*.xml')), 'exercise a real cache entry')
+
+    def test_external_include_update_invalidates_warm_cache(self):
+        self.assert_rate('10')
+        status = self.external.stat()
+        self.write_rate('20')
+        os.utime(self.external, ns=(status.st_atime_ns, status.st_mtime_ns))
+        self.assert_rate('20')
+        self.assertEqual(len(list((self.scratch / 'cache').glob('*.xml'))), 2)
+
+    def test_nested_absolute_include_update_invalidates_warm_cache(self):
+        leaf = self.external.parent / 'nested/rate.xml'
+        leaf.parent.mkdir()
+        leaf.write_bytes(self.external.read_bytes())
+        self.external.write_text('<sdf xmlns:xacro="http://www.ros.org/wiki/xacro">'
+                                 '<xacro:include filename="nested/rate.xml"/></sdf>')
+        self.template.write_text(self.template.read_text().replace('../../common/rate.xml', str(self.external)))
+        self.assert_rate('10')
+        leaf.write_text(leaf.read_text().replace('value="10"', 'value="30"'))
+        self.assert_rate('30')
+
+    def test_missing_external_include_does_not_return_the_warm_document(self):
+        self.assert_rate('10')
+        self.external.unlink()
+        with self.assertRaises(subprocess.CalledProcessError):
+            self.render()
+
+    def test_python_module_update_invalidates_with_unchanged_entry_point(self):
+        implementation = self.module / '__init__.py'
+        implementation.write_text(implementation.read_text() + '''
+_original_process_doc = process_doc
+def process_doc(doc, *args, **kwargs):
+    _original_process_doc(doc, *args, **kwargs)
+    doc.getElementsByTagName('update_rate')[0].firstChild.data = '11'
+''')
+        self.assert_rate('11')
+        status = implementation.stat()
+        entry = self.executable.read_bytes(), self.executable.stat().st_mtime_ns
+        implementation.write_text(implementation.read_text().replace("data = '11'", "data = '22'"))
+        os.utime(implementation, ns=(status.st_atime_ns, status.st_mtime_ns))
+        self.assertEqual(entry, (self.executable.read_bytes(), self.executable.stat().st_mtime_ns))
+        self.assert_rate('22')
+        self.assertEqual(len(list((self.scratch / 'cache').glob('*.xml'))), 2)
 
 
 class FakeXacro:
@@ -89,6 +183,8 @@ class CacheTestCase(unittest.TestCase):
         self.xacro = FakeXacro()
         environment = {ENV: str(self.cache), 'PATH': str(self.executable.parent) + os.pathsep + os.environ['PATH']}
         for patcher in (patch.dict(os.environ, environment),
+                        patch.object(renderer, '_xacro_implementation_sources',
+                                     return_value=(('fake',), {self.executable})),
                         patch.object(renderer, '_render_simple_lidar_xacro', self.xacro),
                         patch.object(renderer, '_rospack_find', return_value=str(self.models.parent))):
             patcher.start()
@@ -206,6 +302,23 @@ class RenderCacheTest(CacheTestCase):
             self.render('/uav1')
             self.render('/uav2')
         self.assertEqual(len(self.xacro.calls), 2)
+        self.assertFalse(self.cache.exists())
+
+    def test_unknown_xacro_implementation_means_no_cache(self):
+        with patch.object(renderer, '_xacro_implementation_sources', return_value=None):
+            self.render('/uav1')
+            self.render('/uav2')
+        self.assertEqual(len(self.xacro.calls), 2)
+        self.assertFalse(self.cache.exists())
+
+    def test_unresolved_include_dependencies_are_rendered_directly(self):
+        for filename in ('$(arg source)', '${source}', '*.xacro', '../missing.xml'):
+            with self.subTest(filename=filename):
+                self.template.write_text(TEMPLATE % ('<xacro:include filename="%s"/>' % filename))
+                before = len(self.xacro.calls)
+                self.render('/uav1')
+                self.render('/uav2')
+                self.assertEqual(len(self.xacro.calls), before + 2)
         self.assertFalse(self.cache.exists())
 
     def test_unusable_cache_directories_fall_back_to_xacro(self):

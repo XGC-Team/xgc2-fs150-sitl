@@ -18,6 +18,10 @@ jobs:
           fetch-depth: 2
       - name: Check launch port contract
         run: python3 -m unittest discover -s test -p test_launch_ports.py -v
+      - name: Check model plugins and render cache
+        run: |
+          python3 -m unittest discover -s test -p test_model_plugins.py -v
+          python3 -m unittest discover -s test -p test_render_cache.py -v
   build-debs:
     strategy:
       fail-fast: false

@@ -167,7 +167,7 @@ def apply_camera(root, enabled=False, robot_namespace='uav1', model_name='uav1',
 # namespace goes. XGC2_FS150_RENDER_CACHE_DIR names another directory; empty, it
 # turns the cache off.
 RENDER_CACHE_ENV = 'XGC2_FS150_RENDER_CACHE_DIR'
-RENDER_CACHE_FORMAT = '1'
+RENDER_CACHE_FORMAT = '2'
 RENDER_CACHE_PLACEHOLDER = '/xgc2_render_cache_namespace'
 RENDER_CACHE_LOCK_SECONDS = 10.0
 _NOFOLLOW = getattr(os, 'O_NOFOLLOW', 0)
@@ -187,12 +187,75 @@ def render_cache_directory():
     return os.path.join(base, 'xgc2', 'fs150-sitl', 'simple-lidar')
 
 
+def _xacro_implementation_sources(executable):
+    """Resolve xacro with its entry point's interpreter and Python search path.
+
+    The small probe does not import xacro or render a document. Unknown launchers
+    bypass the cache rather than guessing which Python installation they use.
+    """
+    executable = Path(executable).resolve()
+    header = executable.read_text().splitlines()[0]
+    if not header.startswith('#!'):
+        return None
+    words = header[2:].split()
+    if len(words) == 2 and words[0] == '/usr/bin/env':
+        interpreter = shutil.which(words[1])
+    elif len(words) == 1 and os.path.isabs(words[0]):
+        interpreter = words[0]
+    else:
+        return None
+    if not interpreter or not re.fullmatch(r'python(?:3(?:\.\d+)?)?', Path(interpreter).name):
+        return None
+    probe = ('import importlib.util,json,sys; sys.path[0]=sys.argv[1]; '
+             's=importlib.util.find_spec("xacro"); '
+             'print(json.dumps([sys.executable,sys.version,s.origin,'
+             'list(s.submodule_search_locations or [])]))')
+    try:
+        binary, version, origin, locations = json.loads(subprocess.check_output(
+            [interpreter, '-c', probe, str(executable.parent)], text=True,
+            stderr=subprocess.DEVNULL, timeout=5))
+    except (OSError, ValueError, subprocess.SubprocessError):
+        return None
+    if not origin or not origin.endswith('.py'):
+        return None
+    sources = {executable, Path(origin)}
+    for location in locations:
+        sources.update(Path(location).rglob('*.py'))
+    status = os.stat(binary)
+    return (binary, version, str(status.st_size), str(status.st_mtime_ns)), sources
+
+
+def _xacro_template_sources(template):
+    """Read literal include dependencies, also outside the template directory.
+
+    Dynamic names and glob includes cannot be proven complete here; render them
+    without caching. Missing/unreadable includes likewise must reach xacro.
+    """
+    sources = {}
+    pending = [template, *template.parent.rglob('*.xacro')]
+    while pending:
+        source = Path(os.path.abspath(pending.pop()))
+        if source in sources:
+            continue
+        text = source.read_bytes()
+        if re.search(rb'\$\((?!arg\s)|load_yaml', text):
+            return None
+        document = ET.fromstring(text)
+        for include in document.iter('{http://www.ros.org/wiki/xacro}include'):
+            filename = include.get('filename', '')
+            if not filename or '$' in filename or any(char in filename for char in '*?['):
+                return None
+            pending.append(source.parent / filename)
+        sources[source] = text
+    return sources
+
+
 class SimpleLidarRenderCache:
     """Rendered ``sensor.sdf.xacro`` for one scan, with the namespace left out.
 
     The key is a digest of everything the output depends on but the namespace:
-    the xacro sources, the xacro executable and the other arguments. An entry is
-    stored only after rendering with the placeholder, with the namespace put
+    the xacro sources/includes, its Python implementation and the other arguments.
+    An entry is stored only after rendering with the placeholder, with the namespace put
     back, reproduces the document xacro rendered for the real namespace, so a
     template that uses the namespace in any other way is never cached; the
     scan is then marked unsupported and rendered directly. Only plain namespaces
@@ -218,19 +281,23 @@ class SimpleLidarRenderCache:
             return None
         template = Path(template)
         try:
-            sources = sorted({template, *template.parent.rglob('*.xacro')})
-            texts = [source.read_bytes() for source in sources]
+            sources = _xacro_template_sources(template)
+            if sources is None:
+                return None
+            implementation = _xacro_implementation_sources(executable)
+            if implementation is None:
+                return None
+            identity, modules = implementation
+            sources.update((source, source.read_bytes()) for source in modules)
             status = os.stat(executable)
-        except OSError:
-            return None
-        if any(re.search(rb'\$\((?!arg\s)|load_yaml', text) for text in texts):
+        except (OSError, UnicodeError, IndexError, ET.ParseError):
             return None
         import hashlib  # about 3 ms of OpenSSL: only a render that uses the cache needs it
         digest = hashlib.sha256()
-        for part in (RENDER_CACHE_FORMAT, executable, str(status.st_size), str(status.st_mtime_ns), *scan):
+        for part in (RENDER_CACHE_FORMAT, executable, str(status.st_size), str(status.st_mtime_ns), *identity, *scan):
             digest.update(os.fsencode(part) + b'\0')
-        for source, text in zip(sources, texts):
-            digest.update(source.relative_to(template.parent).as_posix().encode() + b'\0' + text + b'\0')
+        for source, text in sorted(sources.items()):
+            digest.update(os.fsencode(source) + b'\0' + text + b'\0')
         return cls(directory, digest.hexdigest()[:32])
 
     def load(self, namespace):

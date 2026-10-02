@@ -42,12 +42,14 @@ output once per scan in `$XDG_CACHE_HOME/xgc2/fs150-sitl/simple-lidar` (by
 default `~/.cache/xgc2/fs150-sitl/simple-lidar`): the first robot of a scan
 renders it, the others read it back with their own namespace. The rendered SDF
 is byte for byte the one xacro alone would give. An entry is keyed by the xacro
-sources, the xacro executable and the scan arguments, and is stored only after
+sources and literal include dependencies, the xacro executable and Python
+implementation, and the scan arguments, and is stored only after
 rendering with a placeholder namespace reproduces the real render; plain
 namespaces (`/uav1`, `/fleet/uav1`) are cached, any other namespace and any
 cache problem (no home directory, an unwritable directory, a damaged entry)
-render with xacro as before. The directory holds nothing but this cache and can
-be deleted at any time. `XGC2_FS150_RENDER_CACHE_DIR` names another absolute
+render with xacro as before. Unresolved includes or Python launchers bypass the
+cache. The directory holds nothing but this cache and can be deleted at any
+time. `XGC2_FS150_RENDER_CACHE_DIR` names another absolute
 directory, or turns the cache off when empty. `test/render_benchmark.py
 --compare` times a fleet with the cache off, cold and warm and fails if any SDF
 differs.
