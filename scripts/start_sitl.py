@@ -4,6 +4,7 @@ import sys
 
 preferred_prefix, runtime_root, state_root, model_name, instance, parameter_file, *runner_args = sys.argv[1:]
 import re
+model_name = model_name[1:] if model_name.startswith('/') else model_name
 if preferred_prefix != '/opt/ros/noetic' or runtime_root != '/opt/ros/noetic/share/px4_sitl_1_12/runtime':
     raise SystemExit('FS150 requires its installed Noetic/PX4 runtime')
 if not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,127}', model_name):
