@@ -917,14 +917,12 @@ def prepare_robot_entity(robot, base_sdf):
             or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,63}', model)
             or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,127}', namespace)):
         raise ValueError('invalid frozen FS150 identity or SITL ports')
-    lidar = robot['simulationSensors']['simpleLidar']
+    from xgc2_simple_lidar.configuration import surface_parameters
+    lidar = surface_parameters(robot['authoredSimulationSensors'])
     output, _ = render_indoor_sdf(
         base_sdf, enable_camera=px4['imageSimulationEnabled'], robot_namespace=namespace,
         model_name=model, camera_fps=15, camera_hfov=math.pi/2,
-        enable_simple_lidar=lidar['gazeboRay'], simple_lidar_acceleration=lidar['acceleration'],
-        simple_lidar_rate_hz=lidar['rateHz'], simple_lidar_range_meters=lidar['rangeMeters'],
-        simple_lidar_hfov_deg=lidar['hFovDeg'], simple_lidar_vfov_deg=lidar['vFovDeg'],
-        simple_lidar_hres=lidar['hRes'], simple_lidar_vres=lidar['vRes'])
+        **lidar)
     root = ET.fromstring(output)
     plugins = [p for p in root.findall('model/plugin')
                if Path(p.get('filename', '')).name == 'libgazebo_mavlink_interface.so']

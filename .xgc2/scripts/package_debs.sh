@@ -78,7 +78,7 @@ Section: misc
 Priority: optional
 Architecture: ${ARCH}
 Maintainer: XGC2 <apt@example.com>
-Depends: ros-${ROS_DISTRO}-xgc2-simple-lidar (>= 1.4.0-2), python3, ros-${ROS_DISTRO}-gazebo-plugins, ros-${ROS_DISTRO}-xgc2-fs150-description (>= 0.1.0-11), ros-${ROS_DISTRO}-roslaunch, ros-${ROS_DISTRO}-xacro, ros-${ROS_DISTRO}-mavros, ros-${ROS_DISTRO}-xgc2-gazebo-sim-px4-1-12 (>= 1.12.3-16)
+Depends: ros-${ROS_DISTRO}-xgc2-simple-lidar (>= 1.4.1-4), python3, ros-${ROS_DISTRO}-gazebo-plugins, ros-${ROS_DISTRO}-xgc2-fs150-description (>= 0.1.0-11), ros-${ROS_DISTRO}-roslaunch, ros-${ROS_DISTRO}-xacro, ros-${ROS_DISTRO}-mavros, ros-${ROS_DISTRO}-xgc2-gazebo-sim-px4-1-12 (>= 1.12.3-16)
 Description: FS150 PX4 1.12 iris SITL wrapper with package-owned Gazebo meshes and RViz URDF
 EOF
 printf 'xgc2-gazebo-sim-fs150-sitl package\n' > "${pkg_root}/usr/share/doc/${PACKAGE}/README"
