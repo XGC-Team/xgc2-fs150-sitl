@@ -47,4 +47,4 @@ release:
     xgc2-px4-sitl-112: verify
     xgc2-fs150-description: verify
   apt_versions:
-    focal: 1.1.0-27
+    focal: 1.1.0-28
