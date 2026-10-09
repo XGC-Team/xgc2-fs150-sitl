@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
-DOCKER_IMAGE="${DOCKER_IMAGE:-ghcr.io/xgc-team/xgc2-images/xgc2-build-focal-full-noetic:1.0.0}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-ghcr.io/xgc-team/xgc2-images/xgc2-build-focal-full-noetic:1.0.8@sha256:fce2d76fddf4f6439bf0a188249b731650febdc163befc360bed186b269d252a}"
 WORK_DIR="${WORK_DIR:-${REPO_ROOT}/.work/docker}"
 OUTPUT_DIR="${OUTPUT_DIR:-${REPO_ROOT}/debs}"
 INSTALL_CHECK="${INSTALL_CHECK:-true}"
@@ -48,7 +48,7 @@ docker run --rm \
   bash -lc '
     set -euo pipefail
 
-    export DEBIAN_FRONTEND=noninteractive
+    export DEBIAN_FRONTEND=noninteractive SETUPTOOLS_USE_DISTUTILS=stdlib
     rm -rf /workspace/work/src /workspace/work/build /workspace/work/devel /workspace/work/install-root
     mkdir -p /workspace/work/src/gazebo_sim_fs150_sitl
     rsync -a --delete --exclude=.git --exclude=.work --exclude=.ci --exclude=debs /workspace/fs150-sitl/ /workspace/work/src/gazebo_sim_fs150_sitl/

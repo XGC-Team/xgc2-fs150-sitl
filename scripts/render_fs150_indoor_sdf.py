@@ -907,6 +907,48 @@ def write_atomic(path, content):
         raise
 
 
+def prepare_robot_entity(robot, base_sdf):
+    """Realize the frozen Robot input for the native simulation entity API."""
+    px4 = robot['px4']
+    namespace, model = robot['namespace'], px4['modelName']
+    instance, qgc = px4['sitlInstanceId'], px4['qgcUdpPort']
+    if (not isinstance(instance, int) or isinstance(instance, bool) or not 0 <= instance <= 243
+            or not isinstance(qgc, int) or isinstance(qgc, bool) or not 1 <= qgc <= 65535
+            or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,63}', model)
+            or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,127}', namespace)):
+        raise ValueError('invalid frozen FS150 identity or SITL ports')
+    lidar = robot['simulationSensors']['simpleLidar']
+    output, _ = render_indoor_sdf(
+        base_sdf, enable_camera=px4['imageSimulationEnabled'], robot_namespace=namespace,
+        model_name=model, camera_fps=15, camera_hfov=math.pi/2,
+        enable_simple_lidar=lidar['gazeboRay'], simple_lidar_acceleration=lidar['acceleration'],
+        simple_lidar_rate_hz=lidar['rateHz'], simple_lidar_range_meters=lidar['rangeMeters'],
+        simple_lidar_hfov_deg=lidar['hFovDeg'], simple_lidar_vfov_deg=lidar['vFovDeg'],
+        simple_lidar_hres=lidar['hRes'], simple_lidar_vres=lidar['vRes'])
+    root = ET.fromstring(output)
+    plugins = [p for p in root.findall('model/plugin')
+               if Path(p.get('filename', '')).name == 'libgazebo_mavlink_interface.so']
+    if len(plugins) != 1:
+        raise ValueError('FS150 requires one native MAVLink interface')
+    ports = {'mavlink_tcp_port':4560+instance, 'mavlink_udp_port':14560+instance,
+             'qgc_udp_port':qgc, 'sdk_udp_port':15000+instance}
+    for key, value in ports.items():
+        slot = plugins[0].find(key)
+        if slot is None:
+            raise ValueError('FS150 asset omits ' + key)
+        slot.text = str(value)
+    pose = robot['initialPose']
+    position = [float(pose[key]) for key in ('x', 'y', 'z')]
+    yaw = float(pose['yaw'])
+    if not all(math.isfinite(value) for value in position+[yaw]):
+        raise ValueError('initial pose must be finite')
+    return {'entity':{'id':robot['id'], 'role':'robot',
+            'asset':{'id':'fs150', 'realization':{'media_type':'application/sdf+xml',
+                     'content':ET.tostring(root, encoding='unicode')}},
+            'pose':{'position':position, 'orientation':[0,0,math.sin(yaw/2),math.cos(yaw/2)]},
+            'parameters':{'ros_namespace':'/'+namespace}}, 'operation_timeout_ms':30000}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Render an indoor FS150 SDF from an FS150/PX4 iris SDF.")
     parser.add_argument("--base-sdf", default=None,
@@ -934,9 +976,19 @@ def main():
     parser.add_argument('--simple-lidar-vfov-deg',type=float,default=180/math.pi)
     parser.add_argument('--simple-lidar-hres',type=int,default=360)
     parser.add_argument('--simple-lidar-vres',type=int,default=16)
+    parser.add_argument('--robot-json', help='Frozen Robot input; emit a native entity creation payload')
     args = parser.parse_args()
 
     base_sdf = resolve_base_sdf(args.base_sdf)
+    if args.robot_json is not None:
+        if len(args.robot_json.encode('utf-8')) > 65536:
+            raise ValueError('Robot input exceeds 64 KiB')
+        value = prepare_robot_entity(json.loads(args.robot_json), base_sdf)
+        output = json.dumps(value, ensure_ascii=False, allow_nan=False, separators=(',', ':'))
+        if len(output.encode('utf-8')) > 65536:
+            raise ValueError('FS150 entity payload exceeds 64 KiB')
+        print(output)
+        return
     sdf, report = render_indoor_sdf(
         base_sdf,
         args.strip_mag,

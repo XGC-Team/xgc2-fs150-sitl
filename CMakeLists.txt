@@ -8,6 +8,8 @@ catkin_package()
 catkin_install_python(PROGRAMS
   scripts/generate_fs150_sitl_params.py
   scripts/generate_fs150_urdf.py
+  scripts/start_sitl.py
+  scripts/start_mavros.py
   scripts/render_fs150_indoor_sdf.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
