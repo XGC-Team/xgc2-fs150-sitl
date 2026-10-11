@@ -39,6 +39,8 @@ ownership:
   paths:
   - /opt/ros/noetic/share/gazebo_sim_fs150_sitl
   - /opt/ros/noetic/lib/gazebo_sim_fs150_sitl
+  - /usr/share/xgc2/process-definitions/mavros-px4-sitl.json
+  - /usr/share/xgc2/process-definitions/px4-sitl-fs150.json
 release:
   requires:
   - xgc2-gazebo-sim-scenes

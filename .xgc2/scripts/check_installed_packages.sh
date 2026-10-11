@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+for definition in mavros-px4-sitl px4-sitl-fs150; do
+  test -f "/usr/share/xgc2/process-definitions/${definition}.json"
+done
+test -x /opt/ros/noetic/lib/gazebo_sim_fs150_sitl/start_mavros.py
+test -x /opt/ros/noetic/lib/gazebo_sim_fs150_sitl/start_sitl.py
+
 ROS_DISTRO="${ROS_DISTRO:-noetic}"
 source "/opt/ros/${ROS_DISTRO}/setup.bash"
 

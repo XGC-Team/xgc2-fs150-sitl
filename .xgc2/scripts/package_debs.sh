@@ -70,6 +70,11 @@ mkdir -p "${pkg_root}"
 copy_path "${PREFIX_ROOT}/share/${ROS_PACKAGE}" "${pkg_root}"
 copy_path "${PREFIX_ROOT}/lib/${ROS_PACKAGE}" "${pkg_root}"
 
+for definition in mavros-px4-sitl px4-sitl-fs150; do
+  install -D -m 0644 "${REPO_ROOT}/process-definitions/${definition}.json" \
+    "${pkg_root}/usr/share/xgc2/process-definitions/${definition}.json"
+done
+
 mkdir -p "${pkg_root}/DEBIAN" "${pkg_root}/usr/share/doc/${PACKAGE}"
 cat > "${pkg_root}/DEBIAN/control" <<EOF
 Package: ${PACKAGE}

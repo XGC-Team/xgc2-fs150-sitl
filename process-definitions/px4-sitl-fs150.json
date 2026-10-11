@@ -1,0 +1,107 @@
+{
+  "apiVersion": "xgc.execution.process/v1",
+  "definitions": [
+    {
+      "id": "px4-sitl-fs150",
+      "version": "3.0.0",
+      "label": "PX4 SITL (FS150)",
+      "description": "One direct PX4 1.12 SITL process for an FS150 model; no roslaunch wrapper.",
+      "parameters": {
+        "groups": [
+          {
+            "id": "ros-advanced",
+            "label": "ROS Advanced",
+            "collapsed": true,
+            "parameters": [
+              "rosMasterUri"
+            ]
+          }
+        ],
+        "properties": {
+          "mavSystemId": {
+            "type": "integer",
+            "description": "MAVLink system ID from the bound Robot asset",
+            "default": 4,
+            "minimum": 1,
+            "maximum": 245
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Absolute frozen per-robot ROS namespace",
+            "default": "/uav1"
+          },
+          "simulatorHostname": {
+            "type": "string",
+            "description": "Reachable hostname or address of the shared Gazebo simulator",
+            "default": "127.0.0.1"
+          },
+          "px4RuntimeRoot": {
+            "type": "string",
+            "description": "Trusted PX4 1.12 runtime root",
+            "default": "/opt/ros/noetic/share/px4_sitl_1_12/runtime",
+            "fixedOnly": true,
+            "x-xgc-path-kind": "directory"
+          },
+          "rosMasterUri": {
+            "type": "string",
+            "description": "Absolute URI of the existing ROS master used by lifecycle hooks",
+            "default": "http://127.0.0.1:11311",
+            "output": true
+          },
+          "rosRuntimePrefix": {
+            "type": "string",
+            "description": "Trusted ROS runtime; the execution user's XGC overlay is discovered automatically",
+            "default": "/opt/ros/noetic",
+            "fixedOnly": true,
+            "x-xgc-path-kind": "directory"
+          },
+          "sitlInstanceId": {
+            "type": "integer",
+            "description": "PX4 SITL instance; runtime ports are derived from this value",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 243
+          },
+          "stateDirectory": {
+            "type": "string",
+            "description": "User-owned root for PX4 working state; ~ is resolved by the execution host",
+            "default": "~/.local/state/xgc2/px4-sitl",
+            "x-xgc-path-kind": "directory"
+          }
+        },
+        "required": []
+      },
+      "command": {
+        "executable": "/usr/bin/python3",
+        "args": [
+          "/opt/ros/noetic/lib/gazebo_sim_fs150_sitl/start_sitl.py",
+          "${rosRuntimePrefix}",
+          "${px4RuntimeRoot}",
+          "${stateDirectory}",
+          "${namespace}",
+          "${sitlInstanceId}",
+          "${rosRuntimePrefix}/share/gazebo_sim_fs150_sitl/config/generated/fs150-sitl.params",
+          "-d"
+        ],
+        "env": {
+          "PX4_SIM_HOSTNAME": "${simulatorHostname}",
+          "PX4_SIM_MODEL": "iris",
+          "PX4_SITL_MAV_SYS_ID": "${mavSystemId}"
+        }
+      },
+      "setupFiles": [
+        "${rosRuntimePrefix}/setup.bash"
+      ],
+      "readiness": {
+        "kind": "none"
+      },
+      "stop": {
+        "graceMs": 8000
+      },
+      "logs": {
+        "maxBytes": 1048576,
+        "files": 3
+      }
+    }
+  ]
+}
