@@ -151,9 +151,9 @@ except OSError:
                     master.run_id = "first-run"
                     time.sleep(10.2)
                     self.assertIsNone(process.poll(), "the first run id was mistaken for a replacement")
-                    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as peer:
-                        peer.settimeout(3)
-                        for restart in range(2):
+                    for restart in range(2):
+                        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as peer:
+                            peer.settimeout(3)
                             peer.sendto(str(restart).encode(), ("127.0.0.1", udp_port))
                             self.assertEqual(peer.recv(64), str(restart).encode())
                     self.assertEqual(master.loads, 2)
