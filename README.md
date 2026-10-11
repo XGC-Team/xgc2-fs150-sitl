@@ -10,7 +10,7 @@ behavior.
 Start the default vehicle-4 simulation:
 
 ```bash
-roslaunch gazebo_sim_fs150_sitl fs150.launch
+roslaunch --wait gazebo_sim_fs150_sitl fs150.launch
 ```
 
 For indoor mocap simulation, render a local SDF with the same FS150 dynamics.
@@ -20,7 +20,7 @@ plugin, link, or black GPS marker:
 
 ```bash
 rosrun gazebo_sim_fs150_sitl render_fs150_indoor_sdf.py
-roslaunch gazebo_sim_fs150_sitl fs150.launch \
+roslaunch --wait gazebo_sim_fs150_sitl fs150.launch \
   sdf:=$HOME/.xgc2/fs150_sitl/iris_indoor.sdf
 ```
 
@@ -116,7 +116,7 @@ instance, ROS namespace, model name, and SITL node name. The work directory
 and MAVROS ports follow the model name and instance automatically:
 
 ```bash
-roslaunch gazebo_sim_fs150_sitl fs150.launch \
+roslaunch --wait gazebo_sim_fs150_sitl fs150.launch \
   ID:=4 \
   model_name:=fs150_4 \
   ns:=uav2 \

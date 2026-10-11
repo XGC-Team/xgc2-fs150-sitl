@@ -44,7 +44,7 @@
           },
           "rosMasterUri": {
             "type": "string",
-            "description": "Absolute URI of the existing ROS master used by lifecycle hooks",
+            "description": "Pre-allocated session ROS master URI used by lifecycle hooks",
             "default": "http://127.0.0.1:11311",
             "output": true
           },

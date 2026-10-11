@@ -29,6 +29,8 @@ install(DIRECTORY scripts
 if(CATKIN_ENABLE_TESTING)
   find_package(roslaunch REQUIRED)
   find_package(PythonInterp REQUIRED)
+  add_test(NAME fs150sitl_parallel_launch
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_parallel_launch.py)
   add_test(NAME fs150_shared_visual_assets
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_visual_assets.py)
   add_test(NAME fs150_camera_assets
@@ -37,5 +39,7 @@ if(CATKIN_ENABLE_TESTING)
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_model_plugins.py)
   add_test(NAME fs150_render_cache
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_render_cache.py)
+  add_test(NAME fs150_mavros_start_order
+    COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/test_mavros_start_order.py)
   roslaunch_add_file_check(launch/fs150.launch)
 endif()

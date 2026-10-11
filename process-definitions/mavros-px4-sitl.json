@@ -46,7 +46,7 @@
           },
           "rosMasterUri": {
             "type": "string",
-            "description": "Absolute URI of the existing ROS master",
+            "description": "Pre-allocated session ROS master URI",
             "default": "http://127.0.0.1:11311",
             "output": true
           },
