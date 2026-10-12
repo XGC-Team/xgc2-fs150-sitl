@@ -7,6 +7,14 @@ equivalent compact-frame inertia, and hover-calibrated Gazebo motor constants
 for matching control, power policy, safety policy and mocap/vision estimator
 behavior.
 
+The current station World workflow starts PX4 and MAVROS as direct processes and
+places each FS150 model through simulation-v1. Its finite renderer entry
+`render_fs150_indoor_sdf.py --frozen-robot-stdin` reads a frozen Session robot row
+and emits `{format, content}`. The model keeps the asset's SITL instance ports and
+the binding's sensor switches; the caller supplies the frozen initial pose and
+world endpoint to the existing native placement CLI. MAVROS parameter loading
+requires the existing ROS master to be ready.
+
 Start the default vehicle-4 simulation:
 
 ```bash

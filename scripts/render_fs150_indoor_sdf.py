@@ -947,6 +947,21 @@ def prepare_robot_entity(robot, base_sdf):
             'parameters':{'ros_namespace':'/'+namespace}}, 'operation_timeout_ms':30000}
 
 
+def prepare_frozen_model(row, base_sdf):
+    """Render the FS150 model owned by the current frozen Session robot row."""
+    if row['kind'] != 'px4_multirotor' or row['asset']['px4']['modelId'] != 'fs150':
+        raise ValueError('FS150 model preparation requires an FS150 PX4 robot')
+    namespace = row['namespace'].lstrip('/')
+    robot = {'id': row['slotId'], 'namespace': namespace,
+             'initialPose': row['binding']['initialPose'],
+             'authoredSimulationSensors': row['binding'].get('simulationSensors', {}),
+             'px4': {'modelName': namespace, 'sitlInstanceId': row['derived']['sitlInstanceId'],
+                     'qgcUdpPort': 14550,
+                     'imageSimulationEnabled': row['binding'].get('px4', {}).get('imageSimulationEnabled', False)}}
+    entity = prepare_robot_entity(robot, base_sdf)['entity']
+    return {'format': 'sdf', 'content': entity['asset']['realization']['content']}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Render an indoor FS150 SDF from an FS150/PX4 iris SDF.")
     parser.add_argument("--base-sdf", default=None,
@@ -974,10 +989,20 @@ def main():
     parser.add_argument('--simple-lidar-vfov-deg',type=float,default=180/math.pi)
     parser.add_argument('--simple-lidar-hres',type=int,default=360)
     parser.add_argument('--simple-lidar-vres',type=int,default=16)
-    parser.add_argument('--robot-json', help='Frozen Robot input; emit a native entity creation payload')
+    robot_input = parser.add_mutually_exclusive_group()
+    robot_input.add_argument('--robot-json', help='Frozen Robot input; emit a native entity creation payload')
+    robot_input.add_argument('--frozen-robot-stdin', action='store_true',
+                             help='Read a current frozen Session robot row and emit its native model')
     args = parser.parse_args()
 
     base_sdf = resolve_base_sdf(args.base_sdf)
+    if args.frozen_robot_stdin:
+        raw = sys.stdin.buffer.read(65537)
+        if len(raw) > 65536:
+            raise ValueError('Robot input exceeds 64 KiB')
+        print(json.dumps(prepare_frozen_model(json.loads(raw), base_sdf),
+                         ensure_ascii=False, allow_nan=False, separators=(',', ':')))
+        return
     if args.robot_json is not None:
         if len(args.robot_json.encode('utf-8')) > 65536:
             raise ValueError('Robot input exceeds 64 KiB')
