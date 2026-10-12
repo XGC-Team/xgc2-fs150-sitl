@@ -38,6 +38,7 @@ class Master:
         self.identity, self.loads = 101, 0
         self.run_id = ""
         self.parameters = {}
+        self.clock_requested = threading.Event()
         self.server = SimpleXMLRPCServer(("127.0.0.1", port), allow_none=True, logRequests=False)
         self.server.register_function(lambda caller: [1, "pid", self.identity], "getPid")
         self.server.register_function(self.get, "getParam")
@@ -48,6 +49,8 @@ class Master:
         self.thread.start()
 
     def get(self, caller, name):
+        if name == "/use_sim_time":
+            self.clock_requested.set()
         if name == "/run_id":
             return [1, "run", self.run_id] if self.run_id else [-1, "absent", ""]
         for prefix, document in self.parameters.items():
@@ -143,6 +146,10 @@ except OSError:
                     if duration == 60:
                         self.assertLess(after[0] - before[0], 1.2)
                     master = Master(port)
+                    self.assertTrue(master.clock_requested.wait(35))
+                    self.assertEqual(master.loads, 0)
+                    self.assertFalse(select.select([process.stdout], [], [], 0)[0])
+                    master.parameters["/use_sim_time"] = True
                     self.assertTrue(select.select([process.stdout], [], [], 35)[0])
                     line = process.stdout.readline().strip()
                     self.assertTrue(line.startswith("bound "), line)

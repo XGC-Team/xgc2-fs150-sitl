@@ -93,6 +93,13 @@ def main(argv=None):
                         print("ROS master replaced; ending bound MAVROS", file=sys.stderr, flush=True)
                         return 1
                     if child is None:
+                        # roscpp decides whether to subscribe /clock when it
+                        # initializes. A listening master can precede the
+                        # Session owner's clock configuration; wait for that
+                        # existing parameter without writing global settings.
+                        clock = master.getParam("/mavros_launcher", "/use_sim_time")
+                        if clock[0] != 1 or not isinstance(clock[2], bool):
+                            raise RuntimeError("Session ROS clock is not configured")
                         # This launcher owns only its node's parameter bootstrap.
                         # The FCU is a data peer: MAVROS binds UDP and waits itself.
                         master.deleteParam("/mavros_launcher", private_namespace)
