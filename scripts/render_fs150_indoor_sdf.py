@@ -21,12 +21,9 @@ FS150_BASE_MASS = 0.275
 IRIS_BASE_MASS = 1.5
 IRIS_BASE_INERTIA = (0.029125, 0.029125, 0.055225)
 FS150_EQUIVALENT_INERTIA_SCALE = 0.35
-# The shared FS150 landing pads end at z=-0.033 m in base_link. The old
-# 0.11 m Iris box supported the model 22 mm above those pads. Match its
-# vertical support extent without moving the visual, body/IMU frame or COM.
-# XY and rotor collision geometry remain the existing coarse Iris envelope;
-# this contact-height correction is not a full FS150 airframe calibration.
-FS150_BODY_COLLISION_SIZE = (0.47, 0.47, 0.066)
+# Contact geometry comes only from the published physical description's
+# collision primitives, independently of the selected visual LOD. Equivalent
+# Iris rotor poses and inertias below still belong to the dynamics model.
 FS150_BODY_VISUAL_POSE = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 FS150_BODY_VISUAL_SCALE = (1.0, 1.0, 1.0)
 FS150_ROTOR_POSES = {
@@ -41,9 +38,6 @@ IRIS_ROTOR_INERTIA = (9.75e-07, 0.000273104, 0.000274004)
 FS150_ROTOR_INERTIA = tuple(
     value * FS150_EQUIVALENT_INERTIA_SCALE for value in IRIS_ROTOR_INERTIA
 )
-FS150_PROP_RADIUS = 0.128
-FS150_PROP_COLLISION_RADIUS = FS150_PROP_RADIUS
-FS150_PROP_LENGTH = 0.005
 FS150_PROP_VISUAL_SCALE = (1.0, 1.0, 1.0)
 FS150_PROP_VISUAL_POSE = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 # Hover-test correction from the total-mass scaled FS150 model. Further
@@ -62,6 +56,52 @@ def description_package():
         return Path(subprocess.check_output(['rospack', 'find', 'fs150_description'], text=True).strip())
     except (FileNotFoundError, subprocess.CalledProcessError) as exc:
         raise RuntimeError('fs150_description is required for the FS150 visual model') from exc
+
+
+def airframe_collision_bounds(description_root):
+    """Conservative base_link AABB of fs150_photo.urdf collision primitives."""
+    robot = ET.parse(Path(description_root) / 'urdf/fs150_photo.urdf').getroot()
+    joints = {joint.find('child').get('link'): joint for joint in robot.findall('joint')}
+    identity = ((1., 0., 0.), (0., 1., 0.), (0., 0., 1.))
+
+    def compose(parent, origin):
+        position, rotation = parent
+        xyz = tuple(map(float, origin.get('xyz', '0 0 0').split())) if origin is not None else (0., 0., 0.)
+        r, p, y = tuple(map(float, origin.get('rpy', '0 0 0').split())) if origin is not None else (0., 0., 0.)
+        cr, sr, cp, sp, cy, sy = math.cos(r), math.sin(r), math.cos(p), math.sin(p), math.cos(y), math.sin(y)
+        local = ((cy*cp, cy*sp*sr-sy*cr, cy*sp*cr+sy*sr),
+                 (sy*cp, sy*sp*sr+cy*cr, sy*sp*cr-cy*sr),
+                 (-sp, cp*sr, cp*cr))
+        return (tuple(position[i] + sum(rotation[i][j]*xyz[j] for j in range(3)) for i in range(3)),
+                tuple(tuple(sum(rotation[i][k]*local[k][j] for k in range(3)) for j in range(3)) for i in range(3)))
+
+    poses = {'base_link': ((0., 0., 0.), identity)}
+
+    def link_pose(name):
+        if name not in poses:
+            joint = joints[name]
+            poses[name] = compose(link_pose(joint.find('parent').get('link')), joint.find('origin'))
+        return poses[name]
+
+    lower, upper = [math.inf]*3, [-math.inf]*3
+    for link in robot.findall('link'):
+        for collision in link.findall('collision'):
+            position, rotation = compose(link_pose(link.get('name')), collision.find('origin'))
+            shape = collision.find('geometry')[0]
+            if shape.tag == 'box':
+                half = [float(v)/2 for v in shape.get('size').split()]
+                extent = [sum(abs(rotation[i][j])*half[j] for j in range(3)) for i in range(3)]
+            elif shape.tag == 'cylinder':
+                radius, half_length = float(shape.get('radius')), float(shape.get('length'))/2
+                extent = [radius*math.hypot(rotation[i][0], rotation[i][1]) + half_length*abs(rotation[i][2]) for i in range(3)]
+            elif shape.tag == 'sphere':
+                extent = [float(shape.get('radius'))]*3
+            else:
+                raise ValueError('FS150 contact proxy requires box/cylinder/sphere collisions: ' + shape.tag)
+            for i in range(3):
+                lower[i] = min(lower[i], position[i]-extent[i])
+                upper[i] = max(upper[i], position[i]+extent[i])
+    return tuple(lower), tuple(upper)
 
 
 def apply_visual_assets(root, description_root=None, resolve_resources=True):
@@ -655,16 +695,21 @@ def _patch_body_geometry(root):
     report = []
     collision_count = 0
     visual_count = 0
+    lower, upper = airframe_collision_bounds(description_package())
+    center = tuple((lo+hi)/2 for lo, hi in zip(lower, upper))
+    dimensions = tuple(hi-lo for lo, hi in zip(lower, upper))
     for link in root.iter("link"):
         if link.attrib.get("name") != "base_link":
             continue
-        for collision in link.iter("collision"):
-            if collision.attrib.get("name") != "base_link_inertia_collision":
-                continue
-            size = collision.find("./geometry/box/size")
-            if size is not None:
-                _set_vector(size, FS150_BODY_COLLISION_SIZE)
-                collision_count += 1
+        collision = link.find("collision[@name='base_link_inertia_collision']")
+        for other in list(link.findall('collision')):
+            if other is not collision:
+                link.remove(other)
+        _set_vector(collision.find('pose'), center + (0., 0., 0.))
+        geometry = collision.find('geometry')
+        geometry.clear()
+        _set_vector(ET.SubElement(ET.SubElement(geometry, 'box'), 'size'), dimensions)
+        collision_count += 1
         existing_visuals = list(link.findall("visual"))
         visual = next((v for v in existing_visuals if v.attrib.get("name") == "base_link_inertia_visual"), None)
         for candidate in existing_visuals:
@@ -691,7 +736,7 @@ def _patch_body_geometry(root):
         ET.SubElement(mesh, "scale").text = " ".join("{:.12g}".format(value) for value in FS150_BODY_VISUAL_SCALE)
         ET.SubElement(mesh, "uri").text = "model://fs150/meshes/iris.stl"
         visual_count += 1
-    report.append(("base_link collision size", collision_count))
+    report.append(("base_link fs150_photo.urdf collision AABB", collision_count))
     report.append(("base_link mesh visual scale", visual_count))
     return report
 
@@ -767,16 +812,9 @@ def _patch_rotor_model(root):
                         _set_text(elem, value)
                 inertia_count += 1
 
-        for collision in link.iter("collision"):
-            cylinder = collision.find("./geometry/cylinder")
-            if cylinder is None:
-                continue
-            length = cylinder.find("length")
-            radius = cylinder.find("radius")
-            if length is not None and radius is not None:
-                _set_text(length, FS150_PROP_LENGTH)
-                _set_text(radius, FS150_PROP_COLLISION_RADIUS)
-                collision_count += 1
+        for collision in list(link.findall('collision')):
+            link.remove(collision)
+            collision_count += 1
 
         for visual in link.iter("visual"):
             pose = visual.find("pose")
@@ -794,7 +832,7 @@ def _patch_rotor_model(root):
         ("rotor pose", pose_count),
         ("rotor mass", mass_count),
         ("rotor inertia", inertia_count),
-        ("rotor collision cylinder", collision_count),
+        ("removed Iris rotor collisions", collision_count),
         ("rotor visual pose", visual_pose_count),
         ("rotor visual scale", visual_count),
     ]

@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """The FS150 model runs only Gazebo plugins whose output something reads.
 
-Runs without ROS: the renderer's visual-asset step is patched out.
+With FS150_DESCRIPTION_TEST_ROOT pointing to the published description package,
+runs without ROS; only visual loading is patched out, real collision resources
+are still required. CI resolves the installed package through rospack by default.
 """
 import sys
+import os
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
@@ -13,6 +16,7 @@ from unittest.mock import patch
 PKG = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PKG / 'scripts'))
 sys.path.insert(0, str(PKG.parent / 'scenes/xgc2_simple_lidar/python'))
+import render_fs150_indoor_sdf as renderer  # noqa: E402
 from render_fs150_indoor_sdf import MULTIROTOR_BASE_PLUGIN, prepare_frozen_model, render_indoor_sdf  # noqa: E402
 
 SDF = PKG / 'models/fs150/iris.sdf'
@@ -44,6 +48,17 @@ def render(base):
 
 
 class ModelPluginsTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        # The actual published collision description is the regression input.
+        supplied = os.environ.get('FS150_DESCRIPTION_TEST_ROOT')
+        cls.description = Path(supplied) if supplied else renderer.description_package()
+
+    def setUp(self):
+        patcher = patch.object(renderer, 'description_package', return_value=self.description)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
     def test_frozen_model_uses_robot_instance_ports_and_authored_camera_switch(self):
         row = {'slotId': 'px4-03', 'namespace': '/uav3', 'kind': 'px4_multirotor',
                'asset': {'px4': {'modelId': 'fs150'}},
@@ -81,6 +96,31 @@ class ModelPluginsTest(unittest.TestCase):
         self.assertEqual((report[label], packaged_report[label]), (1, 0))
         self.assertEqual(plugins(from_legacy), EXPECTED_PLUGINS)
         self.assertEqual(canonical(from_legacy), canonical(from_packaged))
+        # Contact is one author-derived proxy, not the old Iris rotor envelope.
+        model = from_packaged.find('model')
+        collisions = model.findall('link/collision')
+        self.assertEqual(len(collisions), 1)
+        collision = model.find("link[@name='base_link']/collision")
+        size = tuple(map(float, collision.findtext('geometry/box/size').split()))
+        center = tuple(map(float, collision.findtext('pose').split()[:3]))
+        lower, upper = renderer.airframe_collision_bounds(self.description)
+        for axis in range(3):
+            self.assertAlmostEqual(center[axis]-size[axis]/2, lower[axis], places=10)
+            self.assertAlmostEqual(center[axis]+size[axis]/2, upper[axis], places=10)
+        # Original IMPC y=+/-0.25: a strict gap between the two contact boxes.
+        self.assertLess(size[1], 0.5)
+        self.assertLess(upper[1]-0.25, lower[1]+0.25)
+        base = ET.parse(SDF).getroot().find('model')
+        self.assertEqual([canonical(j) for j in model.findall('joint')],
+                         [canonical(j) for j in base.findall('joint')])
+        for link in base.findall('link'):
+            actual = model.find("link[@name='%s']" % link.get('name'))
+            for field in ('pose', 'inertial/pose', 'inertial/mass',
+                          'inertial/inertia/ixx', 'inertial/inertia/iyy', 'inertial/inertia/izz'):
+                expected = list(map(float, link.findtext(field).split()))
+                observed = list(map(float, actual.findtext(field).split()))
+                for before, after in zip(expected, observed):
+                    self.assertAlmostEqual(before, after, places=10)
 
 
 if __name__ == '__main__':

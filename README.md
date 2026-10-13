@@ -65,9 +65,12 @@ differs.
 The default launch already uses `models/fs150/iris.sdf` from this package. That
 SDF retains the Iris PX4 airframe, mixer assumptions and equivalent rotor
 geometry. Its visible meshes come from the shared `fs150_description` package.
-The body collision bottom is aligned with the FS150 landing pads at
-`z=-0.033 m` in `base_link`; the former Iris bottom at `-0.055 m` left the
-visible pads about 22 mm above the ground. Neither the visual/IMU frames nor
+The renderer derives a single conservative airframe collision box in `base_link`
+from every existing collision primitive in the published
+`fs150_description/urdf/fs150_photo.urdf`, including the rigid rotor hubs.
+URDF joint and collision origins, rotations and primitive extents determine its
+center and size; visual LOD does not participate. The rendered model removes
+all inherited Iris rotor collisions. Neither the visual/IMU frames nor
 the centre of mass are shifted. The default model has no `gps0`
 include/joint, so Gazebo does not publish GPS and no GPS visual marker is
 shown. The removed GPS mass is folded into `base_link`. The SDF uses the following FS150 equivalent dynamics and geometry:
@@ -78,14 +81,13 @@ shown. The removed GPS mass is folded into `base_link`. The SDF uses the followi
 | `base_link` mass | `0.275 kg` |
 | Base inertia | Iris base inertia scaled by `0.275 / 1.5 * 0.35` |
 | Base inertia values | `ixx=iyy=0.00186885417`, `izz=0.00354360417` |
-| Body collision size | `0.47 x 0.47 x 0.066 m`, centred on `base_link` |
+| Rendered contact geometry | One base-link AABB of `fs150_photo.urdf` collision primitives |
 | Body visual mesh | Shared FS150 canonical URDF mesh (default lod10k) |
 | Body visual pose | `0 0 0 0 0 0` |
 | Body visual scale | Iris default `1 1 1` |
 | Rotor centers | Iris default rotor poses |
 | Rotor z offset | Iris default `0.023 m` |
-| Propeller radius | Iris default `0.128 m` |
-| Rotor collision cylinder | Iris default `radius 0.128 m`, `length 0.005 m` |
+| Rendered rotor collisions | Removed; contact is covered by the airframe proxy |
 | Propeller visual scale | Iris default `1 1 1` |
 | `gps0` model | Removed |
 | `motorConstant` hover-corrected value | `5.33969944334e-06` |
@@ -94,12 +96,15 @@ shown. The removed GPS mass is folded into `base_link`. The SDF uses the followi
 | `rotorDragCoefficient` | `2e-05` |
 | `rollingMomentCoefficient` | `1e-07` |
 
-The horizontal body/rotor collision envelope remains the coarse Iris
-equivalent model. Aligning its ground support does not calibrate FS150 obstacle
-clearance, rotor lever arms or flight dynamics. The viewer uses the incoming
+This is a coarse contact proxy of the published physical description. The
+packaged Iris-derived SDF remains the equivalent dynamics input; the renderer
+replaces its contact geometry without changing rotor force locations, masses,
+inertias, motor parameters or IMU mounting. The contact approximation does not
+calibrate those dynamics or establish fine geometry/scientific equivalence.
+The viewer uses the incoming
 body pose directly; there is no display-only ground offset.
 
-The renderer applies the same FS150 mass, equivalent inertia, contact height,
+The renderer applies the same FS150 mass, equivalent inertia, author-derived contact proxy,
 motor constants, motor response and rotor drag when generating a local indoor
 variant. GPS is not configurable in this renderer: FS150 is treated as a
 no-GPS vehicle, so any `gps0` include/joint in the source SDF is always removed

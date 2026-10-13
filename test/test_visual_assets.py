@@ -53,9 +53,8 @@ class SharedVisualsTest(unittest.TestCase):
         self.assertEqual(len(motors),4)
         self.assertTrue(all(float(p.findtext('motorConstant'))>0 for p in motors))
 
-    def test_packaged_and_rendered_ground_support_matches_shared_mesh(self):
-        # Check the actual selected mesh, rather than repeating the renderer's
-        # height constant. LOD simplification moves the pad surface by <0.2 mm.
+    def test_rendered_ground_support_matches_physical_landing_collider(self):
+        # Visual units remain metre/Z_UP; contact is authored independently of LOD.
         urdf=ET.parse(self.description/'urdf/fs150_visual.urdf').getroot()
         visual=urdf.find("link[@name='base_link']/visual")
         mesh=visual.find('geometry/mesh')
@@ -63,24 +62,16 @@ class SharedVisualsTest(unittest.TestCase):
         ns={'c':'http://www.collada.org/2005/11/COLLADASchema'}
         self.assertEqual(dae.findtext('c:asset/c:up_axis',namespaces=ns),'Z_UP')
         self.assertEqual(float(dae.find('c:asset/c:unit',ns).get('meter')),1.0)
-        zs=[]
-        for geometry in dae.findall('c:library_geometries/c:geometry',ns):
-            vertices=geometry.find('c:mesh/c:vertices',ns)
-            source_id=vertices.find("c:input[@semantic='POSITION']",ns).get('source')[1:]
-            source=geometry.find("c:mesh/c:source[@id='%s']" % source_id,ns)
-            values=list(map(float,source.findtext('c:float_array',namespaces=ns).split()))
-            stride=int(source.find('c:technique_common/c:accessor',ns).get('stride'))
-            zs.extend(values[2::stride])
-        origin=visual.find('origin')
-        offset=0.0 if origin is None else float(origin.get('xyz','0 0 0').split()[2])
-        mesh_bottom=min(zs)*float(mesh.get('scale','1 1 1').split()[2])+offset
-        packaged=ET.parse(PKG/'models/fs150/iris.sdf').getroot()
+        physical=ET.parse(self.description/'urdf/fs150_photo.urdf').getroot()
+        landing=physical.find("link[@name='base_link']/collision[@name='landing']")
+        origin=landing.find('origin')
+        self.assertEqual(tuple(map(float,origin.get('rpy').split())),(0.0,0.0,0.0))
+        landing_bottom=float(origin.get('xyz').split()[2])-float(landing.find('geometry/box').get('size').split()[2])/2
         with patch('render_fs150_indoor_sdf.description_package',return_value=self.description):
             output,_=render_indoor_sdf(str(PKG/'models/fs150/iris.sdf'))
-        for root in (packaged,ET.fromstring(output)):
-            collision=root.find("model/link[@name='base_link']/collision[@name='base_link_inertia_collision']")
-            center_z=float(collision.findtext('pose').split()[2])
-            height=float(collision.findtext('geometry/box/size').split()[2])
-            self.assertLess(abs(mesh_bottom-(center_z-height/2)),0.0002)
+        collision=ET.fromstring(output).find("model/link[@name='base_link']/collision[@name='base_link_inertia_collision']")
+        center_z=float(collision.findtext('pose').split()[2])
+        height=float(collision.findtext('geometry/box/size').split()[2])
+        self.assertAlmostEqual(center_z-height/2,landing_bottom,places=10)
 
 if __name__=='__main__':unittest.main()

@@ -32,7 +32,7 @@ jobs:
               echo "deb [signed-by=/etc/apt/keyrings/xgc2-archive-keyring.gpg] https://xgc2.apt.xiaokang.ink focal main" \
                 > /etc/apt/sources.list.d/xgc2.list
               apt-get update
-              apt-get install -y --no-install-recommends ros-noetic-xgc2-simple-lidar
+              apt-get install -y --no-install-recommends ros-noetic-xgc2-simple-lidar ros-noetic-xgc2-fs150-description
               source /opt/ros/noetic/setup.bash
               cd /workspace/repo
               python3 -m unittest discover -s test -p test_model_plugins.py -v
