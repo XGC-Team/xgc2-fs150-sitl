@@ -701,14 +701,17 @@ def _patch_body_geometry(root):
     for link in root.iter("link"):
         if link.attrib.get("name") != "base_link":
             continue
-        collision = link.find("collision[@name='base_link_inertia_collision']")
+        # Emit the authored proxy independently of vendor collision names.
+        # Preserve the source body's contact policy when it supplies one.
+        surface = link.find('collision/surface')
         for other in list(link.findall('collision')):
-            if other is not collision:
-                link.remove(other)
-        _set_vector(collision.find('pose'), center + (0., 0., 0.))
-        geometry = collision.find('geometry')
-        geometry.clear()
+            link.remove(other)
+        collision = ET.SubElement(link, 'collision', name='base_link_inertia_collision')
+        _set_vector(ET.SubElement(collision, 'pose'), center + (0., 0., 0.))
+        geometry = ET.SubElement(collision, 'geometry')
         _set_vector(ET.SubElement(ET.SubElement(geometry, 'box'), 'size'), dimensions)
+        if surface is not None:
+            collision.append(surface)
         collision_count += 1
         existing_visuals = list(link.findall("visual"))
         visual = next((v for v in existing_visuals if v.attrib.get("name") == "base_link_inertia_visual"), None)
