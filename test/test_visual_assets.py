@@ -39,6 +39,14 @@ class SharedVisualsTest(unittest.TestCase):
         for visual in root.findall('model/link/visual'):
             self.assertTrue(visual.findtext('geometry/mesh/uri').startswith(self.description.as_uri()+'/models/fs150_lod10k/'))
             self.assertIsNone(visual.find('material'))
+        for i in range(4):
+            visual=root.find("model/link[@name='base_link']/visual[@name='fs150_photo_rotor_%d']" % i)
+            plugin=visual.find('plugin')
+            self.assertEqual(plugin.get('filename'),'libxgc2_fs150_rotor_visual.so')
+            self.assertEqual(plugin.findtext('rotor_link'),'rotor_%d' % i)
+            self.assertEqual(tuple(map(float,visual.findtext('pose').split()[:3])),
+                             ((.045 if i in (0,2) else -.045),
+                              (-.0536190265 if i in (0,3) else .0536190265),.023))
 
     def test_indoor_renderer_retains_visual_assets_and_existing_motor_parameters(self):
         with patch('render_fs150_indoor_sdf.description_package',return_value=self.description):

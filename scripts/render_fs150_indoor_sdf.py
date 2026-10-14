@@ -140,10 +140,14 @@ def apply_visual_assets(root, description_root=None, resolve_resources=True):
                 raise FileNotFoundError(str(asset))
             ET.SubElement(output_mesh, 'uri').text = asset.as_uri() if resolve_resources else 'model://'+relative[len('models/'):]
             ET.SubElement(output_mesh, 'scale').text = mesh.get('scale','1 1 1')
+            if link.get('name') in FS150_ROTOR_POSES:
+                plugin = ET.SubElement(target, 'plugin', name='fs150_rotor_visual',
+                                       filename='libxgc2_fs150_rotor_visual.so')
+                ET.SubElement(plugin, 'rotor_link').text = link.get('name')
             count += 1
     if count != 5:
         raise ValueError('FS150 appearance must contain a body and four rotors')
-    return [('shared FS150 visual meshes (static rotor appearance)',count)]
+    return [('shared FS150 visual meshes (native rotor link rotation)',count)]
 
 
 def apply_camera(root, enabled=False, robot_namespace='uav1', model_name='uav1',
