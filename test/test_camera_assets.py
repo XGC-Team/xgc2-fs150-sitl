@@ -79,9 +79,9 @@ class CameraAssetsTest(unittest.TestCase):
                 simple_lidar_hfov_deg=120,simple_lidar_vfov_deg=40,simple_lidar_hres=90,simple_lidar_vres=8)
         root=ET.fromstring(xml)
         sensor=root.find("model/link[@name='base_link']/sensor[@name='simple_lidar']")
-        self.assertEqual(sensor.get('type'),'ray')
-        self.assertEqual(sensor.find('plugin').get('filename'),'libxgc2_simple_lidar_cpu.so')
-        self.assertEqual(sensor.findtext('plugin/robotNamespace'),'/uav3')
+        self.assertEqual(sensor.get('type'),'xgc2_cpu_lidar')
+        self.assertEqual(sensor.findtext('topic'),'/uav3/simple_lidar/points')
+        self.assertIsNone(sensor.find('plugin'))
         self.assertEqual(float(sensor.findtext('update_rate')),12)
         self.assertEqual(float(sensor.findtext('ray/range/max')),8)
         for direction,count,degrees in [('horizontal',90,120),('vertical',8,40)]:
