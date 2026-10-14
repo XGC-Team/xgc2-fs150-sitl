@@ -79,13 +79,9 @@ class CameraAssetsTest(unittest.TestCase):
                 simple_lidar_hfov_deg=120,simple_lidar_vfov_deg=40,simple_lidar_hres=90,simple_lidar_vres=8)
         root=ET.fromstring(xml)
         sensor=root.find("model/link[@name='base_link']/sensor[@name='simple_lidar']")
-        self.assertEqual(sensor.get('type'),'ray')
-        plugin=sensor.find('plugin')
-        self.assertIsNotNone(plugin)
-        self.assertEqual(plugin.get('name'),'simple_lidar')
-        self.assertEqual(plugin.get('filename'),'libxgc2_simple_lidar_cpu.so')
-        self.assertEqual(plugin.findtext('robotNamespace'),'/uav3')
-        self.assertEqual(plugin.findtext('robotNamespace')+'/simple_lidar/points','/uav3/simple_lidar/points')
+        self.assertEqual(sensor.get('type'),'xgc2_cpu_lidar')
+        self.assertIsNone(sensor.find('plugin'))
+        self.assertEqual(sensor.findtext('topic'),'/uav3/simple_lidar/points')
         self.assertEqual(float(sensor.findtext('update_rate')),12)
         self.assertEqual(float(sensor.findtext('ray/range/max')),8)
         for direction,count,degrees in [('horizontal',90,120),('vertical',8,40)]:
@@ -126,14 +122,13 @@ class CameraAssetsTest(unittest.TestCase):
             self.assertEqual(int(sensor.findtext('ray/scan/horizontal/samples')),360)
             self.assertEqual(int(sensor.findtext('ray/scan/vertical/samples')),16)
             self.assertEqual(float(sensor.findtext('ray/range/max')),20)
-            plugin=sensor.find('plugin')
-            self.assertEqual(plugin.findtext('robotNamespace'),namespace)
+            self.assertEqual(sensor.findtext('topic'),namespace+'/simple_lidar/points')
             return root,sensor
 
         first_root,first_sensor=sensor_from(first,'/uav1')
         second_root,second_sensor=sensor_from(second,'/uav2')
-        self.assertEqual(first_sensor.findtext('plugin/robotNamespace')+'/simple_lidar/points','/uav1/simple_lidar/points')
-        self.assertEqual(second_sensor.findtext('plugin/robotNamespace')+'/simple_lidar/points','/uav2/simple_lidar/points')
+        self.assertEqual(first_sensor.findtext('topic'),'/uav1/simple_lidar/points')
+        self.assertEqual(second_sensor.findtext('topic'),'/uav2/simple_lidar/points')
 
         def without_sensor(root):
             base_link=root.find("model/link[@name='base_link']")
