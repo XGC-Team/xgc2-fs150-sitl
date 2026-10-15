@@ -64,6 +64,10 @@ def main(argv=None):
         if not separator or not key:
             raise SystemExit("invalid trusted ROS parameter setting " + repr(setting))
         overrides[key] = ros_set_value(key, value)
+    clock = os.environ.get("XGC_ROS_USE_SIM_TIME", "false").lower()
+    if clock not in ("true", "false"):
+        raise SystemExit("XGC_ROS_USE_SIM_TIME must be a boolean")
+    overrides["use_sim_time"] = clock == "true"
     parameter_documents.append(dict(_ns=private_namespace, **overrides))
     stopping = threading.Event()
     child = None
@@ -93,18 +97,12 @@ def main(argv=None):
                         print("ROS master replaced; ending bound MAVROS", file=sys.stderr, flush=True)
                         return 1
                     if child is None:
-                        # roscpp decides whether to subscribe /clock when it
-                        # initializes. A listening master can precede the
-                        # Session owner's clock configuration; wait for that
-                        # existing parameter without writing global settings.
-                        clock = master.getParam("/mavros_launcher", "/use_sim_time")
-                        if clock[0] != 1 or not isinstance(clock[2], bool):
-                            raise RuntimeError("Session ROS clock is not configured")
                         # This launcher owns only its node's parameter bootstrap.
                         # The FCU is a data peer: MAVROS binds UDP and waits itself.
                         master.deleteParam("/mavros_launcher", private_namespace)
                         subprocess.run(["/opt/ros/noetic/bin/rosparam", "load", parameter_file.name, "/"], check=True, timeout=5)
-                        arguments = [executable, "__name:=" + node_name, "__ns:=/" + namespace]
+                        arguments = [executable, "__name:=" + node_name, "__ns:=/" + namespace,
+                                     "/use_sim_time:=" + private_namespace + "/use_sim_time"]
                         child = subprocess.Popen(arguments)
                         bound_identity = identity
                     elif identity[1] and not bound_identity[1]:

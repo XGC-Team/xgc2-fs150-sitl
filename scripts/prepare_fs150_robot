@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+"""Render the FS150 product model from {robot, runMode} on stdin."""
+import json
+import sys
+from render_fs150_indoor_sdf import prepare_frozen_model, resolve_base_sdf
+from xgc2_gazebo_scene.robot_placement import read_placement
+
+
+if __name__ == '__main__':
+    try:
+        robot, _ = read_placement()
+        print(json.dumps(prepare_frozen_model(robot, resolve_base_sdf(None)), allow_nan=False))
+    except Exception as error:
+        sys.exit('prepare_fs150_robot: ' + ' '.join(str(error).splitlines()))

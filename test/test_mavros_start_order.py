@@ -99,13 +99,15 @@ class MavrosStartOrderTest(unittest.TestCase):
             attempts = root / "attempts"
             port, udp_port = private_port(), private_port()
             environment = dict(os.environ, ROS_MASTER_URI="http://127.0.0.1:%d" % port,
-                               ROS_HOME=str(root / "ros"), ATTEMPT_FILE=str(attempts))
+                               ROS_HOME=str(root / "ros"), ATTEMPT_FILE=str(attempts), XGC_ROS_USE_SIM_TIME="true")
             # This disposable node binds the allocated UDP port before its FCU
             # exists. The test checks the launcher's composition, not MAVLink.
             child = root / "node.py"
             child.write_text('''#!/usr/bin/env python3
-import os, signal, socket, xmlrpc.client
+import os, signal, socket, sys, xmlrpc.client
 master = xmlrpc.client.ServerProxy(os.environ["ROS_MASTER_URI"])
+assert "/use_sim_time:=/uav1/mavros/use_sim_time" in sys.argv
+assert master.getParam("/fixture", "/uav1/mavros/use_sim_time")[2] is True
 url = master.getParam("/fixture", "/uav1/mavros/fcu_url")[2]
 port = int(url.split("@")[0].rsplit(":", 1)[1])
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -146,15 +148,14 @@ except OSError:
                     if duration == 60:
                         self.assertLess(after[0] - before[0], 1.2)
                     master = Master(port)
-                    self.assertTrue(master.clock_requested.wait(35))
-                    self.assertEqual(master.loads, 0)
-                    self.assertFalse(select.select([process.stdout], [], [], 0)[0])
-                    master.parameters["/use_sim_time"] = True
+                    # There is deliberately no global /use_sim_time parameter.
+                    # The launcher binds its frozen clock privately at node init.
                     self.assertTrue(select.select([process.stdout], [], [], 35)[0])
                     line = process.stdout.readline().strip()
                     self.assertTrue(line.startswith("bound "), line)
                     node_pid = int(line.split()[1])
-                    self.assertEqual(master.loads, 2)  # One document, two leaf parameters.
+                    self.assertEqual(master.loads, 3)  # Endpoint settings and the private clock.
+                    self.assertFalse(master.clock_requested.is_set())
                     master.run_id = "first-run"
                     time.sleep(10.2)
                     self.assertIsNone(process.poll(), "the first run id was mistaken for a replacement")
@@ -163,13 +164,13 @@ except OSError:
                             peer.settimeout(3)
                             peer.sendto(str(restart).encode(), ("127.0.0.1", udp_port))
                             self.assertEqual(peer.recv(64), str(restart).encode())
-                    self.assertEqual(master.loads, 2)
+                    self.assertEqual(master.loads, 3)
                     master.identity = 102
                     self.assertEqual(process.wait(timeout=15), 1)
                     self.assertFalse(Path("/proc/%d" % node_pid).exists())
                     print(json.dumps({"peer": "MAVROS master", "outage_seconds": duration,
                         "cpu_seconds": after[0] - before[0], "attempts": count, "log_lines": len(lines),
-                        "threads": [before[1], after[1]], "fds": [before[2], after[2]], "parameter_writes": 2}))
+                        "threads": [before[1], after[1]], "fds": [before[2], after[2]], "parameter_writes": 3}))
                 finally:
                     if process.poll() is None:
                         process.terminate()
