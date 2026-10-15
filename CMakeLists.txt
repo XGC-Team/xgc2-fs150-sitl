@@ -13,6 +13,7 @@ target_link_libraries(xgc2_fs150_rotor_visual PRIVATE ${GAZEBO_LIBRARIES})
 install(TARGETS xgc2_fs150_rotor_visual LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
 catkin_install_python(PROGRAMS
+  scripts/prepare_fs150_robot
   scripts/generate_fs150_sitl_params.py
   scripts/generate_fs150_urdf.py
   scripts/start_sitl.py

@@ -62,6 +62,11 @@
             "default": "/opt/ros/noetic",
             "fixedOnly": true,
             "x-xgc-path-kind": "directory"
+          },
+          "useSimTime": {
+            "type": "boolean",
+            "default": false,
+            "description": "Frozen Session clock selection; bound privately before node initialization."
           }
         },
         "required": []
@@ -81,7 +86,8 @@
         ],
         "env": {
           "ROS_IP": "${rosIp}",
-          "ROS_MASTER_URI": "${rosMasterUri}"
+          "ROS_MASTER_URI": "${rosMasterUri}",
+          "XGC_ROS_USE_SIM_TIME": "${useSimTime}"
         }
       },
       "setupFiles": [

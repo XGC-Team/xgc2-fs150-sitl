@@ -1004,7 +1004,9 @@ def prepare_frozen_model(row, base_sdf):
                      'qgcUdpPort': 14550,
                      'imageSimulationEnabled': row['binding'].get('px4', {}).get('imageSimulationEnabled', False)}}
     entity = prepare_robot_entity(robot, base_sdf)['entity']
-    return {'format': 'sdf', 'content': entity['asset']['realization']['content']}
+    content = ET.fromstring(entity['asset']['realization']['content'])
+    content.find('model').set('name', row['slotId'])
+    return {'format': 'sdf', 'content': ET.tostring(content, encoding='unicode')}
 
 
 def main():
