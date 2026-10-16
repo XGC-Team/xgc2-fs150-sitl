@@ -994,8 +994,14 @@ def prepare_robot_entity(robot, base_sdf):
 
 def prepare_frozen_model(row, base_sdf):
     """Render the FS150 model owned by the current frozen Session robot row."""
-    if row['kind'] != 'px4_multirotor' or row['asset']['px4']['modelId'] != 'fs150':
-        raise ValueError('FS150 model preparation requires an FS150 PX4 robot')
+    derived = row.get('derived')
+    instance = derived.get('sitlInstanceId') if isinstance(derived, dict) else None
+    if (row.get('kind') != 'px4_multirotor' or not isinstance(derived, dict)
+            or derived.get('modelId') != 'fs150' or isinstance(instance, bool)
+            or not isinstance(instance, int) or not 0 <= instance <= 243):
+        raise ValueError('FS150 model preparation requires derived.modelId fs150 and Gazebo sitlInstanceId')
+    if row.get('binding', {}).get('applyModelDynamics') is not True:
+        raise ValueError('FS150 model preparation requires declared model dynamics')
     namespace = row['namespace'].lstrip('/')
     robot = {'id': row['slotId'], 'namespace': namespace,
              'initialPose': row['binding']['initialPose'],

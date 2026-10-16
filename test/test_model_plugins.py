@@ -60,10 +60,9 @@ class ModelPluginsTest(unittest.TestCase):
         self.addCleanup(patcher.stop)
 
     def test_frozen_model_uses_robot_instance_ports_and_authored_camera_switch(self):
-        row = {'slotId': 'px4-03', 'namespace': '/uav3', 'kind': 'px4_multirotor',
-               'asset': {'px4': {'modelId': 'fs150'}},
-               'derived': {'sitlInstanceId': 5},
-               'binding': {'initialPose': {'x': 1.2, 'y': -0.9, 'z': 0, 'yaw': 0}, 'px4': {}}}
+        row = {'slotId': 'px4-03', 'namespace': '/uav3',
+               'kind': 'px4_multirotor', 'derived': {'modelId': 'fs150', 'sitlInstanceId': 5},
+               'binding': {'applyModelDynamics': True, 'initialPose': {'x': 1.2, 'y': -0.9, 'z': 0, 'yaw': 0}, 'px4': {}}}
         with patch('render_fs150_indoor_sdf.apply_visual_assets', return_value=[]):
             value = prepare_frozen_model(row, str(SDF))
         self.assertEqual(value['format'], 'sdf')
@@ -121,6 +120,27 @@ class ModelPluginsTest(unittest.TestCase):
                 observed = list(map(float, actual.findtext(field).split()))
                 for before, after in zip(expected, observed):
                     self.assertAlmostEqual(before, after, places=10)
+
+
+class FrozenModelSelectionTest(unittest.TestCase):
+    def test_asset_document_does_not_select_the_model(self):
+        binding = {'applyModelDynamics': True, 'initialPose': {'x': 0, 'y': 0, 'z': 0, 'yaw': 0}, 'px4': {}}
+        asset_only = {'slotId': 'px4-03', 'namespace': '/uav3', 'kind': 'px4_multirotor',
+                      'physicalBinding': {'asset': {'px4': {'modelId': 'fs150'}}},
+                      'derived': {'sitlInstanceId': 5}, 'binding': binding}
+        with self.assertRaises(ValueError):
+            prepare_frozen_model(asset_only, str(SDF))
+        wrong_model = dict(asset_only, derived={'modelId': 'mocap_rotor', 'sitlInstanceId': 5})
+        with self.assertRaises(ValueError):
+            prepare_frozen_model(wrong_model, str(SDF))
+        for instance in (-1, 244, True, 1.5):
+            invalid = dict(asset_only, derived={'modelId': 'fs150', 'sitlInstanceId': instance})
+            with self.assertRaises(ValueError):
+                prepare_frozen_model(invalid, str(SDF))
+        tracker = dict(asset_only, derived={'modelId': 'fs150', 'sitlInstanceId': 5},
+                       binding=dict(binding, applyModelDynamics=False))
+        with self.assertRaises(ValueError):
+            prepare_frozen_model(tracker, str(SDF))
 
 
 if __name__ == '__main__':
