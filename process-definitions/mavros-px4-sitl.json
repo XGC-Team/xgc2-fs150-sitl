@@ -3,9 +3,9 @@
   "definitions": [
     {
       "id": "mavros-px4-sitl",
-      "version": "3.0.0",
+      "version": "4.0.0",
       "label": "MAVROS for PX4 SITL",
-      "description": "Direct MAVROS node with trusted PX4 plugin and parameter files. fcuUrl is supplied by the calling graph from the bound Robot asset simulation ports.",
+      "description": "Direct MAVROS node with trusted PX4 plugin and parameter files. The native SITL instance selects the matching MAVLink identity and offboard endpoint.",
       "parameters": {
         "groups": [
           {
@@ -27,17 +27,12 @@
           }
         ],
         "properties": {
-          "fcuUrl": {
-            "type": "string",
-            "description": "Robot-owned SITL MAVROS endpoint (from simulationFcuUrl / simulationLink); not derived from sitlInstanceId",
-            "default": "udp://:15000@127.0.0.1:15300"
-          },
-          "mavSystemId": {
+          "sitlInstanceId": {
             "type": "integer",
-            "description": "Target MAVLink system ID",
-            "default": 4,
-            "minimum": 1,
-            "maximum": 245
+            "description": "PX4 SITL instance; native MAVLink identity and offboard ports are derived from this value",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 243
           },
           "namespace": {
             "type": "string",
@@ -79,10 +74,8 @@
           "${namespace}",
           "mavros",
           "/opt/ros/noetic/share/mavros/launch/px4_pluginlists.yaml,/opt/ros/noetic/share/mavros/launch/px4_config.yaml",
-          "fcu_url=${fcuUrl}",
-          "gcs_url=",
-          "target_system_id=${mavSystemId}",
-          "target_component_id=1"
+          "${sitlInstanceId}",
+          "gcs_url="
         ],
         "env": {
           "ROS_IP": "${rosIp}",

@@ -42,7 +42,10 @@ class MasterTransport(xmlrpc.client.Transport):
 
 
 def main(argv=None):
-    executable, namespace, node_name, config_files, *settings = sys.argv[1:] if argv is None else argv
+    executable, namespace, node_name, config_files, instance, *settings = sys.argv[1:] if argv is None else argv
+    if not instance.isdecimal() or not 0 <= int(instance) <= 243:
+        raise SystemExit("invalid SITL instance")
+    instance = int(instance)
     namespace = validate_namespace(namespace)
     if not node_name:
         raise SystemExit("ROS node name is required")
@@ -58,11 +61,17 @@ def main(argv=None):
                 document = dict(document)
                 document_namespace = ros_ns_join(private_namespace, document.pop("_ns")) if "_ns" in document else private_namespace
                 parameter_documents.append(dict(_ns=document_namespace, **document))
-    overrides = {}
+    overrides = {
+        "fcu_url": f"udp://:{15000 + instance}@127.0.0.1:{15300 + instance}",
+        "target_system_id": instance + 1,
+        "target_component_id": 1,
+    }
     for setting in settings:
         key, separator, value = setting.partition("=")
         if not separator or not key:
             raise SystemExit("invalid trusted ROS parameter setting " + repr(setting))
+        if key in ("fcu_url", "target_system_id", "target_component_id"):
+            raise SystemExit("SITL instance owns MAVROS parameter " + key)
         overrides[key] = ros_set_value(key, value)
     clock = os.environ.get("XGC_ROS_USE_SIM_TIME", "false").lower()
     if clock not in ("true", "false"):

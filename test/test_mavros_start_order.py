@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Late/replaced master bootstrap and fixed UDP binding, no PX4 or Gazebo.
+"""Late/replaced master bootstrap and disposable UDP binding, no PX4 or Gazebo.
 
 XGC_LONG_TESTS=1 includes the 60-second master outage cell.
 """
@@ -17,6 +17,8 @@ import threading
 import time
 import unittest
 from xmlrpc.server import SimpleXMLRPCServer
+
+from test_process_startup_vectors import ProcessStartupVectorsTest
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -99,7 +101,8 @@ class MavrosStartOrderTest(unittest.TestCase):
             attempts = root / "attempts"
             port, udp_port = private_port(), private_port()
             environment = dict(os.environ, ROS_MASTER_URI="http://127.0.0.1:%d" % port,
-                               ROS_HOME=str(root / "ros"), ATTEMPT_FILE=str(attempts), XGC_ROS_USE_SIM_TIME="true")
+                               ROS_HOME=str(root / "ros"), ATTEMPT_FILE=str(attempts), XGC_ROS_USE_SIM_TIME="true",
+                               FIXTURE_UDP_PORT=str(udp_port))
             # This disposable node binds the allocated UDP port before its FCU
             # exists. The test checks the launcher's composition, not MAVLink.
             child = root / "node.py"
@@ -109,7 +112,9 @@ master = xmlrpc.client.ServerProxy(os.environ["ROS_MASTER_URI"])
 assert "/use_sim_time:=/uav1/mavros/use_sim_time" in sys.argv
 assert master.getParam("/fixture", "/uav1/mavros/use_sim_time")[2] is True
 url = master.getParam("/fixture", "/uav1/mavros/fcu_url")[2]
-port = int(url.split("@")[0].rsplit(":", 1)[1])
+assert url == "udp://:15000@127.0.0.1:15300"
+assert master.getParam("/fixture", "/uav1/mavros/target_system_id")[2] == 1
+port = int(os.environ["FIXTURE_UDP_PORT"])
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("127.0.0.1", port))
 print("bound " + str(os.getpid()), flush=True)
@@ -124,8 +129,7 @@ except OSError:
             child.chmod(0o755)
             log_path = root / "launcher.log"
             with log_path.open("w+") as log:
-                process = subprocess.Popen([sys.executable, __file__, "--worker", str(child), "/uav1", "mavros", "",
-                    "fcu_url=udp://:%d@127.0.0.1:15300" % udp_port, "gcs_url="], env=environment,
+                process = subprocess.Popen([sys.executable, __file__, "--worker", str(child), "/uav1", "mavros", "", "0", "gcs_url="], env=environment,
                     stdout=subprocess.PIPE, stderr=log, universal_newlines=True)
                 master = None
                 node_pid = None
@@ -154,7 +158,7 @@ except OSError:
                     line = process.stdout.readline().strip()
                     self.assertTrue(line.startswith("bound "), line)
                     node_pid = int(line.split()[1])
-                    self.assertEqual(master.loads, 3)  # Endpoint settings and the private clock.
+                    self.assertEqual(master.loads, 5)  # Native endpoint/identity, GCS setting and the private clock.
                     self.assertFalse(master.clock_requested.is_set())
                     master.run_id = "first-run"
                     time.sleep(10.2)
@@ -164,13 +168,13 @@ except OSError:
                             peer.settimeout(3)
                             peer.sendto(str(restart).encode(), ("127.0.0.1", udp_port))
                             self.assertEqual(peer.recv(64), str(restart).encode())
-                    self.assertEqual(master.loads, 3)
+                    self.assertEqual(master.loads, 5)
                     master.identity = 102
                     self.assertEqual(process.wait(timeout=15), 1)
                     self.assertFalse(Path("/proc/%d" % node_pid).exists())
                     print(json.dumps({"peer": "MAVROS master", "outage_seconds": duration,
                         "cpu_seconds": after[0] - before[0], "attempts": count, "log_lines": len(lines),
-                        "threads": [before[1], after[1]], "fds": [before[2], after[2]], "parameter_writes": 3}))
+                        "threads": [before[1], after[1]], "fds": [before[2], after[2]], "parameter_writes": 5}))
                 finally:
                     if process.poll() is None:
                         process.terminate()

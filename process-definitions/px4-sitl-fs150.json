@@ -3,7 +3,7 @@
   "definitions": [
     {
       "id": "px4-sitl-fs150",
-      "version": "3.0.0",
+      "version": "4.0.0",
       "label": "PX4 SITL (FS150)",
       "description": "One direct PX4 1.12 SITL process for an FS150 model; no roslaunch wrapper.",
       "parameters": {
@@ -18,13 +18,6 @@
           }
         ],
         "properties": {
-          "mavSystemId": {
-            "type": "integer",
-            "description": "MAVLink system ID from the bound Robot asset",
-            "default": 4,
-            "minimum": 1,
-            "maximum": 245
-          },
           "namespace": {
             "type": "string",
             "description": "Absolute frozen per-robot ROS namespace",
@@ -86,7 +79,7 @@
         "env": {
           "PX4_SIM_HOSTNAME": "${simulatorHostname}",
           "PX4_SIM_MODEL": "iris",
-          "PX4_SITL_MAV_SYS_ID": "${mavSystemId}"
+          "PX4_SITL_MAV_SYS_ID": ""
         }
       },
       "setupFiles": [
